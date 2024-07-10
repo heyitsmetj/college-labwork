@@ -1,0 +1,173 @@
+se2203=# create table Area(aname varchar(20) primary key, area_type varchar(5) check(area_type in('Urban','Rural')));
+CREATE TABLE
+se2203=# create table Person(pno int primary key ,pname varchar(20),birthdate date,income float,aname varchar(20) references Area);
+CREATE TABLE
+se2203=# /d Area;
+ERROR:  syntax error at or near "/"
+LINE 1: /d Area;
+        ^
+se2203=# \d Area;
+                        Table "public.area"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ aname     | character varying(20) |           | not null | 
+ area_type | character varying(5)  |           |          | 
+Indexes:
+    "area_pkey" PRIMARY KEY, btree (aname)
+Check constraints:
+    "area_area_type_check" CHECK (area_type::text = ANY (ARRAY['Urban'::character varying, 'Rural'::character varying]::text[]))
+Referenced by:
+    TABLE "person" CONSTRAINT "person_aname_fkey" FOREIGN KEY (aname) REFERENCES area(aname)
+
+se2203=# \d Person;
+                       Table "public.person"
+  Column   |         Type          | Collation | Nullable | Default 
+-----------+-----------------------+-----------+----------+---------
+ pno       | integer               |           | not null | 
+ pname     | character varying(20) |           |          | 
+ birthdate | date                  |           |          | 
+ income    | double precision      |           |          | 
+ aname     | character varying(20) |           |          | 
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (pno)
+Foreign-key constraints:
+    "person_aname_fkey" FOREIGN KEY (aname) REFERENCES area(aname)
+
+se2203=# insert into Area values('Pune','Urban'),
+se2203-# ('Dhanori','Rural'),
+se2203-# ('Mumbai','Urban'),
+se2203-# ('Alandi','Rural');
+INSERT 0 4
+se2203=# insert into Person values(1,'Ayush','12-08-1990',15000,'Pune'),
+se2203-# (2,'Dhanush','15-08-1991',12000,'Dhanori'),
+se2203-# (3,'Deva','24-03-1995',12000,'Alandi'),
+se2203-# (4,'Rekha','25-06-1998',20000,'Mumbai');
+INSERT 0 4
+se2203=# insert into Person values(5,'Ahan','12-07-1990',25000,'Pune'),
+(6,'Devesh','15-09-1991',14000,'Dhanori'),
+(7,'Devika','24-10-1995',9000,'Alandi'),
+(8,'Revati','25-05-1998',20000,'Mumbai');
+INSERT 0 4
+se2203=# select pname from PErson, Area where Person.aname=Area.aname and Area.aname='Pune';
+ pname 
+-------
+ Ayush
+ Ahan
+(2 rows)
+
+se2203=# select * from Area;
+  aname  | area_type 
+---------+-----------
+ Pune    | Urban
+ Dhanori | Rural
+ Mumbai  | Urban
+ Alandi  | Rural
+(4 rows)
+
+se2203=# select * from Person;
+ pno |  pname  | birthdate  | income |  aname  
+-----+---------+------------+--------+---------
+   1 | Ayush   | 1990-08-12 |  15000 | Pune
+   2 | Dhanush | 1991-08-15 |  12000 | Dhanori
+   3 | Deva    | 1995-03-24 |  12000 | Alandi
+   4 | Rekha   | 1998-06-25 |  20000 | Mumbai
+   5 | Ahan    | 1990-07-12 |  25000 | Pune
+   6 | Devesh  | 1991-09-15 |  14000 | Dhanori
+   7 | Devika  | 1995-10-24 |   9000 | Alandi
+   8 | Revati  | 1998-05-25 |  20000 | Mumbai
+(8 rows)
+
+se2203=# select * from Person where pname like 'D%';
+ pno |  pname  | birthdate  | income |  aname  
+-----+---------+------------+--------+---------
+   2 | Dhanush | 1991-08-15 |  12000 | Dhanori
+   3 | Deva    | 1995-03-24 |  12000 | Alandi
+   6 | Devesh  | 1991-09-15 |  14000 | Dhanori
+   7 | Devika  | 1995-10-24 |   9000 | Alandi
+(4 rows)
+
+se2203=# select Area.aname,COUNT(pno) as person_count from Person,Area where Person.aname = Area.aname and Person.income > 10000 group by Area.aname;
+  aname  | person_count 
+---------+--------------
+ Mumbai  |            2
+ Pune    |            2
+ Dhanori |            2
+ Alandi  |            1
+(4 rows)
+
+se2203=# select pname from Person where income between 10000 and 20000;
+  pname  
+---------
+ Ayush
+ Dhanush
+ Deva
+ Rekha
+ Devesh
+ Revati
+(6 rows)
+
+se2203=# select pname from Person where EXTRACT(month from birthdate)=08;
+  pname  
+---------
+ Ayush
+ Dhanush
+(2 rows)
+
+se2203=# select p1.pname from Person p1 JOIN Person p2 ON p1.income=p2.income and p1.pno!=p2.pno order by p1.income;
+  pname  
+---------
+ Deva
+ Dhanush
+ Revati
+ Rekha
+(4 rows)
+
+se2203=# select Area.aname,MAX(Person.income) as max_income from Person,Area where Person.aname = Area.aname group by Area.aname;
+  aname  | max_income 
+---------+------------
+ Alandi  |      12000
+ Pune    |      25000
+ Dhanori |      14000
+ Mumbai  |      20000
+(4 rows)
+
+se2203=# UPDATE Person set income = income * 1.10 where Person.aname in ( select Area.aname from Area where area_type = 'Rural');
+UPDATE 4
+se2203=# select * from person;
+ pno |  pname  | birthdate  |       income       |  aname  
+-----+---------+------------+--------------------+---------
+   1 | Ayush   | 1990-08-12 |              15000 | Pune
+   4 | Rekha   | 1998-06-25 |              20000 | Mumbai
+   5 | Ahan    | 1990-07-12 |              25000 | Pune
+   8 | Revati  | 1998-05-25 |              20000 | Mumbai
+   2 | Dhanush | 1991-08-15 | 13200.000000000002 | Dhanori
+   3 | Deva    | 1995-03-24 | 13200.000000000002 | Alandi
+   6 | Devesh  | 1991-09-15 | 15400.000000000002 | Dhanori
+   7 | Devika  | 1995-10-24 |               9900 | Alandi
+(8 rows)
+
+se2203=# delete from Person where income < 10000;
+DELETE 1
+se2203=# select * from person;
+ pno |  pname  | birthdate  |       income       |  aname  
+-----+---------+------------+--------------------+---------
+   1 | Ayush   | 1990-08-12 |              15000 | Pune
+   4 | Rekha   | 1998-06-25 |              20000 | Mumbai
+   5 | Ahan    | 1990-07-12 |              25000 | Pune
+   8 | Revati  | 1998-05-25 |              20000 | Mumbai
+   2 | Dhanush | 1991-08-15 | 13200.000000000002 | Dhanori
+   3 | Deva    | 1995-03-24 | 13200.000000000002 | Alandi
+   6 | Devesh  | 1991-09-15 | 15400.000000000002 | Dhanori
+
+se2203=# select * from Person order by pname DESC;
+ pno |  pname  | birthdate  |       income       |  aname  
+-----+---------+------------+--------------------+---------
+   8 | Revati  | 1998-05-25 |              20000 | Mumbai
+   4 | Rekha   | 1998-06-25 |              20000 | Mumbai
+   2 | Dhanush | 1991-08-15 | 13200.000000000002 | Dhanori
+   6 | Devesh  | 1991-09-15 | 15400.000000000002 | Dhanori
+   3 | Deva    | 1995-03-24 | 13200.000000000002 | Alandi
+   1 | Ayush   | 1990-08-12 |              15000 | Pune
+   5 | Ahan    | 1990-07-12 |              25000 | Pune
+(7 rows)
+

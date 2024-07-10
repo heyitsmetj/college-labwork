@@ -1,0 +1,80 @@
+A3SetA1
+
+ Your array:  11 5 45 26 12 34 19
+ Your key (x) = 26 
+ 26 is at 4 position
+
+A3SetA2
+
+ Your array:  1 5 7 12 13 16 17 22 24 26
+ Your sorted array:  1 5 7 12 13 16 17 22 24 26
+ Enter the element to search: 17
+
+ 17 is at 7 position
+
+A3SetB1
+
+Enter the no. of array elements:5
+Enter Element [1]:5
+Enter Element [2]:4
+Enter Element [3]:1
+Enter Element [4]:3
+Enter Element [5]:2
+ Your array:  5 4 1 3 2
+ Enter the element to search: 3
+
+ Your key = 3 
+ 3 is at 4 position
+ 
+A3SetB2
+
+Enter the no. of array elements:5
+Enter Element [1]:5
+Enter Element [2]:4
+Enter Element [3]:1
+Enter Element [4]:3
+Enter Element [5]:2
+ Your array:  5 4 1 3 2
+ Your sorted array:  1 2 3 4 5
+ Enter the element to search: 4
+
+ 4 is at 4 position
+ 
+A3SetC1
+
+ Enter filename to read: cities.txt
+
+ Structure data after reading file: 
+ 12 Pune
+ 32 Mumbai
+ 44 Thane
+ 55 Nagpur
+ 66 Nashik
+ Enter the city to be searched: Nashik
+
+ Nashik city found. 
+ Code of Nashik city is 66.
+
+A3SetC2
+
+
+ Enter no. of elements: 5
+
+ Enter element [1] : 5
+
+ Enter element [2] : 4
+
+ Enter element [3] : 3
+
+ Enter element [4] : 1
+
+ Enter element [5] : 2
+Your Array:  5 4 3 1 2
+ Your Sorted Array:  1 2 3 4 5
+ Enter element to be searched : 2
+
+ 2 is present in the array.
+ 
+
+ 
+

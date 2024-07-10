@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+#define MAX 100
+
+typedef struct {
+    int personno;
+    int personage;
+} Person;
+
+void insertionSort(Person persons[], int n) 
+{
+    for (int i = 1; i < n; i++) 
+    {
+        Person key = persons[i];
+        int j = i - 1;
+
+        while (j >= 0 && persons[j].personage > key.personage) 
+        {
+            persons[j + 1] = persons[j];
+            j = j - 1;
+        }
+        persons[j + 1] = key;
+    }
+}
+
+int main() 
+{
+    FILE *file = fopen("person.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file\n");
+        return 1;
+    }
+
+    Person persons[MAX];
+    int count = 0;
+
+    while (fscanf(file, "%d %d", &persons[count].personno, &persons[count].personage) != EOF) 
+    {
+        count++;
+    }
+
+    fclose(file);
+
+    insertionSort(persons, count);
+
+    printf("Sorted Person Data:\n");
+    for (int i = 0; i < count; i++) 
+    {
+        printf("%d %d\n", persons[i].personno, persons[i].personage);
+    }
+
+    return 0;
+}
