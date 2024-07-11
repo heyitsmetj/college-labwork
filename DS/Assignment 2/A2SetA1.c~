@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 100
-
 typedef struct {
     int empno;
     char empname[50];
