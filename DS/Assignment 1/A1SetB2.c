@@ -1,51 +1,76 @@
 #include <stdio.h>
+#include<stdlib.h>
 
-typedef struct {
+struct Persons
+{
     int personno;
     int personage;
-} Person;
+}per[100];
 
-void insertionSort(Person persons[], int n) 
+void insertionSort(struct Persons *per, int n)
 {
-    for (int i = 1; i < n; i++) 
+    for (int i = 1; i < n; i++)
     {
-        Person key = persons[i];
+        struct Persons current = per[i];
         int j = i - 1;
 
-        while (j >= 0 && persons[j].personage > key.personage) 
+        while (j >= 0 && per[j].personage > key.personage)
         {
-            persons[j + 1] = persons[j];
+            per[j + 1] = per[j];
             j = j - 1;
         }
-        persons[j + 1] = key;
+        per[j + 1] = current;
     }
 }
 
-int main() 
+int readfile(struct Persons *per)
 {
-    FILE *file = fopen("person.txt", "r");
-    if (file == NULL) {
-        printf("Error opening file\n");
-        return 1;
-    }
+    char fname[20];
+    int i=0;
+    FILE *fp;
 
-    Person persons[100];
-    int count = 0;
+    printf("\n Enter filename to read: ");
+    scanf("%s",fname);
+    fp = fopen(fname,"r");
 
-    while (fscanf(file, "%d %d", &persons[count].personno, &persons[count].personage) != EOF) 
+    if (fp == NULL)
     {
-        count++;
+        printf("\n Error in opening file!");
     }
 
-    fclose(file);
-
-    insertionSort(persons, count);
-
-    printf("Sorted Person Data:\n");
-    for (int i = 0; i < count; i++) 
+    while (!feof(fp))
     {
-        printf("%d %d\n", persons[i].personno, persons[i].personage);
+        fscanf(fp,"%d %d",&per[i].personno,&per[i].personage);
+        i++;
     }
+    
+    return i-1;
+}
 
-    return 0;
+void display(struct Persons *per,int n)
+{
+    int i;
+
+    for ( i = 0; i < n; i++)
+    {
+        printf("\n %d %d",per[i].personno,per[i].personage);
+    }
+    
+}
+int main()
+{
+    int n;
+
+    n = readfile(per);
+
+    printf("\n Structure after reading file: ");
+    display(per,n);
+
+    insertionSort(per,n);
+
+    printf("\n Structure after Sorting : ");
+    display(per,n);
+
+
+   return 0;
 }
