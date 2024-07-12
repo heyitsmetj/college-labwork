@@ -1,20 +1,132 @@
 se2203=# create table Book(b_no int primary key,
-se2203(# b_name varchar(20),
-se2203(# pub_name varchar(10) NOT NULL,
-se2203(# b_price float);
+b_name varchar(40),
+pub_name varchar(50) NOT NULL,
+b_price float);
 CREATE TABLE
+
 
 se2203=# create table Author(a_no int primary key,
-se2203(# a_name varchar(30),
-se2203(# qualification varchar(20),
-se2203(# address varchar(20));
+a_name varchar(40),
+qualification varchar(40),
+address varchar(20));
 CREATE TABLE
 
-se2203=# alter table book alter column pub_name set data type varchar(30);
-ALTER TABLE
 
 se2203=# create table Book_Author(b_no int references Book,a_no int references Author);
 CREATE TABLE
 
 
+se2203=# INSERT INTO Book VALUES 
+(1, 'The Great Gatsby', 'Nirali Publications', 500.00),
+(2, 'To Kill a Mockingbird', 'Niyati Publications', 450.00),
+(3, '1984', 'Nirali Publications', 550.00),
+(4, 'Brave New World', 'Niyati Publications', 400.00),
+(5, 'Sapiens', 'Nirali Publications', 600.00),
+(6,'Sagarika','Nirali Publications',550.00);
+INSERT 0 6
+
+se2203=# insert into Author values 
+se2203-# (1, 'Shashtri', 'MA in English Literature', 'Nagpur'),
+se2203-# (2, 'Harish', 'JD', 'Alibaug'),
+se2203-# (3, 'Gargi', 'BA in English', 'Loni'),
+se2203-# (4, 'Alok', 'BA in Literature', 'Nashik'),
+se2203-# (5, 'Yuvraj', 'PhD in History', 'Juhu');
+INSERT 0 5
+
+
+se2203=# insert into Book_Author values 
+se2203-# (1, 1), 
+se2203-# (2, 2), 
+se2203-# (3, 3), 
+se2203-# (4, 4),
+se2203-# (5, 5),
+se2203-# (6,5);
+
+
+se2203=# select b.b_no,b_name from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no and a_name = 'Yuvraj';
+ b_no |  b_name  
+------+----------
+    5 | Sapiens
+    6 | Sagarika
+(2 rows)
+
+
+se2203=# select COUNT(b_no) as Books_by_Nirali from book where pub_name = 'Nirali Publications';
+ books_by_nirali 
+-----------------
+               4
+(1 row)
+
+
+se2203=# select * from book where b_price between 400.00 and 600.00;
+ b_no |        b_name         |      pub_name       | b_price 
+------+-----------------------+---------------------+---------
+    1 | The Great Gatsby      | Nirali Publications |     500
+    2 | To Kill a Mockingbird | Niyati Publications |     450
+    3 | 1984                  | Nirali Publications |     550
+    4 | Brave New World       | Niyati Publications |     400
+    5 | Sapiens               | Nirali Publications |     600
+    6 | Sagarika              | Nirali Publications |     550
+(6 rows)
+
+
+se2203=# select a_no,a_name from author order by a_name;
+ a_no |  a_name  
+------+----------
+    4 | Alok
+    3 | Gargi
+    2 | Harish
+    1 | Shashtri
+    5 | Yuvraj
+(5 rows)
+
+
+se2203=# update book set pub_name = 'Jagruti Publications' where pub_name = 'Nirali Publications';
+UPDATE 4
+
+
+se2203=# select * from book where b_name like 'S%';
+ b_no |  b_name  |       pub_name       | b_price 
+------+----------+----------------------+---------
+    5 | Sapiens  | Jagruti Publications |     600
+    6 | Sagarika | Jagruti Publications |     550
+(2 rows)
+
+
+se2203=# select a_name,b_name from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no group by a_name,b_name;
+  a_name  |        b_name         
+----------+-----------------------
+ Alok     | Brave New World
+ Shashtri | The Great Gatsby
+ Gargi    | 1984
+ Harish   | To Kill a Mockingbird
+ Yuvraj   | Sapiens
+ Yuvraj   | Sagarika
+(6 rows)
+
+
+se2203=# select * from author where a_no in (select ba.a_no from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no group by ba.a_no having COUNT(*) >=2);
+ a_no | a_name | qualification  | address 
+------+--------+----------------+---------
+    5 | Yuvraj | PhD in History | Juhu
+(1 row)
+
+
+se2203=# select b.b_no,b_name,a.a_no,a_name from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no and address = 'Nashik';
+ b_no |     b_name      | a_no | a_name 
+------+-----------------+------+--------
+    4 | Brave New World |    4 | Alok
+(1 row)
+se2203=# select b.* from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no and address = 'Nashik';
+ b_no |     b_name      |      pub_name       | b_price 
+------+-----------------+---------------------+---------
+    4 | Brave New World | Niyati Publications |     400
+(1 row)
+
+
+se2203=# select * from author where a_no in (select ba.a_no from book b,author a,book_author ba where b.b_no = ba.b_no and a.a_no = ba.a_no group by ba.a_no order by COUNT(ba.b_no) desc LIMIT 1);
+ a_no | a_name | qualification  | address 
+------+--------+----------------+---------
+    5 | Yuvraj | PhD in History | Juhu
+(1 row)
 

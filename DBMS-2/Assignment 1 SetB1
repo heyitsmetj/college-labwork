@@ -1,0 +1,72 @@
+create table movie (
+    m_name varchar(25) primary key,
+    release_year int,
+    budget money,
+);
+
+
+create table actor (
+    a_name varchar(20) primary key,
+    role char(20) not null,
+    charges money,
+    a_address varchar(20),
+);
+
+
+create table producer (
+    producer_id int primary key,
+    p_name char(30),
+    p_address varchar(20),
+);
+
+
+create table movie_actor (
+    m_name varchar(25) references movie,
+    a_name varchar(20) references actor
+);
+
+create table movie_producer (
+    m_name varchar(25) movie,
+    producer_id integer references producer
+);
+
+insert into movie values 
+('Kick', 2016, 5000000.00),
+('Sholey', 2018, 7000000.00),
+('Ek Villain', 2017, 4000000.00),
+('Super 30', 2019, 6000000.00);
+
+inserting records into the actor table:
+sql
+
+insert into actor values 
+('Ritesh Deshmukh', 'Villain',800000,'Mumbai'),
+('Hritik Roshan','Hero',10000000, 'Pune'),
+('Amitabh Bachchan', 'Hero',1000000,'Delhi'),
+('', 'address4');
+
+inserting records into the producer table:
+sql
+
+insert into producer (producer_id, p_name, p_address) values 
+(1, 'mr.subhash ghai', 'address5'),
+(2, 'mr.xyz', 'address6'),
+(3, 'mr.abc', 'address7');
+
+inserting records into the movie_actor table:
+sql
+
+insert into movie_actor (m_name, a_name, role, charges) values 
+('movie1', 'actor1', 'lead', 1000000.00),
+('movie2', 'actor2', 'supporting', 800000.00),
+('movie3', 'actor3', 'lead', 1200000.00),
+('movie4', 'actor4', 'supporting', 900000.00);
+
+
+insert into movie_producer (m_name, producer_id) values 
+('movie1', 1),
+('movie2', 1),
+('movie3', 2),
+('movie3', 3),
+('movie4', 3);
+
