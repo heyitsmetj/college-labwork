@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<time.h>
 
 void display (int a[], int n)
 {
@@ -62,6 +63,8 @@ void quicksort (int a[], int down, int up)
 
 int main ()
 {
+    clock_t start_time = clock();
+    
   int n=5, i;
 
   printf ("\n Enter the 5 elements: ");
@@ -81,6 +84,12 @@ int main ()
 
   printf ("\n Your Sorted Array: ");
   display (a, n);
+  
+  clock_t end_time = clock();
+  
+  double time_taken = ((double) end_time - start_time) / CLOCKS_PER_SEC;
+  
+  printf("\n Time take to execute program: %f seconds",time_taken);
 
   return 0;
 }
