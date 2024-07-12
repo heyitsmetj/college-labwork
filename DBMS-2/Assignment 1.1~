@@ -1,0 +1,197 @@
+se2203=# create table student(s_no int primary key,
+se2203(# s_name varchar(20),
+se2203(# s_class varchar(10) NOT NULL,
+se2203(# s_addr varchar(30));
+CREATE TABLE
+se2203=# create table teacher(t_no int primary key,
+se2203(# t_name varchar(20),
+se2203(# qualification varchar(15),
+se2203(# experience int);
+CREATE TABLE
+se2203=# create table stud_teach(s_no int references student,
+se2203(# t_no int references teacher,
+se2203(# subject varchar(20));
+CREATE TABLE
+se2203=# \d student
+                      Table "public.student"
+ Column  |         Type          | Collation | Nullable | Default 
+---------+-----------------------+-----------+----------+---------
+ s_no    | integer               |           | not null | 
+ s_name  | character varying(20) |           |          | 
+ s_class | character varying(10) |           | not null | 
+ s_addr  | character varying(30) |           |          | 
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (s_no)
+Referenced by:
+    TABLE "stud_teach" CONSTRAINT "stud_teach_s_no_fkey" FOREIGN KEY (s_no) REFERENCES student(s_no)
+
+se2203=# \d teacher
+                         Table "public.teacher"
+    Column     |         Type          | Collation | Nullable | Default 
+---------------+-----------------------+-----------+----------+---------
+ t_no          | integer               |           | not null | 
+ t_name        | character varying(20) |           |          | 
+ qualification | character varying(15) |           |          | 
+ experience    | integer               |           |          | 
+Indexes:
+    "teacher_pkey" PRIMARY KEY, btree (t_no)
+Referenced by:
+    TABLE "stud_teach" CONSTRAINT "stud_teach_t_no_fkey" FOREIGN KEY (t_no) REFERENCES teacher(t_no)
+
+se2203=# \d stud_teach 
+                    Table "public.stud_teach"
+ Column  |         Type          | Collation | Nullable | Default 
+---------+-----------------------+-----------+----------+---------
+ s_no    | integer               |           |          | 
+ t_no    | integer               |           |          | 
+ subject | character varying(20) |           |          | 
+Foreign-key constraints:
+    "stud_teach_s_no_fkey" FOREIGN KEY (s_no) REFERENCES student(s_no)
+    "stud_teach_t_no_fkey" FOREIGN KEY (t_no) REFERENCES teacher(t_no)
+
+se2203=# insert into student values(1,'Avinash','SYBCA','Pimpri'),
+se2203-# (2,'Ram','TYBCA','Cisco'),
+se2203-# (3,'Shyam','SYBCA','Kothrud'),
+se2203-# (4,'Kiran','SYBCA','Kothrud');
+INSERT 0 4
+se2203=# insert into teacher values(101,'Professor Patil','Phd',4),
+se2203-# (102,'Taran','B.Ed',3),
+se2203-# (103,'Tanishka','Phd',5),
+se2203-# (104,'Rakesh','PGDCM',2);
+INSERT 0 4
+se2203=# insert into student values(5,'Rajesh','TYBCA','Cisco');
+INSERT 0 1
+se2203=# select * from student;
+ s_no | s_name  | s_class | s_addr  
+------+---------+---------+---------
+    1 | Avinash | SYBCA   | Pimpri
+    2 | Ram     | TYBCA   | Cisco
+    3 | Shyam   | SYBCA   | Kothrud
+    4 | Kiran   | SYBCA   | Kothrud
+    5 | Rajesh  | TYBCA   | Cisco
+(5 rows)
+
+se2203=# select * from teacher;
+ t_no |     t_name      | qualification | experience 
+------+-----------------+---------------+------------
+  101 | Professor Patil | Phd           |          4
+  102 | Taran           | B.Ed          |          3
+  103 | Tanishka        | Phd           |          5
+  104 | Rakesh          | PGDCM         |          2
+(4 rows)
+
+se2203=# select * from stud_teach;
+ s_no | t_no | subject 
+------+------+---------
+(0 rows)
+
+se2203=# insert into stud_teach values(101,1,'DBMS'),
+se2203-# (102,2,'EVS'),
+se2203-# (102,1,'EVS'),
+se2203-# (101,3,'DBMS'),
+se2203-# (103,4,'CPP'),
+se2203-# (104,5,'CN');
+ERROR:  insert or update on table "stud_teach" violates foreign key constraint "stud_teach_s_no_fkey"
+DETAIL:  Key (s_no)=(101) is not present in table "student".
+se2203=# insert into stud_teach values(1,101,'DBMS'),
+(2,102,'EVS'),
+(2,101,'EVS'),
+(1,103,'DBMS'),
+(3,104,'CPP'),
+(5,104,'CN');
+INSERT 0 6
+se2203=# select t_name from teacher,student,stud_teach
+se2203-# where teacher.t_no=stud_teach.t_no and
+se2203-# student.s_no=stud_teach.s_no and 
+se2203-# s_name = 'Avinash'; 
+     t_name      
+-----------------
+ Professor Patil
+ Tanishka
+(2 rows)
+
+se2203=# select s_name from teacher,student,stud_teach
+where teacher.t_no=stud_teach.t_no and
+student.s_no=stud_teach.s_no and 
+t_name = 'Professor Patil'; 
+ s_name  
+---------
+ Avinash
+ Ram
+(2 rows)
+
+se2203=# select * from teacher where 
+se2203-# t_name like 'T%';
+ t_no |  t_name  | qualification | experience 
+------+----------+---------------+------------
+  102 | Taran    | B.Ed          |          3
+  103 | Tanishka | Phd           |          5
+(2 rows)
+
+se2203=# select t_name from teacher,stud_teach
+se2203-# where teacher.t_no = stud_teach.t_no and
+se2203-# subject = 'DBMS';
+     t_name      
+-----------------
+ Professor Patil
+ Tanishka
+(2 rows)
+
+se2203=# select COUNT() from teacher where
+se2203-# qualification = 'Phd';
+ERROR:  count(*) must be used to call a parameterless aggregate function
+LINE 1: select COUNT() from teacher where
+               ^
+se2203=# select COUNT(*) from teacher where
+qualification = 'Phd';
+ count 
+-------
+     2
+(1 row)
+
+se2203=# select COUNT(*) from student where
+se2203-# s_addr = 'Cisco';
+ count 
+-------
+     2
+(1 row)
+
+se2203=# select * from teacher order by experience desc LIMIT 1;
+ t_no |  t_name  | qualification | experience 
+------+----------+---------------+------------
+  103 | Tanishka | Phd           |          5
+(1 row)
+
+se2203=# select s_name from student
+se2203-# where s_class = 'SYBCA' and
+se2203-# s_addr = 'Kothrud';
+ s_name 
+--------
+ Shyam
+ Kiran
+(2 rows)
+
+se2203=# select s_name from student where
+se2203-# s_name like '______';
+ s_name 
+--------
+ Rajesh
+ 
+ 
+ 
+ 
+(1 row)
+
+se2203=# insert into stud_teach values(5,101,'DBMS');
+INSERT 0 1
+se2203=# select t.t_name,st.subject,COUNT(st.s_no) from teacher t,stud_teach st where t.t_no=st.t_no group by t.t_name,st.subject;
+     t_name      | subject | count 
+-----------------+---------+-------
+ Tanishka        | DBMS    |     1
+ Rakesh          | CPP     |     1
+ Professor Patil | EVS     |     1
+ Rakesh          | CN      |     1
+ Professor Patil | DBMS    |     2
+ Taran           | EVS     |     1
+(6 rows)
+

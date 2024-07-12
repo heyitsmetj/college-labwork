@@ -182,3 +182,16 @@ se2203-# s_name like '______';
  
 (1 row)
 
+se2203=# insert into stud_teach values(5,101,'DBMS');
+INSERT 0 1
+se2203=# select t.t_name,st.subject,COUNT(st.s_no) from teacher t,stud_teach st where t.t_no=st.t_no group by t.t_name,st.subject;
+     t_name      | subject | count 
+-----------------+---------+-------
+ Tanishka        | DBMS    |     1
+ Rakesh          | CPP     |     1
+ Professor Patil | EVS     |     1
+ Rakesh          | CN      |     1
+ Professor Patil | DBMS    |     2
+ Taran           | EVS     |     1
+(6 rows)
+

@@ -170,4 +170,3 @@ se2203=# select * from Person order by pname DESC;
    1 | Ayush   | 1990-08-12 |              15000 | Pune
    5 | Ahan    | 1990-07-12 |              25000 | Pune
 (7 rows)
-

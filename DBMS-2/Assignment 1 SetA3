@@ -1,0 +1,20 @@
+se2203=# create table Book(b_no int primary key,
+se2203(# b_name varchar(20),
+se2203(# pub_name varchar(10) NOT NULL,
+se2203(# b_price float);
+CREATE TABLE
+
+se2203=# create table Author(a_no int primary key,
+se2203(# a_name varchar(30),
+se2203(# qualification varchar(20),
+se2203(# address varchar(20));
+CREATE TABLE
+
+se2203=# alter table book alter column pub_name set data type varchar(30);
+ALTER TABLE
+
+se2203=# create table Book_Author(b_no int references Book,a_no int references Author);
+CREATE TABLE
+
+
+
