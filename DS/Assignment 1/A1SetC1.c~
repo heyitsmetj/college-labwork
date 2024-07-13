@@ -31,7 +31,7 @@ int main()
 	
 	for(i=0;i<n;i++)
 	{
-		array[i] = rand() % (1000);
+		array[i] = rand() % (100);
 	}
 
 	printf("\n Your random array: ");
