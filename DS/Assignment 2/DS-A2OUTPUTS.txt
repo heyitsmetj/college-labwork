@@ -1,0 +1,119 @@
+A1SetA1
+
+Enter the 5 elements: 
+ Enter element[1]: 5
+
+ Enter element[2]: 4
+
+ Enter element[3]: 3
+
+ Enter element[4]: 1
+
+ Enter element[5]: 2
+
+ Your Array:  5 4 3 1 2
+ Your Sorted Array:  1 2 3 4 5
+
+
+A1SetA2
+
+
+ Enter the size of array: 5
+
+ Your Random Array:  6 8 6 2 7
+ Your Sorted Array:  2 6 6 7 8
+ 
+
+A1SetA3
+
+
+ Enter the size of array: 6
+
+ Enter element[1]: 7
+
+ Enter element[2]: 9
+
+ Enter element[3]: 2
+
+ Enter element[4]: 4
+
+ Enter element[5]: 6
+
+ Enter element[6]: 1
+
+ Your Array:  7 9 2 4 6 1
+ Your Sorted Array:  1 2 4 6 7 9
+
+
+ A1SetB1
+
+ Enter 5 elements: 
+ Enter element[1]: 8
+
+ Enter element[2]: 7
+
+ Enter element[3]: 4
+
+ Enter element[4]: 1 
+
+ Enter element[5]: 2
+
+ Your Array:  8 7 4 1 2
+ Your Sorted Array:  1 2 4 7 8
+
+ 
+
+ A3SetB2
+
+  Enter the size of array: 8
+
+ Your Random Array:  0 5 1 4 8 2 2 2
+ Your Sorted Array:  0 1 2 2 2 4 5 8
+
+
+ A3SetC1
+
+  a[5]:  11 12 15 16 17
+ Your Sorted Array:  11 12 15 16 17
+
+
+ A3SetC2
+
+ a[5]:  11 12 15 16 17
+ Your Sorted Array:  11 12 15 16 17
+
+
+ A3SetC3Q
+
+  Enter the 5 elements: 
+ Enter element[1]: 5
+
+ Enter element[2]: 4
+
+ Enter element[3]: 3
+
+ Enter element[4]: 1
+
+ Enter element[5]: 2
+
+ Your Array:  5 4 3 1 2
+ Your Sorted Array:  1 2 3 4 5
+ Time take to execute program: 0.000538 seconds
+ 
+
+A3SetC3M
+
+ Enter the 5 elements: 
+ Enter element[1]: 5
+
+ Enter element[2]: 4
+
+ Enter element[3]: 3 
+
+ Enter element[4]: 1
+
+ Enter element[5]: 2
+
+ Your Array:  5 4 3 1 2
+ Your Sorted Array:  1 2 3 4 5
+ Time take to execute program: 0.000530 seconds

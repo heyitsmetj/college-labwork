@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 void display (int a[], int n)
 {
@@ -66,30 +65,13 @@ void mergeSort (int a[], int low, int high)
 	}
 }
 
-void rarray (int a[], int n)
-{
-  srand(time(0));
-
-  for (int i = 0; i < n; i++)
-	{
-	  a[i] = rand () % (10);
-	}
-}
-
-
-
 int main ()
 {
-  int n, i;
+  int n=5, i;
 
-  printf ("\n Enter the size of array: ");
-  scanf ("%d", &n);
+  int a[5]={11,12,15,16,17};
 
-  int a[n];
-
-  rarray (a, n);
-
-  printf ("\n Your Random Array: ");
+  printf ("\n a[5]: ");
 
   display (a, n);
 

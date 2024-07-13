@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void display(int a[], int n)
 {
@@ -60,19 +61,21 @@ void quicksort(int a[], int down, int up)
 
 int main()
 {
-  int n = 5, i;
+  srand(time(0));
 
-  printf("\n Enter the 5 elements: ");
+  int n, i;
+
+  printf("\n Enter the size of array: ");
+  scanf("%d", &n);
 
   int a[n];
 
   for (i = 0; i < n; i++)
   {
-    printf("\n Enter element[%d]: ", i + 1);
-    scanf("%d", &a[i]);
+    a[i] = rand() % (10);
   }
 
-  printf("\n Your Array: ");
+  printf("\n Your Random Array: ");
   display(a, n);
 
   quicksort(a, 0, n - 1);

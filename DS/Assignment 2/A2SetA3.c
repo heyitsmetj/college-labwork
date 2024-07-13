@@ -60,9 +60,10 @@ void quicksort(int a[], int down, int up)
 
 int main()
 {
-  int n = 5, i;
+  int n, i;
 
-  printf("\n Enter the 5 elements: ");
+  printf("\n Enter the size of array: ");
+  scanf("%d",&n);
 
   int a[n];
 

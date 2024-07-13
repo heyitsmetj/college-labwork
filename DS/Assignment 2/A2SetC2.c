@@ -60,19 +60,11 @@ void quicksort(int a[], int down, int up)
 
 int main()
 {
-  int n = 5, i;
+  int n=5, i;
 
-  printf("\n Enter the 5 elements: ");
+  int a[5]={11,12,15,16,17};
 
-  int a[n];
-
-  for (i = 0; i < n; i++)
-  {
-    printf("\n Enter element[%d]: ", i + 1);
-    scanf("%d", &a[i]);
-  }
-
-  printf("\n Your Array: ");
+  printf ("\n a[5]: ");
   display(a, n);
 
   quicksort(a, 0, n - 1);
