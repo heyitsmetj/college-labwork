@@ -1,0 +1,41 @@
+A1SetA1
+
+Enter the no. of array elements: 5
+
+ Enter Element [1]: 5
+
+ Enter Element [2]: 4
+
+ Enter Element [3]: 3
+
+ Enter Element [4]: 1
+
+ Enter Element [5]: 2
+
+ Your array:  5 4 3 1 2
+ Your sorted array:  1 2 3 4 5
+ 
+
+A1SetA2
+
+Enter the no. of array elements: 5
+
+ Enter Element [1]: 7
+
+ Enter Element [2]: 6
+
+ Enter Element [3]: 8
+
+ Enter Element [4]: 3
+
+ Enter Element [5]: 2
+
+ Your array:  7 6 8 3 2
+ Your sorted array:  2 3 6 7 8
+ 
+
+A1SetA2
+
+
+ 
+

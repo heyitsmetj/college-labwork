@@ -14,7 +14,7 @@ void insertionSort(struct Persons *per, int n)
         struct Persons current = per[i];
         int j = i - 1;
 
-        while (j >= 0 && per[j].personage > key.personage)
+        while (j >= 0 && per[j].personage > current.personage)
         {
             per[j + 1] = per[j];
             j = j - 1;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void bubbleSort(array[], int n) 
+void bubbleSort(int array[], int n) 
 {
     int temp;
     for (int i = 0; i < n - 1; i++) {
@@ -21,18 +21,18 @@ int main()
 
     int i,n;
 	
-	printf("Enter the no. of array elements:");
+	printf("\n Enter the no. of array elements: ");
 	scanf("%d",&n);
 	
 	int array[n];
 	
 	for(i=0;i<n;i++)
 	{
-		printf("Enter Element [%d]:",i+1);
+		printf("\n Enter Element [%d]: ",i+1);
 		scanf("%d",&array[i]);
 	}
 
-	printf(" Your array: ");
+	printf("\n Your array: ");
 	
 	for(i=0;i<n;i++)
 	{
@@ -41,7 +41,7 @@ int main()
 
     bubbleSort(array, n);
 
-printf(" Your sorted array: ");
+printf("\n Your sorted array: ");
 	
 	for(i=0;i<n;i++)
 	{

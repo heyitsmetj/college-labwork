@@ -1,0 +1,93 @@
+A1SetA1
+
+Enter the no. of array elements: 5
+
+ Enter Element [1]: 5
+
+ Enter Element [2]: 4
+
+ Enter Element [3]: 3
+
+ Enter Element [4]: 1
+
+ Enter Element [5]: 2
+
+ Your array:  5 4 3 1 2
+ Your sorted array:  1 2 3 4 5
+ 
+
+A1SetA2
+
+Enter the no. of array elements: 5
+
+ Enter Element [1]: 7
+
+ Enter Element [2]: 6
+
+ Enter Element [3]: 8
+
+ Enter Element [4]: 3
+
+ Enter Element [5]: 2
+
+ Your array:  7 6 8 3 2
+ Your sorted array:  2 3 6 7 8
+ 
+
+A1SetB1
+
+Enter filename to read: employee.txt
+
+ Structure after reading file: 
+ 101 Bunty
+ 102 Arun
+ 103 Sanket
+ 104 Rinki
+ Structure after Sorting : 
+ 102 Arun
+ 101 Bunty
+ 104 Rinki
+ 103 Sanket
+
+
+ A1SetB2
+
+ Enter filename to read: person.txt
+
+ Structure after reading file: 
+ 101 63
+ 102 52
+ 103 48
+ 104 33
+ Structure after Sorting : 
+ 104 33
+ 103 48
+ 102 52
+ 101 63
+
+ 
+ A3SetC1
+
+ Enter the no. of array elements: 6
+
+ Your random array:  0 8 4 8 2 7
+ Your sorted array:  0 2 4 7 8 8
+
+
+ A3SetC2
+
+  Enter the no. of array elements: 8
+
+ Your random array:  9 1 2 5 5 2 8 9
+ Your sorted array:  1 2 2 5 5 8 9 9
+
+
+ A3SetC3
+
+  A[5]:  10 20 35 23 12
+ Your sorted array:  10 12 20 23 35
+ 
+
+
+ 
+
