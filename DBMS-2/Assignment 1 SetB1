@@ -70,3 +70,49 @@ insert into movie_producer (m_name, producer_id) values
 ('movie3', 3),
 ('movie4', 3);
 
+INSERT INTO Movie (m_name, release_year, budget) VALUES
+('Sholay', 1975, 1000000.00),
+('Lagaan', 2001, 5000000.00),
+('Dangal', 2016, 7500000.00),
+('Baahubali', 2015, 6000000.00),
+('PK', 2014, 8500000.00);
+
+INSERT INTO Actor (a_name, role, charges, a_address) VALUES
+('Amitabh Bachchan', 'Hero', 200000.00, 'Mumbai'),
+('Dharmendra', 'Hero', 150000.00, 'Mumbai'),
+('Hema Malini', 'Heroine', 180000.00, 'Mumbai'),
+('Aamir Khan', 'Hero', 250000.00, 'Mumbai'),
+('Anushka Sharma', 'Heroine', 200000.00, 'Bangalore'),
+('Prabhas', 'Hero', 300000.00, 'Hyderabad'),
+('Rana Daggubati', 'Villain', 200000.00, 'Hyderabad'),
+('Ritesh Deshmukh', 'Comedian', 100000.00, 'Mumbai');
+
+INSERT INTO Producer (producer_id, p_name, p_address) VALUES
+(1, 'Ramesh Sippy', 'Mumbai'),
+(2, 'Ashutosh Gowariker', 'Mumbai'),
+(3, 'Aamir Khan', 'Mumbai'),
+(4, 'Karan Johar', 'Mumbai'),
+(5, 'Subhash Ghai', 'Mumbai'),
+(6, 'S.S. Rajamouli', 'Hyderabad');
+
+INSERT INTO Movie_Actor (m_name, a_name) VALUES
+('Sholay', 'Amitabh Bachchan'),
+('Sholay', 'Dharmendra'),
+('Sholay', 'Hema Malini'),
+('Lagaan', 'Aamir Khan'),
+('Lagaan', 'Anushka Sharma'),
+('Dangal', 'Aamir Khan'),
+('Baahubali', 'Prabhas'),
+('Baahubali', 'Rana Daggubati'),
+('PK', 'Aamir Khan'),
+('PK', 'Anushka Sharma'),
+('Housefull', 'Ritesh Deshmukh');
+
+INSERT INTO Movie_Producer (m_name, producer_id) VALUES
+('Sholay', 1),
+('Lagaan', 2),
+('Lagaan', 3),
+('Dangal', 3),
+('Baahubali', 6),
+('PK', 3),
+('PK', 4);

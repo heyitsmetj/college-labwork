@@ -1,0 +1,22 @@
+INSERT INTO Branch (bid, brname, brcity) VALUES
+(1, 'Nagar', 'Nagar'),
+(2, 'Karve Nagar', 'Pune'),
+(3, 'ShivajiNagar', 'Pune');
+
+INSERT INTO Customer (cno, cname, caddr, city) VALUES
+(101, 'Mr. Patil', '123 Street, Nagar', 'Nagar'),
+(102, 'Mr. Baviskar', '456 Avenue, Pune', 'Pune'),
+(103, 'Mr. Sharma', '789 Road, Pune', 'Pune'),
+(104, 'Mr. Joshi', '101 Lane, Nagar', 'Nagar');
+
+INSERT INTO Loan_application (lno, l_amt_require, l_amt_approved, l_date) VALUES
+(1001, 200000.00, 180000.00, '2024-01-15'),
+(1002, 500000.00, 500000.00, '2024-02-20'),
+(1003, 150000.00, 120000.00, '2024-03-25'),
+(1004, 300000.00, 300000.00, '2024-04-10');
+
+INSERT INTO Ternary (bid, cno, lno) VALUES
+(1, 101, 1001),
+(2, 102, 1002),
+(2, 103, 1003),
+(1, 104, 1004);
