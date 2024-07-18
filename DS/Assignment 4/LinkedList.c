@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct NODE
 {
@@ -8,20 +8,20 @@ struct NODE
 };
 
 typedef struct NODE node;
-node *last,*list = NULL;
+node *last, *list = NULL;
 
-node * getnode() //creates a node
+node *getnode() // creates a node
 {
 	node *temp;
 
 	temp = (node *)malloc(sizeof(node));
 
 	printf("\n Enter the data: ");
-	scanf("%d",&temp->data);
+	scanf("%d", &temp->data);
 
 	temp->next = NULL;
 
-	return temp; 
+	return temp;
 }
 
 void create()
@@ -46,48 +46,119 @@ void create()
 		last = temp;
 
 		printf("\n Do you want to enter more ndoes? (Y/N): ");
-		scanf(" %c",&ch);
-				
-	} while (ch == 'Y' || ch =='y');
+		scanf(" %c", &ch);
+
+	} while (ch == 'Y' || ch == 'y');
 }
 
 void display()
 {
 	node *ptr;
 
-	for (ptr = list;ptr != NULL;ptr->next)
+	printf("\n Linked List: ");
+
+	for (ptr = list; ptr != NULL; ptr = ptr->next)
 	{
-		printf("\t %d",ptr->data);
+		printf("\t %d", ptr->data);
 	}
+}
+
+int countnode()
+{
+	node *ptr;
+	int cnt;
+
+	for (ptr = list, cnt = 0; ptr != NULL; ptr = ptr->next, cnt++)
+		;
+
+	return cnt;
+}
+
+void deletenode()
+{
+	int pos, i;
+	node *curr, *prev = NULL;
+
+	if (list == NULL)
+	{
+		printf("List is empty.\n");
+		return;
+	}
+
+	display();
+
+	printf("Enter position to delete (starting from 1): ");
+	scanf("%d", &pos);
+
+	if (pos < 1)
+	{
+		printf("Invalid position.\n");
+		return;
+	}
+
+	for (curr = list, i = 1; curr != NULL && i < pos; prev = curr, curr = curr->next, i++)
+		;
+
+	if (curr == NULL)
+	{
+		printf("Position %d not found.\n", pos);
+		return;
+	}
+
+	if (prev == NULL)
+	{
+		list = curr->next;
+	}
+	else
+	{
+		prev->next = curr->next;
+	}
+
+	if (curr == last)
+	{
+		last = prev;
+	}
+
+	free(curr);
+	printf("Node at position %d deleted.\n", pos);
 }
 
 void main()
 {
-	int ch;
+	int ch, cnt;
 
 	while (1)
 	{
-		printf("\n 1.Create the Linked List.");
+		printf("\n\n 1.Create the Linked List.");
 		printf("\n 2.Display the Linked List.");
-		printf("\n 3.Exit the program.");
+		printf("\n 3.Count the nodes in the Linked List.");
+		printf("\n 4.Delete a node from the Linked List.");
+		printf("\n 5.Exit the program.");
 		printf("\n Enter choice: ");
-		scanf("%d",&ch);
+		scanf("%d", &ch);
 
 		switch (ch)
 		{
 		case 1:
 			create();
 			break;
-		
+
 		case 2:
 			display();
 			break;
-		
+
 		case 3:
+			cnt = countnode();
+			printf("\n No. of nodes = %d\n", cnt);
+			display();
+			break;
+
+		case 4:
+			deletenode();
+			break;
+
+		case 5:
 			exit(1);
 		}
 	}
-	
 }
-
-
