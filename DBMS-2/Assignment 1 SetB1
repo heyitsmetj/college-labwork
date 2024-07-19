@@ -1,83 +1,53 @@
-create table movie (
+se2203=# create table movie (
     m_name varchar(25) primary key,
     release_year int,
     budget money,
 );
 
 
-create table actor (
+se2203=# create table actor (
     a_name varchar(20) primary key,
     role char(20) not null,
     charges money,
-    a_address varchar(20),
+    a_address varchar(20)
 );
 
 
-create table producer (
+se2203=# create table producer (
     producer_id int primary key,
     p_name char(30),
-    p_address varchar(20),
+    p_address varchar(20)
 );
 
 
-create table movie_actor (
+se2203=# create table movie_actor (
     m_name varchar(25) references movie,
     a_name varchar(20) references actor
 );
 
-create table movie_producer (
-    m_name varchar(25) movie,
+se2203=# create table movie_producer (
+    m_name varchar(25) references movie,
     producer_id integer references producer
 );
 
-insert into movie values 
+se2203=# insert into movie values 
 ('Kick', 2016, 5000000.00),
 ('Sholey', 2018, 7000000.00),
 ('Ek Villain', 2017, 4000000.00),
 ('Super 30', 2019, 6000000.00);
 
-inserting records into the actor table:
-sql
-
-insert into actor values 
-('Ritesh Deshmukh', 'Villain',800000,'Mumbai'),
-('Hritik Roshan','Hero',10000000, 'Pune'),
-('Amitabh Bachchan', 'Hero',1000000,'Delhi'),
-('', 'address4');
-
-inserting records into the producer table:
-sql
-
-insert into producer (producer_id, p_name, p_address) values 
-(1, 'mr.subhash ghai', 'address5'),
-(2, 'mr.xyz', 'address6'),
-(3, 'mr.abc', 'address7');
-
-inserting records into the movie_actor table:
-sql
-
-insert into movie_actor (m_name, a_name, role, charges) values 
-('movie1', 'actor1', 'lead', 1000000.00),
-('movie2', 'actor2', 'supporting', 800000.00),
-('movie3', 'actor3', 'lead', 1200000.00),
-('movie4', 'actor4', 'supporting', 900000.00);
+se2203=# INSERT INTO Movie VALUES
+('Housefull', 2014, 1000000.00);
 
 
-insert into movie_producer (m_name, producer_id) values 
-('movie1', 1),
-('movie2', 1),
-('movie3', 2),
-('movie3', 3),
-('movie4', 3);
-
-INSERT INTO Movie (m_name, release_year, budget) VALUES
+se2203=# insert into movie values
 ('Sholay', 1975, 1000000.00),
 ('Lagaan', 2001, 5000000.00),
 ('Dangal', 2016, 7500000.00),
 ('Baahubali', 2015, 6000000.00),
 ('PK', 2014, 8500000.00);
 
-INSERT INTO Actor (a_name, role, charges, a_address) VALUES
+se2203=# insert into actor values
 ('Amitabh Bachchan', 'Hero', 200000.00, 'Mumbai'),
 ('Dharmendra', 'Hero', 150000.00, 'Mumbai'),
 ('Hema Malini', 'Heroine', 180000.00, 'Mumbai'),
@@ -87,7 +57,7 @@ INSERT INTO Actor (a_name, role, charges, a_address) VALUES
 ('Rana Daggubati', 'Villain', 200000.00, 'Hyderabad'),
 ('Ritesh Deshmukh', 'Comedian', 100000.00, 'Mumbai');
 
-INSERT INTO Producer (producer_id, p_name, p_address) VALUES
+se2203=# insert into producer values
 (1, 'Ramesh Sippy', 'Mumbai'),
 (2, 'Ashutosh Gowariker', 'Mumbai'),
 (3, 'Aamir Khan', 'Mumbai'),
@@ -95,7 +65,7 @@ INSERT INTO Producer (producer_id, p_name, p_address) VALUES
 (5, 'Subhash Ghai', 'Mumbai'),
 (6, 'S.S. Rajamouli', 'Hyderabad');
 
-INSERT INTO Movie_Actor (m_name, a_name) VALUES
+se2203=# insert into movie_actor values
 ('Sholay', 'Amitabh Bachchan'),
 ('Sholay', 'Dharmendra'),
 ('Sholay', 'Hema Malini'),
@@ -108,7 +78,7 @@ INSERT INTO Movie_Actor (m_name, a_name) VALUES
 ('PK', 'Anushka Sharma'),
 ('Housefull', 'Ritesh Deshmukh');
 
-INSERT INTO Movie_Producer (m_name, producer_id) VALUES
+se2203=# insert into movie_producer values
 ('Sholay', 1),
 ('Lagaan', 2),
 ('Lagaan', 3),
@@ -116,3 +86,114 @@ INSERT INTO Movie_Producer (m_name, producer_id) VALUES
 ('Baahubali', 6),
 ('PK', 3),
 ('PK', 4);
+se2203=# insert into movie_producer values ('Sholay',5);
+INSERT 0 1
+
+
+se2203=# select a.a_name,m.m_name from movie m,actor a,movie_actor ma where m.m_name = ma.m_name and a.a_name = ma.a_name;
+      a_name      |  m_name   
+------------------+-----------
+ Amitabh Bachchan | Sholay
+ Dharmendra       | Sholay
+ Hema Malini      | Sholay
+ Aamir Khan       | Lagaan
+ Anushka Sharma   | Lagaan
+ Aamir Khan       | Dangal
+ Prabhas          | Baahubali
+ Rana Daggubati   | Baahubali
+ Aamir Khan       | PK
+ Anushka Sharma   | PK
+ Ritesh Deshmukh  | Housefull
+(11 rows)
+
+
+se2203=# select m.m_name from movie m,producer p,movie_producer mp where m.m_name = mp.m_name and mp.producer_id = p.producer_id and p_name = 'Subhash Ghai';
+ m_name 
+--------
+ Sholay
+(1 row)
+
+
+se2203=# select * from Movie where budget =(select MIN(budget) from Movie);
+  m_name   | release_year |    budget     
+-----------+--------------+---------------
+ Sholay    |         1975 | ₹1,000,000.00
+ Housefull |         2014 | ₹1,000,000.00
+(2 rows)
+
+
+se2203=# select m_name from Movie where release_year > 2015;
+   m_name   
+------------
+ Kick
+ Sholey
+ Ek Villain
+ Super 30
+ Dangal
+(5 rows)
+
+
+se2203=# select COUNT(m_name) ,SUM(budget) as total_budget from Movie where release_year =2017;
+ count | total_budget  
+-------+---------------
+     1 | ₹4,000,000.00
+(1 row)
+
+
+se2203=# select a_name from actor a where a_name = 
+(select a.a_name from movie m,actor a,movie_actor ma 
+where m.m_name = ma.m_name and a.a_name = ma.a_name 
+group by a.a_name having count(*) = 1);
+   a_name    
+-------------
+ Hema Malini
+(1 row)
+
+
+se2203=# select m_name from movie_producer group by m_name having COUNT(producer_id) > 1;
+ m_name 
+--------
+ Lagaan
+ Sholay
+ PK
+(3 rows)
+
+
+se2203=# select a_name from Actor where role = 'Villain';
+     a_name     
+----------------
+ Rana Daggubati
+(1 row)
+
+
+se2203=# select distinct a_name from Movie_Actor where m_name in (select m_name from Movie_Actor where a_name = 'Ritesh Deshmukh') and a_name != 'Ritesh Deshmukh';
+      a_name      
+------------------
+ Aamir Khan
+ Amitabh Bachchan
+ Prabhas
+ Rana Daggubati
+(4 rows)
+
+se2203=# select  a.a_name from movie m,actor a,movie_actor ma 
+where m.m_name = ma.m_name and a.a_name=ma.a_name and m.m_name in (select  m.m_name from movie m,actor a,movie_actor ma 
+where m.m_name = ma.m_name and a.a_name = 'Ritesh Deshmukh' and a.a_name = ma.a_name 
+group by m.m_name having COUNT(m.m_name)=1) and a.a_name != 'Ritesh Deshmukh';
+      a_name      
+------------------
+ Aamir Khan
+ Amitabh Bachchan
+ Prabhas
+ Rana Daggubati
+(4 rows)
+
+
+
+se2203=# select COUNT(distinct a_name) as actor_count from Movie_Actor where m_name ='Sholay';
+ actor_count 
+-------------
+           3
+(1 row)
+
+
+
