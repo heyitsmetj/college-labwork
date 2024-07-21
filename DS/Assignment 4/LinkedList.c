@@ -8,7 +8,7 @@ struct NODE
 };
 
 typedef struct NODE node;
-node *last, *list = NULL;
+node *last, *list = NULL, *list2 = NULL;
 
 node *getnode() // creates a node
 {
@@ -16,7 +16,7 @@ node *getnode() // creates a node
 
 	temp = (node *)malloc(sizeof(node));
 
-	printf("\n Enter the data: ");
+	printf("\n Enter the data for new node: ");
 	scanf("%d", &temp->data);
 
 	temp->next = NULL;
@@ -26,7 +26,6 @@ node *getnode() // creates a node
 
 void create()
 {
-	int i;
 	char ch;
 	node *temp;
 
@@ -45,7 +44,7 @@ void create()
 
 		last = temp;
 
-		printf("\n Do you want to enter more ndoes? (Y/N): ");
+		printf("\n Do you want to enter more nodes? (Y/N): ");
 		scanf(" %c", &ch);
 
 	} while (ch == 'Y' || ch == 'y');
@@ -87,7 +86,7 @@ void deletenode()
 
 	display();
 
-	printf("Enter position to delete (starting from 1): ");
+	printf("\n Enter position to delete (starting from 1): ");
 	scanf("%d", &pos);
 
 	if (pos < 1)
@@ -101,7 +100,7 @@ void deletenode()
 
 	if (curr == NULL)
 	{
-		printf("Position %d not found.\n", pos);
+		printf("\n Position %d not found.\n", pos);
 		return;
 	}
 
@@ -120,7 +119,78 @@ void deletenode()
 	}
 
 	free(curr);
-	printf("Node at position %d deleted.\n", pos);
+	printf("\n Node at position %d deleted.\n", pos);
+	display();
+}
+
+void reverse()
+{
+	node *temp = NULL, *prev = NULL, *current = list;
+
+	while (current != NULL)
+	{
+		temp = current->next;
+		current->next = prev;
+		prev = current;
+		current = temp;
+	}
+	list = prev;
+
+	printf("\n Linked List Reversed.\n");
+	display();
+}
+
+node *create_another_list()
+{
+	char ch;
+	node *temp, *list2 = NULL;
+
+	printf("\n Creating another Linked List!\n");
+
+	do
+	{
+		temp = getnode();
+
+		if (list2 == NULL)
+		{
+			list2 = temp;
+		}
+		else
+		{
+			last->next = temp;
+		}
+
+		last = temp;
+
+		printf("\n Do you want to enter more nodes? (Y/N): ");
+		scanf(" %c", &ch);
+
+	} while (ch == 'Y' || ch == 'y');
+
+	display();
+	return list2;
+}
+
+void concatenate(node **list, node **list2)
+{
+	if (*list == NULL)
+	{
+		*list = *list2;
+		return;
+	}
+
+	if (*list2 == NULL)
+	{
+		return;
+	}
+
+	node *ptr;
+
+	for (ptr = *list; ptr->next != NULL; ptr = ptr->next)
+		;
+
+	ptr->next = *list2;
+	printf("\n\n List Concatenated.\n");
 }
 
 void main()
@@ -133,8 +203,10 @@ void main()
 		printf("\n 2.Display the Linked List.");
 		printf("\n 3.Count the nodes in the Linked List.");
 		printf("\n 4.Delete a node from the Linked List.");
-		printf("\n 5.Exit the program.");
-		printf("\n Enter choice: ");
+		printf("\n 5.Reverse the Linked List.");
+		printf("\n 6.Concatenate another Linked List.");
+		printf("\n 7.Exit the program.");
+		printf("\n\n Enter choice: ");
 		scanf("%d", &ch);
 
 		switch (ch)
@@ -158,6 +230,16 @@ void main()
 			break;
 
 		case 5:
+			reverse();
+			break;
+
+		case 6:
+			list2 = create_another_list();
+			concatenate(&list, &list2);
+			display();
+			break;
+
+		case 7:
 			exit(1);
 		}
 	}

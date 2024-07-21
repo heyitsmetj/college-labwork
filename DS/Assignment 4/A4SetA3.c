@@ -8,7 +8,7 @@ struct NODE
 };
 
 typedef struct NODE node;
-node *list;
+node *last = NULL;
 
 node *getnode() // creates a node
 {
@@ -19,8 +19,7 @@ node *getnode() // creates a node
 	printf("\n Enter the data for the new node: ");
 	scanf("%d", &temp->data);
 
-		temp->next = list;
-	
+	temp->next = NULL;
 
 	return temp;
 }
@@ -35,16 +34,17 @@ void create()
 	{
 		temp = getnode();
 
-		if (list == NULL)
+		if (last == NULL)
 		{
-			list = temp;
+			last = temp;
+			last->next = last;
 		}
 		else
 		{
-			list->next = temp;
+			temp->next = last->next;
+			last->next = temp;
+			last = temp;
 		}
-
-		list = temp;
 
 		printf("\n Do you want to enter more nodes? (Y/N): ");
 		scanf(" %c", &ch);
@@ -58,12 +58,13 @@ void display()
 
 	printf("\n Linked List: ");
 
-	ptr = list;
+	ptr = last->next;
 	do
 	{
 		printf("\t %d", ptr->data);
 		ptr = ptr->next;
-	} while (ptr != list);
+
+	} while (ptr != last->next);
 }
 
 void search()
@@ -76,7 +77,7 @@ void search()
 	printf("\n Enter the data to search: ");
 	scanf("%d", &key);
 
-	ptr = list;
+	ptr = last->next;
 
 	do
 	{
@@ -89,11 +90,11 @@ void search()
 		}
 		ptr = ptr->next;
 
-	} while (ptr != list);
+	} while (ptr != last->next);
 
 	if (flag == 0)
 	{
-		printf("\n Data not found in the Linked List.");
+		printf("\n Data NOT found in the Linked List!");
 		display();
 	}
 }
@@ -103,7 +104,7 @@ void countnode()
 	node *ptr;
 	int cnt;
 
-	ptr = list;
+	ptr = last->next;
 	cnt = 0;
 
 	do
@@ -111,11 +112,11 @@ void countnode()
 		ptr = ptr->next;
 		cnt++;
 
-	} while (ptr != list);
+	} while (ptr != last->next);
 
 	if (cnt == 0)
 	{
-		printf("\n Linked List is empty.");
+		printf("\n Linked List is empty!");
 	}
 	else
 	{
