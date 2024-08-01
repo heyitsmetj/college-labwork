@@ -1,0 +1,112 @@
+CREATE TABLE Cities (
+    city CHAR(20) PRIMARY KEY,
+    state CHAR(20),
+);
+
+CREATE TABLE Warehouses (
+    wid INTEGER PRIMARY KEY,
+    wname CHAR(30) NOT NULL,
+    location CHAR(20)
+);
+
+CREATE TABLE Stores (
+    sid INTEGER PRIMARY KEY,
+    store_name CHAR(20),
+    location_city CHAR(20),
+    warehouse_id INT REFERENCES Warehouses
+);
+
+CREATE TABLE Items (
+    itemno INTEGER PRIMARY KEY,
+    description TEXT,
+    weight DECIMAL(5, 2),
+    cost DECIMAL(5, 2)
+);
+
+CREATE TABLE Customer (
+    cno INTEGER PRIMARY KEY,
+    cname CHAR(50),
+    addr VARCHAR(50),
+    c_city CHAR(20)
+);
+
+CREATE TABLE Orders (
+    ono INTEGER PRIMARY KEY,
+    odate DATE,
+    cno INT REFERENCES Customer
+);
+
+CREATE TABLE Item_Order (
+    itemno INT REFERENCES Items,
+    ono INT REFERENCES Orders,
+    ordered_quantity INT
+);
+
+CREATE TABLE Store_Item (
+    sid INT REFERENCES Stores,  
+    itemno INT REFERENCES Items,
+    quantity INT
+);
+
+
+-- Insert records into Cities
+INSERT INTO Cities (city, state) VALUES 
+('Pune', 'Maharashtra'), 
+('Mumbai', 'Maharashtra'), 
+('Nashik', 'Maharashtra'), 
+('Delhi', 'Delhi');
+
+-- Insert records into Warehouses
+INSERT INTO Warehouses (wid, wname, location) VALUES 
+(1, 'Spares', 'Pune'), 
+(2, 'Essentials', 'Mumbai'), 
+(3, 'Supplies', 'Nashik');
+
+-- Insert records into Stores
+INSERT INTO Stores (sid, store_name, location_city, wid) VALUES 
+(1, 'Store A', 'Pune', 1), 
+(2, 'Store B', 'Mumbai', 2), 
+(3, 'Store C', 'Nashik', 3), 
+(4, 'Store D', 'Pune', 1);
+
+-- Insert records into Items
+INSERT INTO Items (itemno, description, weight, cost) VALUES 
+(1, 'Item 1', 5.00, 200.00), 
+(2, 'Item 2', 2.50, 150.00), 
+(3, 'Item 3', 3.00, 300.00);
+
+-- Insert records into Customer
+INSERT INTO Customer (cno, cname, addr, c_city) VALUES 
+(1, 'Mr. Patil', '123, Main St.', 'Pune'), 
+(2, 'Mr. Sharma', '456, High St.', 'Mumbai'), 
+(3, 'Mr. Gupta', '789, Low St.', 'Nashik');
+
+-- Insert records into Orders
+INSERT INTO Orders (ono, odate, cno) VALUES 
+(1, '2015-11-12', 1), 
+(2, '2015-11-12', 2), 
+(3, '2016-01-15', 3);
+
+
+
+CREATE VIEW A2C2V1 AS
+SELECT s.*
+FROM Stores s, Warehouses w
+WHERE s.wid = w.wid
+AND w.wname = 'Spares' AND w.location = 'Pune';
+
+
+CREATE VIEW A2C2V2 AS
+SELECT c.*
+FROM Customer c, Orders o
+WHERE c.cno = o.cno
+AND o.odate = '2015-11-12';
+
+
+CREATE VIEW A2C2V3 AS
+SELECT c.city, COUNT(w.wid) AS warehouse_count
+FROM Cities c, Warehouses w
+WHERE c.city = w.location
+GROUP BY c.city;
+
+

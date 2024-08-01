@@ -1,0 +1,76 @@
+CREATE TABLE Project (
+    pno INTEGER PRIMARY KEY,
+    pname CHAR(30) NOT NULL,
+    ptype CHAR(20),
+    duration INTEGER CHECK (duration > 0)
+);
+
+CREATE TABLE Employee (
+    eno INTEGER PRIMARY KEY,
+    ename CHAR(20),
+    qualification CHAR(15),
+    joining_date DATE
+);
+
+CREATE TABLE Project_Employee (
+    pno INTEGER REFERENCES Project,
+    eno INTEGER REFERENCES Employee,
+    start_date DATE,
+    no_of_hours_worked INTEGER
+);
+
+INSERT INTO Project (pno, pname, ptype, duration) VALUES
+(1, 'ERP', 'Software', 12),
+(2, 'CRM', 'Software', 8),
+(3, 'HRMS', 'Software', 4),
+(4, 'E-Commerce', 'Web', 10);
+
+INSERT INTO Employee (eno, ename, qualification, joining_date) VALUES
+(1, 'Rajesh Kumar', 'MCA', '2020-01-15'),
+(2, 'Aditi Sharma', 'B.Tech', '2019-06-01'),
+(3, 'Vijay Mehta', 'MCA', '2021-03-10'),
+(4, 'Pooja Gupta', 'MBA', '2018-11-20'),
+(5, 'Suresh Rathi', 'B.Com', '2020-05-05');
+
+INSERT INTO Project_Employee (pno, eno, start_date, no_of_hours_worked) VALUES
+(1, 1, '2020-02-01', 350),
+(1, 2, '2020-03-01', 200),
+(2, 1, '2020-04-01', 150),
+(1, 3, '2020-01-20', 400),
+(4, 4, '2020-07-01', 500),
+(3, 5, '2021-05-01', 100);
+
+
+CREATE VIEW A2A1V1 AS
+SELECT e.*
+FROM Employee e, Project_Employee pe, Project p
+WHERE e.eno = pe.eno
+  AND pe.pno = p.pno
+  AND p.pname = 'ERP';
+
+
+CREATE VIEW A2A1V2 AS
+SELECT p.*, pe.start_date
+FROM Project p, Project_Employee pe
+WHERE p.pno = pe.pno
+  AND p.duration > 6
+ORDER BY pe.start_date;
+
+
+CREATE VIEW A2A1V3 AS
+SELECT *
+FROM Employee
+WHERE qualification = 'MCA';
+
+
+CREATE VIEW Employees_With_Over_300_Hours AS
+SELECT e.ename, p.pname
+FROM Employee e, Project_Employee pe, Project p
+WHERE e.eno = pe.eno
+  AND pe.pno = p.pno
+  AND pe.no_of_hours_worked > 300;
+
+
+
+
+

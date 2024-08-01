@@ -1,0 +1,73 @@
+CREATE TABLE Area (
+    aname VARCHAR(20) PRIMARY KEY,
+    area_type VARCHAR(5) CHECK (area_type IN ('urban', 'rural'))
+);
+
+CREATE TABLE Person (
+    pno INTEGER PRIMARY KEY,
+    pname VARCHAR(20),
+    birthdate DATE,
+    income MONEY,
+    aname VARCHAR(20) REFERENCES Area
+);
+
+
+INSERT INTO Area (aname, area_type) VALUES
+('Hadapsar', 'urban'),
+('Kothrud', 'urban'),
+('Shivaji Nagar', 'rural'),
+('Pune', 'urban'),
+('Alandi', 'rural');
+
+
+INSERT INTO Person (pno, pname, birthdate, income, aname) VALUES
+(1, 'Rahul Tupe', '1980-06-15', 15000, 'Hadapsar'),
+(2, 'Sita Tupe', '1975-03-12', 9000, 'Hadapsar'),
+(3, 'Anil Joshi', '1955-05-20', 12000, 'Kothrud'),
+(4, 'Kiran Shinde', '1960-08-25', 5000, 'Shivaji Nagar'),
+(5, 'Sunil Patil', '1950-09-10', 20000, 'Alandi'),
+(6, 'Geeta Mehta', '1945-02-01', 30000, 'Pune'),
+(7, 'Pooja Joshi', '1972-12-30', 11000, 'Kothrud'),
+(8, 'Vijay Patil', '1962-04-05', 25000, 'Hadapsar');
+
+
+CREATE VIEW A2A2V1 AS
+SELECT pname
+FROM Person
+WHERE pname LIKE '%Tupe%' AND aname = 'Hadapsar';
+
+
+CREATE VIEW A2A2V2 AS
+SELECT COUNT(*) AS count
+FROM Person
+WHERE aname IN (SELECT aname FROM Area WHERE area_type = 'rural')
+  AND income > '10000';
+
+
+CREATE VIEW A2A2V3 AS
+SELECT a.aname, COUNT(p.pno) AS count
+FROM Area a, Person p
+WHERE a.aname = p.aname
+  AND EXTRACT(YEAR FROM AGE(p.birthdate)) > 60
+GROUP BY a.aname;
+
+
+CREATE VIEW A2A2V4 AS
+SELECT a.aname, p.pname, p.income
+FROM Area a, Person p
+WHERE a.aname = p.aname
+  AND p.income = (SELECT MAX(income) FROM Person WHERE aname = a.aname)
+ORDER BY a.aname;
+
+CREATE VIEW A2A2V4 AS
+SELECT a.aname, p.pname, p.income
+FROM Area a, Person p
+WHERE a.aname = p.aname
+  AND p.income = (SELECT MAX(income) FROM Person WHERE aname = a.aname)
+ORDER BY a.aname;
+
+CREATE VIEW A2A2V42 AS
+SELECT a.aname, p.pname
+FROM Area a, Person p
+WHERE a.aname = p.aname
+GROUP BY a.aname,pname ORDER BY income DESC LIMIT 1;

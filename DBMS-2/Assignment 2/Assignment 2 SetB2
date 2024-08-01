@@ -1,0 +1,90 @@
+
+CREATE TABLE Branch (
+    br_id INTEGER PRIMARY KEY,
+    br_name CHAR(30),
+    br_city CHAR(10)
+);
+
+CREATE TABLE Customer (
+    cno INTEGER PRIMARY KEY,
+    c_name CHAR(20),
+    caddr CHAR(35),
+    city CHAR(20)
+);
+
+CREATE TABLE Loan_application (
+    lno INTEGER PRIMARY KEY,
+    l_amt_required MONEY CHECK (l_amt_required > 0),
+    l_amt_approved MONEY,
+    l_date DATE
+);
+
+CREATE TABLE Ternary (
+    br_id INTEGER REFERENCES Branch,
+    cno INTEGER REFERENCES Customer,
+    lno INTEGER REFERENCES Loan_application
+);
+
+INSERT INTO Branch (br_id, br_name, br_city) VALUES
+(1, 'Koregaon Park Branch', 'Pune'),
+(2, 'Bandra Branch', 'Mumbai'),
+(3, 'MG Road Branch', 'Bangalore'),
+(4, 'Connaught Place Branch', 'Delhi'),
+(5, 'Anna Nagar Branch', 'Chennai');
+
+INSERT INTO Customer (cno, c_name, caddr, city) VALUES
+(101, 'Rahul Sharma', '123 ABC Street', 'Pune'),
+(102, 'Priya Patel', '456 XYZ Road', 'Mumbai'),
+(103, 'Amit Kumar', '789 PQR Avenue', 'Bangalore'),
+(104, 'Sneha Gupta', '321 LMN Lane', 'Delhi'),
+(105, 'Karthik Rajan', '654 JKL Street', 'Chennai');
+
+INSERT INTO Loan_application (lno, l_amt_required, l_amt_approved, l_date) VALUES
+(1001, 500000, 450000, '2019-07-15'),
+(1002, 3500000, 3000000, '2019-09-20'),
+(1003, 200000, 200000, '2019-11-30'),
+(1004, 4000000, 3500000, '2020-01-10'),
+(1005, 80000, 75000, '2020-03-25');
+
+INSERT INTO Ternary (br_id, cno, lno) VALUES
+(1, 101, 1001),
+(2, 102, 1002),
+(3, 103, 1003),
+(4, 104, 1004),
+(5, 105, 1005);
+
+CREATE VIEW A2B2V1 AS
+SELECT c.*, l.l_amt_required, l.l_amt_approved
+FROM Customer c, Loan_application l, Ternary t
+WHERE c.cno = t.cno
+  AND l.lno = t.lno
+  AND l.l_amt_approved < l.l_amt_required;
+
+
+CREATE VIEW A2B2V2 AS
+SELECT b.br_id, b.br_name, SUM(l.l_amt_approved) as total_approved
+FROM Branch b, Loan_application l, Ternary t
+WHERE b.br_id = t.br_id
+  AND l.lno = t.lno
+  AND l.l_date BETWEEN '2019-06-01' AND '2020-06-01'
+GROUP BY b.br_id, b.br_name;
+
+
+CREATE VIEW A2B2V3 AS
+SELECT b.br_id, b.br_name, COUNT(DISTINCT c.cno) as high_loan_customers
+FROM Branch b, Customer c, Loan_application l, Ternary t
+WHERE b.br_id = t.br_id
+  AND c.cno = t.cno
+  AND l.lno = t.lno
+  AND l.l_amt_required > '3000000'
+GROUP BY b.br_id, b.br_name;
+
+CREATE VIEW A2B2V4 AS
+SELECT b.br_id, b.br_name, c.c_name
+FROM Branch b, Customer c, Loan_application l, Ternary t
+WHERE b.br_id = t.br_id
+  AND c.cno = t.cno
+  AND l.lno = t.lno
+  AND l.l_amt_required < '100000'
+ORDER BY b.br_id, c.c_name;
+

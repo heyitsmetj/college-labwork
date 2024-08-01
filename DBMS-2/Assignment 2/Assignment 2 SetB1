@@ -1,0 +1,101 @@
+
+CREATE TABLE Bus (
+    bus_no INT PRIMARY KEY,
+    b_capacity INT NOT NULL,
+    depot_name VARCHAR(20)
+);
+
+CREATE TABLE Route (
+    route_no INT PRIMARY KEY,
+    source CHAR(20),
+    destination CHAR(20),
+    no_of_stations INT
+);
+
+CREATE TABLE Driver (
+    driver_no INT PRIMARY KEY,
+    driver_name CHAR(20),
+    license_no INT UNIQUE,
+    address CHAR(20),
+    d_age INT,
+    salary FLOAT
+);
+
+CREATE TABLE Bus_Driver (
+    bus_no INT REFERENCES Bus,
+    driver_no INT REFERENCES Driver,
+    date_of_duty_allotted DATE,
+    shift INT CHECK (shift IN (1, 2))
+);
+
+CREATE TABLE Bus_Route (
+    bus_no INT REFERENCES Bus,
+    route_no INT REFERENCES Route
+);
+
+INSERT INTO Bus (bus_no, b_capacity, depot_name) VALUES
+(10, 50, 'Kothrud'),
+(11, 45, 'Swargate'),
+(12, 55, 'Hadapsar'),
+(13, 40, 'Kothrud'),
+(14, 60, 'Nigdi');
+
+INSERT INTO Route (route_no, source, destination, no_of_stations) VALUES
+(1, 'Deccan', 'Katraj', 15),
+(2, 'Swargate', 'Nigdi', 20),
+(3, 'Hadapsar', 'Hinjewadi', 18),
+(4, 'Kothrud', 'Viman Nagar', 22),
+(5, 'Deccan', 'Vishrantwadi', 17);
+
+INSERT INTO Driver (driver_no, driver_name, license_no, address, d_age, salary) VALUES
+(1, 'Rajesh Kumar', 101, 'Pune', 45, 35000),
+(2, 'Priya Singh', 102, 'Mumbai', 38, 32000),
+(3, 'Amit Sharma', 103, 'Nashik', 42, 34000),
+(4, 'Neha Patel', 104, 'Nagpur', 35, 31000),
+(5, 'Suresh Verma', 105, 'Pune', 50, 38000);
+
+INSERT INTO Bus_Driver (bus_no, driver_no, date_of_duty_allotted, shift) VALUES
+(10, 1, '2020-06-15', 2),
+(10, 2, '2020-06-20', 1),
+(11, 3, '2020-06-25', 2),
+(12, 4, '2020-07-01', 1),
+(13, 5, '2020-06-10', 2);
+
+INSERT INTO Bus_Route (bus_no, route_no) VALUES
+(10, 1),
+(11, 2),
+(12, 3),
+(13, 4),
+(14, 5);
+
+CREATE VIEW A2B1V1 AS
+SELECT *
+FROM Driver
+WHERE d_age > 40;
+
+
+CREATE VIEW A2B1V2 AS
+SELECT b.*, d.*, bd.date_of_duty_allotted
+FROM Bus b, Bus_Driver bd, Driver d
+WHERE b.bus_no = bd.bus_no
+  AND bd.driver_no = d.driver_no
+  AND b.bus_no = 10
+  AND bd.shift = 2;
+
+
+CREATE VIEW A2B1V3 AS
+SELECT d.driver_name, bd.shift
+FROM Driver d, Bus_Driver bd, Bus b
+WHERE d.driver_no = bd.driver_no
+  AND bd.bus_no = b.bus_no
+  AND b.depot_name = 'Kothrud'
+  AND bd.date_of_duty_allotted BETWEEN '2020-06-01' AND '2020-07-01';
+
+
+CREATE VIEW A2B1V4 AS
+SELECT b.bus_no
+FROM Bus b, Bus_Route br, Route r
+WHERE b.bus_no = br.bus_no
+  AND br.route_no = r.route_no
+  AND r.source = 'Deccan'
+  AND r.destination = 'Katraj';

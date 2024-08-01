@@ -1,0 +1,88 @@
+-- Create tables
+CREATE TABLE Dept (
+    deptno VARCHAR(10) PRIMARY KEY,
+    dept_name CHAR(20)
+);
+
+CREATE TABLE Salesman (
+    sno INTEGER PRIMARY KEY,
+    s_name VARCHAR(30) NOT NULL,
+    start_year INTEGER,
+    deptno VARCHAR(10),
+    FOREIGN KEY (deptno) REFERENCES Dept(deptno)
+);
+
+CREATE TABLE Trip (
+    tno INTEGER PRIMARY KEY,
+    from_city CHAR(20),
+    to_city CHAR(20),
+    departure_date DATE,
+    return_date DATE,
+    sno INTEGER,
+    FOREIGN KEY (sno) REFERENCES Salesman(sno)
+);
+
+CREATE TABLE Expense (
+    eid INTEGER PRIMARY KEY,
+    amount MONEY,
+    tno INTEGER UNIQUE,
+    FOREIGN KEY (tno) REFERENCES Trip(tno)
+);
+
+INSERT INTO Dept (deptno, dept_name) VALUES
+('D001', 'Sales'),
+('D002', 'Marketing'),
+('D003', 'Finance');
+
+
+INSERT INTO Salesman (sno, s_name, start_year, deptno) VALUES
+(1, 'Mr.Pawar', 2018, 'D001'),
+(2, 'Mr. Kale', 2019, 'D001'),
+(3, 'Ms. Joshi', 2020, 'D002'),
+(4, 'Mr. Sharma', 2017, 'D003');
+
+
+INSERT INTO Trip (tno, from_city, to_city, departure_date, return_date, sno) VALUES
+(101, 'Pune', 'Mumbai', '2023-06-10', '2023-06-12', 1),
+(102, 'Mumbai', 'Delhi', '2023-07-15', '2023-07-18', 1),
+(103, 'Pune', 'Mumbai', '2023-06-20', '2023-06-22', 2),
+(104, 'Pune', 'Mumbai', '2023-06-25', '2023-06-27', 2),
+(105, 'Bangalore', 'Chennai', '2023-08-05', '2023-08-07', 3);
+
+
+INSERT INTO Expense (eid, amount, tno) VALUES
+(1001, 5000, 101),
+(1002, 15000, 102),
+(1003, 6000, 103),
+(1004, 5500, 104),
+(1005, 8000, 105);
+
+
+CREATE VIEW A2C1V1 AS
+SELECT s.s_name, SUM(e.amount) as total_expenses
+FROM Salesman s, Trip t, Expense e
+WHERE s.sno = t.sno
+  AND t.tno = e.tno
+  AND s.s_name = 'Mr.Pawar'
+GROUP BY s.s_name;
+
+
+CREATE VIEW A2C1V2 AS
+SELECT d.dept_name
+FROM Dept d, Salesman s
+WHERE d.deptno = s.deptno
+  AND s.sno NOT IN (
+    SELECT DISTINCT t.sno
+    FROM Trip t
+  );
+
+
+CREATE VIEW A2C1V3 AS
+SELECT s.s_name, COUNT(*) as trip_count
+FROM Salesman s, Trip t
+WHERE s.sno = t.sno
+  AND s.s_name = 'Mr. Kale'
+  AND t.from_city = 'Pune'
+  AND t.to_city = 'Mumbai'
+  AND EXTRACT(MONTH FROM t.departure_date) = 6
+GROUP BY s.s_name;
