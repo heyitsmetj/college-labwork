@@ -1,0 +1,125 @@
+CREATE TABLE Cities (
+    city CHAR(20),
+    state CHAR(20),
+    PRIMARY KEY (city)
+);
+
+CREATE TABLE Warehouses (
+    wid INTEGER PRIMARY KEY,
+    wname CHAR(30) NOT NULL,
+    location CHAR(20),
+    city CHAR(20) REFERENCES Cities
+);
+
+CREATE TABLE Stores (
+    sid INTEGER PRIMARY KEY,
+    store_name CHAR(20),
+    location_city CHAR(20),
+    wid INTEGER REFERENCES Warehouses
+);
+
+CREATE TABLE Items (
+    itemno INTEGER PRIMARY KEY,
+    description TEXT,
+    weight DECIMAL(5,2),
+    cost DECIMAL(5,2)
+);
+
+CREATE TABLE Customers (
+    cno INTEGER PRIMARY KEY,
+    cname CHAR(50),
+    addr VARCHAR(50),
+    cu_city CHAR(20)
+);
+
+CREATE TABLE Orders (
+    ono INTEGER PRIMARY KEY,
+    odate DATE,
+    cno INTEGER REFERENCES Customers
+);
+
+CREATE TABLE Items_Orders (
+    
+    itemno INTEGER REFERENCES Items,
+    ono INTEGER REFERENCES Orders,
+    ordered_quantity INTEGER
+);
+
+CREATE TABLE Stores_Items (
+    sid INTEGER REFERENCES Stores,
+    itemno INTEGER REFERENCES Items,
+    quantity INTEGER
+);
+
+INSERT INTO Cities (city, state) VALUES
+('Nagar', 'Maharashtra'),
+('Pune', 'Maharashtra');
+
+INSERT INTO Warehouses (wid, wname, location, city) VALUES
+(1, 'Central Warehouse', 'Main Road', 'Nagar'),
+(2, 'Spare Parts', 'Industrial Area', 'Pune');
+
+INSERT INTO Stores (sid, store_name, location_city, wid) VALUES
+(1, 'Auto Parts Store', 'Nagar', 1),
+(2, 'Electronics Store', 'Pune', 2),
+(3, 'Grocery Store', 'Nagar', 1);
+
+INSERT INTO Items (itemno, description, weight, cost) VALUES
+(1, 'Engine Oil', 2.5, 300),
+(2, 'Brake Pads', 1.2, 150),
+(3, 'Spark Plug', 0.1, 75);
+
+INSERT INTO Customers (cno, cname, addr, cu_city) VALUES
+(1, 'Mr.Patil', '123 Main St', 'Nagar'),
+(2, 'Mr.Baviskar', '456 Elm St', 'Pune'),
+(3, 'Mr.Shinde', '789 Pine St', 'Nagar');
+
+INSERT INTO Orders (ono, odate, cno) VALUES
+(1, '2015-11-12', 1),
+(2, '2015-11-12', 2),
+(3, '2015-11-12', 3);
+
+INSERT INTO Items_Orders (ono, itemno, ordered_quantity) VALUES
+(1, 1, 10),
+(1, 2, 20),
+(2, 2, 30),
+(2, 3, 40),
+(3, 3, 50);
+
+INSERT INTO Stores_Items (sid, itemno, quantity) VALUES
+(1, 1, 100),
+(1, 2, 200),
+(2, 2, 300),
+(2, 3, 400),
+(3, 1, 150),
+(3, 3, 250);
+
+SELECT DISTINCT wname
+FROM Warehouses
+WHERE city = 'Nagar';
+
+SELECT *
+FROM Items
+WHERE weight = (SELECT MIN(weight) FROM Items);
+
+DELETE FROM Orders
+WHERE cno = (SELECT cno FROM Customer WHERE cname = 'Mr.Patil');
+
+SELECT i.*
+FROM Items i ,Items_Orders io, Orders o,Customers c WHERE i.itemno = io.itemno AND io.ono = o.ono AND o.cno = c.cno
+AND c.cname = 'Mr.Baviskar';
+
+SELECT w.wname
+FROM Warehouses w ,Stores s WHERE w.wid = s.wid
+GROUP BY w.wid, w.wname
+ORDER BY COUNT(s.sid) DESC
+LIMIT 1;
+
+SELECT i.*
+FROM Items i, Items_Orders io WHERE i.itemno = io.itemno
+GROUP BY i.itemno, i.description, i.weight, i.cost
+ORDER BY SUM(io.ordered_quantity) ASC
+LIMIT 1;
+
+SELECT c.cname, o.*
+FROM Customers c, Orders o WHERE c.cno = o.cno GROUP BY ono,cname;

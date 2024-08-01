@@ -1,0 +1,107 @@
+CREATE TABLE Branch (
+    bid INTEGER PRIMARY KEY,
+    brname CHAR(30),
+    brcity CHAR(10)
+);
+
+CREATE TABLE Customer (
+    cno INTEGER PRIMARY KEY,
+    cname CHAR(20),
+    caddr CHAR(35),
+    city CHAR(20)
+);
+
+CREATE TABLE Loan_application (
+    lno INTEGER PRIMARY KEY,
+    l_amt_require MONEY CHECK(l_amt_require > '0'),
+    l_amt_approved MONEY,
+    l_date DATE
+);
+
+CREATE TABLE Ternary (
+    bid INTEGER REFERENCES Branch,
+    cno INTEGER REFERENCES Customer,
+    lno INTEGER REFERENCES Loan_application
+);
+
+INSERT INTO Branch VALUES
+(1, 'Nagar', 'Nagar'),
+(2, 'Karve Nagar', 'Pune'),
+(3, 'ShivajiNagar', 'Pune');
+
+INSERT INTO Customer (cno, cname, caddr, city) VALUES
+(101, 'Mr. Patil', '123 Street, Nagar', 'Nagar'),
+(102, 'Mr. Baviskar', '456 Avenue, Pune', 'Pune'),
+(103, 'Mr. Sharma', '789 Road, Pune', 'Pune'),
+(104, 'Mr. Joshi', '101 Lane, Nagar', 'Nagar');
+
+INSERT INTO Loan_application (lno, l_amt_require, l_amt_approved, l_date) VALUES
+(1001, 200000.00, 180000.00, '2024-01-15'),
+(1002, 500000.00, 500000.00, '2024-02-20'),
+(1003, 150000.00, 120000.00, '2024-03-25'),
+(1004, 300000.00, 300000.00, '2024-04-10');
+
+INSERT INTO Ternary (bid, cno, lno) VALUES
+(1, 101, 1001),
+(2, 102, 1002),
+(2, 103, 1003),
+(1, 104, 1004),
+(3, 104, 1004);
+
+SELECT SUM(l.l_amt_approved) AS total_approved
+FROM Loan_application l, Ternary t, Branch b
+WHERE l.lno = t.lno
+  AND t.bid = b.bid
+  AND b.brname = 'Nagar';
+
+SELECT c.cname
+FROM Customer c, Ternary t, Branch b
+WHERE c.cno = t.cno
+  AND t.bid = b.bid
+  AND b.brname = 'Karve Nagar';
+
+SELECT DISTINCT c.cname
+FROM Customer c, Ternary t, Branch b
+WHERE c.cno = t.cno
+  AND t.bid = b.bid
+  AND c.city = b.brcity;
+
+SELECT c.cname
+FROM Customer c, Ternary t, Loan_application l
+WHERE c.cno = t.cno
+  AND t.lno = l.lno
+  AND l.l_amt_approved < l.l_amt_require;
+
+SELECT c.cname, b.brname
+FROM Customer c, Ternary t, Loan_application l, Branch b
+WHERE c.cno = t.cno
+  AND t.lno = l.lno
+  AND t.bid = b.bid
+  AND EXTRACT(MONTH FROM l.l_date) = 1;
+
+SELECT c.cname
+FROM Customer c, Ternary t, Loan_application l
+WHERE c.cno = t.cno
+  AND t.lno = l.lno
+  AND l.l_amt_require > '100000';
+
+SELECT MAX(l.l_amt_approved) AS max_approved
+FROM Loan_application l;
+
+SELECT COUNT(c.cno) AS customer_count
+FROM Customer c, Ternary t, Branch b
+WHERE c.cno = t.cno
+  AND t.bid = b.bid
+  AND b.brname = 'ShivajiNagar';
+
+SELECT DISTINCT c.cname
+FROM Customer c, Ternary t, Loan_application l
+WHERE c.cno = t.cno
+  AND t.lno = l.lno
+  AND l.l_amt_require BETWEEN '200000' AND '400000';
+
+SELECT DISTINCT b.brname, c.cname
+FROM Branch b, Ternary t, Customer c
+WHERE b.bid = t.bid
+  AND t.cno = c.cno
+ORDER BY b.brname, c.cname;

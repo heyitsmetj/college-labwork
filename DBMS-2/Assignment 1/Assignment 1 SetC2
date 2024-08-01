@@ -1,0 +1,110 @@
+CREATE TABLE BUS (
+    bus_no INT PRIMARY KEY,
+    capacity INT NOT NULL,
+    depot_name VARCHAR(20)
+);
+
+CREATE TABLE ROUTE (
+    route_no INT PRIMARY KEY,
+    source CHAR(20),
+    destination CHAR(20),
+    no_of_stations INT
+);
+
+CREATE TABLE DRIVER (
+    driver_no INT PRIMARY KEY,
+    driver_name CHAR(20),
+    license_no INT UNIQUE,
+    address CHAR(20),
+    d_age INT,
+    salary FLOAT
+);
+
+CREATE TABLE BUS_ROUTE (
+    bus_no INT REFERENCES BUS,
+    route_no INT REFERENCES ROUTE
+);
+
+CREATE TABLE BUS_DRIVER (
+    bus_no INT REFERENCES BUS,
+    driver_no INT REFERENCES DRIVER,
+    date_of_duty_allotted DATE,
+    shift INT CHECK(shift in (1,2))
+);
+
+
+INSERT INTO BUS (bus_no, capacity, depot_name) VALUES
+(1, 20, 'Central Depot'),
+(2, 30, 'North Depot'),
+(3, 15, 'Central Depot');
+
+INSERT INTO ROUTE (route_no, source, destination, no_of_stations) VALUES
+(1, 'A', 'B', 5),
+(2, 'C', 'D', 3);
+
+INSERT INTO DRIVER (driver_no, driver_name, license_no, address, d_age, salary) VALUES
+(1, 'John Doe', 1001, '123 Main St', 45, 5000),
+(2, 'Jane Smith', 1002, '456 Elm St', 35, 4500),
+(3, 'Mike Johnson', 1003, '789 Oak St', 50, 5500);
+
+INSERT INTO BUS_ROUTE (bus_no, route_no) VALUES
+(1, 1),
+(2, 1),
+(3, 2);
+
+INSERT INTO BUS_DRIVER (bus_no, driver_no, date_of_duty_allotted, shift) VALUES
+(1, 1, '2020-06-15', 1),
+(1, 1, '2020-06-15', 2),
+(2, 2, '2020-06-16', 2),
+(2, 3, '2020-06-17', 1),
+(2, 3, '2020-06-17', 2);
+
+
+SELECT d.driver_name
+FROM DRIVER d, BUS_DRIVER bd WHERE d.driver_no = bd.driver_no AND bd.shift = 2;
+
+
+SELECT r.*
+FROM BUS b,ROUTE r,BUS_ROUTE br 
+WHERE r.route_no = br.route_no 
+AND br.bus_no = b.bus_no 
+AND b.capacity = 20;
+
+
+UPDATE DRIVER
+SET salary = salary * 1.05
+WHERE d_age > 40;
+
+
+SELECT d.driver_name
+FROM DRIVER d, BUS_DRIVER bd 
+WHERE d.driver_no = bd.driver_no
+AND shift = 1 AND shift = 2; 
+
+SELECT d.driver_name
+FROM DRIVER d
+JOIN BUS_DRIVER bd1 ON d.driver_no = bd1.driver_no
+JOIN BUS_DRIVER bd2 ON d.driver_no = bd2.driver_no
+WHERE bd1.shift = 1 AND bd2.shift = 2;
+
+
+SELECT driver_name
+FROM DRIVER
+WHERE salary = (SELECT MAX(salary) FROM DRIVER);
+
+
+DELETE FROM BUS
+WHERE capacity < 10;
+
+
+SELECT d.driver_name, d.license_no
+FROM DRIVER d, BUS_DRIVER bd WHERE d.driver_no = bd.driver_no
+AND bd.shift = 1 AND bd.shift = 2;
+
+SELECT d.driver_name, d.license_no
+FROM DRIVER d
+JOIN BUS_DRIVER bd1 ON d.driver_no = bd1.driver_no
+JOIN BUS_DRIVER bd2 ON d.driver_no = bd2.driver_no
+WHERE bd1.shift = 1 AND bd2.shift = 2;
+
+
