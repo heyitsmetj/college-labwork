@@ -1,4 +1,4 @@
--- Create tables
+
 CREATE TABLE Dept (
     deptno VARCHAR(10) PRIMARY KEY,
     dept_name CHAR(20)
@@ -8,8 +8,7 @@ CREATE TABLE Salesman (
     sno INTEGER PRIMARY KEY,
     s_name VARCHAR(30) NOT NULL,
     start_year INTEGER,
-    deptno VARCHAR(10),
-    FOREIGN KEY (deptno) REFERENCES Dept(deptno)
+    deptno VARCHAR(10) REFERENCES Dept ON DELETE CASCADE
 );
 
 CREATE TABLE Trip (
@@ -18,15 +17,13 @@ CREATE TABLE Trip (
     to_city CHAR(20),
     departure_date DATE,
     return_date DATE,
-    sno INTEGER,
-    FOREIGN KEY (sno) REFERENCES Salesman(sno)
+    sno INTEGER REFERENCES Salesman ON DELETE CASCADE
 );
 
 CREATE TABLE Expense (
     eid INTEGER PRIMARY KEY,
     amount MONEY,
-    tno INTEGER UNIQUE,
-    FOREIGN KEY (tno) REFERENCES Trip(tno)
+    tno INTEGER REFERENCES ON DELETE CASCADE 
 );
 
 INSERT INTO Dept (deptno, dept_name) VALUES

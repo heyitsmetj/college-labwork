@@ -23,7 +23,7 @@ CREATE TABLE Items (
     cost DECIMAL(5, 2)
 );
 
-CREATE TABLE Customer (
+CREATE TABLE Customers (
     cno INTEGER PRIMARY KEY,
     cname CHAR(50),
     addr VARCHAR(50),
@@ -76,7 +76,7 @@ INSERT INTO Items (itemno, description, weight, cost) VALUES
 (3, 'Item 3', 3.00, 300.00);
 
 -- Insert records into Customer
-INSERT INTO Customer (cno, cname, addr, c_city) VALUES 
+INSERT INTO Customers (cno, cname, addr, c_city) VALUES 
 (1, 'Mr. Patil', '123, Main St.', 'Pune'), 
 (2, 'Mr. Sharma', '456, High St.', 'Mumbai'), 
 (3, 'Mr. Gupta', '789, Low St.', 'Nashik');
@@ -98,7 +98,7 @@ AND w.wname = 'Spares' AND w.location = 'Pune';
 
 CREATE VIEW A2C2V2 AS
 SELECT c.*
-FROM Customer c, Orders o
+FROM Customers c, Orders o
 WHERE c.cno = o.cno
 AND o.odate = '2015-11-12';
 

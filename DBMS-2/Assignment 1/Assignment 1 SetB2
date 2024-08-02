@@ -53,24 +53,49 @@ FROM Loan_application l, Ternary t, Branch b
 WHERE l.lno = t.lno
   AND t.bid = b.bid
   AND b.brname = 'Nagar';
+ total_approved 
+----------------
+    ₹480,000.00
+(1 row)
+
 
 SELECT c.cname
 FROM Customer c, Ternary t, Branch b
 WHERE c.cno = t.cno
   AND t.bid = b.bid
   AND b.brname = 'Karve Nagar';
+        cname         
+----------------------
+ Mr. Baviskar        
+ Mr. Sharma          
+(2 rows)
+
 
 SELECT DISTINCT c.cname
 FROM Customer c, Ternary t, Branch b
 WHERE c.cno = t.cno
   AND t.bid = b.bid
   AND c.city = b.brcity;
+        cname         
+----------------------
+ Mr. Baviskar        
+ Mr. Joshi           
+ Mr. Patil           
+ Mr. Sharma          
+(4 rows)
+
 
 SELECT c.cname
 FROM Customer c, Ternary t, Loan_application l
 WHERE c.cno = t.cno
   AND t.lno = l.lno
   AND l.l_amt_approved < l.l_amt_require;
+        cname         
+----------------------
+ Mr. Patil           
+ Mr. Sharma          
+(2 rows)
+
 
 SELECT c.cname, b.brname
 FROM Customer c, Ternary t, Loan_application l, Branch b
@@ -78,30 +103,70 @@ WHERE c.cno = t.cno
   AND t.lno = l.lno
   AND t.bid = b.bid
   AND EXTRACT(MONTH FROM l.l_date) = 1;
+        cname         |             brname             
+----------------------+--------------------------------
+ Mr. Patil            | Nagar                         
+(1 row)
+
 
 SELECT c.cname
 FROM Customer c, Ternary t, Loan_application l
 WHERE c.cno = t.cno
   AND t.lno = l.lno
   AND l.l_amt_require > '100000';
+        cname         
+----------------------
+ Mr. Patil           
+ Mr. Baviskar        
+ Mr. Sharma          
+ Mr. Joshi           
+ Mr. Joshi           
+(5 rows)
+
+
 
 SELECT MAX(l.l_amt_approved) AS max_approved
 FROM Loan_application l;
+ max_approved 
+--------------
+  ₹500,000.00
+(1 row)
+
 
 SELECT COUNT(c.cno) AS customer_count
 FROM Customer c, Ternary t, Branch b
 WHERE c.cno = t.cno
   AND t.bid = b.bid
   AND b.brname = 'ShivajiNagar';
+ customer_count 
+----------------
+              1
+(1 row)
+
 
 SELECT DISTINCT c.cname
 FROM Customer c, Ternary t, Loan_application l
 WHERE c.cno = t.cno
   AND t.lno = l.lno
   AND l.l_amt_require BETWEEN '200000' AND '400000';
+        cname         
+----------------------
+ Mr. Joshi           
+ Mr. Patil           
+(2 rows)
+
 
 SELECT DISTINCT b.brname, c.cname
 FROM Branch b, Ternary t, Customer c
 WHERE b.bid = t.bid
   AND t.cno = c.cno
 ORDER BY b.brname, c.cname;
+             brname             |        cname         
+--------------------------------+----------------------
+ Karve Nagar                    | Mr. Baviskar        
+ Karve Nagar                    | Mr. Sharma          
+ Nagar                          | Mr. Joshi           
+ Nagar                          | Mr. Patil           
+ ShivajiNagar                   | Mr. Joshi           
+(5 rows)
+

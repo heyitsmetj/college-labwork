@@ -97,29 +97,60 @@ INSERT INTO Stores_Items (sid, itemno, quantity) VALUES
 SELECT DISTINCT wname
 FROM Warehouses
 WHERE city = 'Nagar';
+             wname              
+--------------------------------
+ Central Warehouse             
+(1 row)
 
 SELECT *
 FROM Items
 WHERE weight = (SELECT MIN(weight) FROM Items);
+ itemno | description | weight | cost  
+--------+-------------+--------+-------
+      3 | Spark Plug  |   0.10 | 75.00
+(1 row)
+
 
 DELETE FROM Orders
 WHERE cno = (SELECT cno FROM Customer WHERE cname = 'Mr.Patil');
 
+
 SELECT i.*
 FROM Items i ,Items_Orders io, Orders o,Customers c WHERE i.itemno = io.itemno AND io.ono = o.ono AND o.cno = c.cno
 AND c.cname = 'Mr.Baviskar';
+ itemno | description | weight |  cost  
+--------+-------------+--------+--------
+      2 | Brake Pads  |   1.20 | 150.00
+      3 | Spark Plug  |   0.10 |  75.00
+(2 rows)
+
 
 SELECT w.wname
 FROM Warehouses w ,Stores s WHERE w.wid = s.wid
 GROUP BY w.wid, w.wname
 ORDER BY COUNT(s.sid) DESC
 LIMIT 1;
+             wname              
+--------------------------------
+ Central Warehouse             
+(1 row)
 
 SELECT i.*
 FROM Items i, Items_Orders io WHERE i.itemno = io.itemno
 GROUP BY i.itemno, i.description, i.weight, i.cost
-ORDER BY SUM(io.ordered_quantity) ASC
+ORDER BY SUM(io.ordered_quantity)
 LIMIT 1;
+ itemno | description | weight |  cost  
+--------+-------------+--------+--------
+      1 | Engine Oil  |   2.50 | 300.00
+(1 row)
+
 
 SELECT c.cname, o.*
 FROM Customers c, Orders o WHERE c.cno = o.cno GROUP BY ono,cname;
+                       cname                        | ono |   odate    | cno 
+----------------------------------------------------+-----+------------+-----
+ Mr.Baviskar                                        |   2 | 2015-11-12 |   2
+ Mr.Patil                                           |   1 | 2015-11-12 |   1
+ Mr.Shinde                                          |   3 | 2015-11-12 |   3
+(3 rows)

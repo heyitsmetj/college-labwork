@@ -43,9 +43,9 @@ INSERT INTO ROUTE (route_no, source, destination, no_of_stations) VALUES
 (2, 'C', 'D', 3);
 
 INSERT INTO DRIVER (driver_no, driver_name, license_no, address, d_age, salary) VALUES
-(1, 'John Doe', 1001, '123 Main St', 45, 5000),
-(2, 'Jane Smith', 1002, '456 Elm St', 35, 4500),
-(3, 'Mike Johnson', 1003, '789 Oak St', 50, 5500);
+(1, 'Jagdish', 1001, 'Nagpur', 45, 5000),
+(2, 'Janardhan', 1002, 'Akola', 35, 4500),
+(3, 'Manav', 1003, 'Nashik', 50, 5500);
 
 INSERT INTO BUS_ROUTE (bus_no, route_no) VALUES
 (1, 1),
@@ -62,6 +62,13 @@ INSERT INTO BUS_DRIVER (bus_no, driver_no, date_of_duty_allotted, shift) VALUES
 
 SELECT d.driver_name
 FROM DRIVER d, BUS_DRIVER bd WHERE d.driver_no = bd.driver_no AND bd.shift = 2;
+     driver_name      
+----------------------
+ Jagdish             
+ Janardhan           
+ Manav               
+(3 rows)
+
 
 
 SELECT r.*
@@ -69,28 +76,50 @@ FROM BUS b,ROUTE r,BUS_ROUTE br
 WHERE r.route_no = br.route_no 
 AND br.bus_no = b.bus_no 
 AND b.capacity = 20;
+ route_no |        source        |     destination      | no_of_stations 
+----------+----------------------+----------------------+----------------
+        1 | A                    | B                    |              5
+(1 row)
+
 
 
 UPDATE DRIVER
 SET salary = salary * 1.05
 WHERE d_age > 40;
+UPDATE 2
 
 
 SELECT d.driver_name
 FROM DRIVER d, BUS_DRIVER bd 
 WHERE d.driver_no = bd.driver_no
 AND shift = 1 AND shift = 2; 
+     driver_name      
+----------------------
+ Jagdish             
+ Manav               
+(2 rows)
+
 
 SELECT d.driver_name
 FROM DRIVER d
 JOIN BUS_DRIVER bd1 ON d.driver_no = bd1.driver_no
 JOIN BUS_DRIVER bd2 ON d.driver_no = bd2.driver_no
 WHERE bd1.shift = 1 AND bd2.shift = 2;
+     driver_name      
+----------------------
+ Jagdish             
+ Manav               
+(2 rows)
+
 
 
 SELECT driver_name
 FROM DRIVER
 WHERE salary = (SELECT MAX(salary) FROM DRIVER);
+     driver_name      
+----------------------
+ Manav               
+(1 row)
 
 
 DELETE FROM BUS
@@ -100,11 +129,22 @@ WHERE capacity < 10;
 SELECT d.driver_name, d.license_no
 FROM DRIVER d, BUS_DRIVER bd WHERE d.driver_no = bd.driver_no
 AND bd.shift = 1 AND bd.shift = 2;
+     driver_name      | license_no 
+----------------------+------------
+ Jagdish              |       1001
+ Manav                |       1003
+(2 rows)
+
 
 SELECT d.driver_name, d.license_no
 FROM DRIVER d
 JOIN BUS_DRIVER bd1 ON d.driver_no = bd1.driver_no
 JOIN BUS_DRIVER bd2 ON d.driver_no = bd2.driver_no
 WHERE bd1.shift = 1 AND bd2.shift = 2;
+     driver_name      | license_no 
+----------------------+------------
+ Jagdish              |       1001
+ Manav                |       1003
+(2 rows)
 
 
