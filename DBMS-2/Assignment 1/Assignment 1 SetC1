@@ -138,7 +138,7 @@ LIMIT 1;
 SELECT i.*
 FROM Items i, Items_Orders io WHERE i.itemno = io.itemno
 GROUP BY i.itemno, i.description, i.weight, i.cost
-ORDER BY SUM(io.ordered_quantity) ASC
+ORDER BY SUM(io.ordered_quantity)
 LIMIT 1;
  itemno | description | weight |  cost  
 --------+-------------+--------+--------
