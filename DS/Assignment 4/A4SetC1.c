@@ -58,7 +58,7 @@ void display(node *list)
 
 	for (ptr = list; ptr != NULL; ptr = ptr->next)
 	{
-		printf("%d", ptr->data);
+		printf("%d->", ptr->data);
 	}
 	printf("NULL");
 }
@@ -87,17 +87,16 @@ void main()
 {
 	printf("\n Creating 1st List:\n");
 	list1 = create(list1);
-	printf("\n Creating 1st List:\n");
+	printf("\n Creating 2nd List:\n");
 	list2 = create(list2);
 	
 	printf("\n 1st Linked list: ");
 	display(list1);
-	printf("\n Creating 2nd List: ");
+	printf("\n 2nd Linked List: ");
 	display(list2);
 	
 	concatenate(list1,list2);
 
-	printf("\n List Concatenated!\n");
-	printf("\n Linked list after concatenation: ");
+	printf("\n\n Linked list after concatenation: ");
 	display(list1);
 }
