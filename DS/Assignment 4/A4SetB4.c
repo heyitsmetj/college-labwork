@@ -56,12 +56,12 @@ node *create(node *list)
 	return (list);
 }
 
-void display(node * list)
+void display(node *list)
 {
 	node *ptr;
 
 	printf("\n\n Doubly Linked List: ");
-	
+
 	for (ptr = list; ptr->next != list; ptr = ptr->next)
 	{
 		printf("<-%d->", ptr->data);
@@ -71,34 +71,80 @@ void display(node * list)
 
 void delete()
 {
+	if (list == NULL)
+	{
+		printf("The list is empty.\n");
+		return;
+	}
+
 	int val;
-	node *ptr,*previous,*forward;
+	node *ptr = list, *previous = NULL;
+
+	display(list);
+
 	printf("\n\n Enter the value of node to delete: ");
 	scanf("%d", &val);
 
-	for (ptr=list,previous=list,forward=ptr->next;ptr->next != list && ptr->data != val;previous = ptr, ptr = ptr->next,forward=ptr->next);
+	do
+	{
+		if (ptr->data == val)
+		{
+			if (ptr->next == ptr)
+			{
+				free(ptr);
+				list = NULL;
+			}
+			else
+			{
+				if (ptr == list)
+				{
+					list = ptr->next;
+				}
+				if (ptr->next != NULL)
+				{
+					ptr->next->prev = ptr->prev;
+				}
+				if (ptr->prev != NULL)
+				{
+					ptr->prev->next = ptr->next;
+				}
+				free(ptr);
+			}
+			printf("\n\n Node %d deleted successfully!\n", val);
+			display(list);
+			return;
+		}
+		previous = ptr;
+		ptr = ptr->next;
+	} while (ptr != list);
 
-	if(ptr == list && previous == list)
-	{
-		forward->prev = ptr->prev;
-		list = forward;
-		free(ptr);
-	}
-	
-	if(ptr->next != list && ptr->data == val)
-	{
-        previous->next = ptr->next;
-        forward->prev = ptr->prev;
-		free(ptr);
+	printf("Node not found!\n");
+}
+
+void append(node *list)
+{
+	node *temp, *last;
+
+    temp = getnode();
+
+    if (list == NULL)
+    {
+        list = temp;
+        list->prev = list;
+        list->next = list;
     }
-	else
-	{
-        printf("\n Node not found!");
-		return;
+    else
+    {
+        for (last = list; last->next != list; last = last->next)
+            ;
+        last->next = temp;
+        temp->prev = last;
+        temp->next = list;
+        list->prev = temp;
     }
-	printf("\n Node %d deleted successfully!\n", val);
-	
-	
+
+    printf("\n Node appended successfully!\n");
+	display(list);
 }
 
 void main()
@@ -111,7 +157,7 @@ void main()
 		printf("\n 1.Create Circular Doubly Linked List.");
 		printf("\n 2.Display the Circular Doubly Linked List.");
 		printf("\n 3.Delete a node by its value.");
-		printf("\n 4.Append a Linked List.");
+		printf("\n 4.Append a node.");
 		printf("\n 5.Exit.");
 
 		printf("\n\n Enter Choice: ");
@@ -126,13 +172,14 @@ void main()
 		case 2:
 			display(list);
 			break;
-			
-        case 3:
-		    delete();
-			break;
-			
-        case 4:
 
+		case 3:
+			delete ();
+			break;
+
+		case 4:
+			append(list);
+			break;
 
 		case 5:
 			printf("\n Exiting...");

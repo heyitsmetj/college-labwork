@@ -14,7 +14,7 @@ node *getnode() // creates a node
 {
 	node *temp;
 
-	temp = (node *)malloc(sizeof(node));
+	temp = (node *)malloc(sizeof(node)); 
 
 	printf("\n Enter the data: ");
 	scanf("%d", &temp->data);
@@ -45,7 +45,7 @@ void create()
 
 		last = temp;
 
-		printf("\n Do you want to enter more ndoes? (Y/N): ");
+		printf("\n Do you want to enter more nodes? (Y/N): ");
 		scanf(" %c", &ch);
 
 	} while (ch == 'Y' || ch == 'y');
