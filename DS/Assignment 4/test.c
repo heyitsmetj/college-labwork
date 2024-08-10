@@ -1,121 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 struct NODE
 {
-	int data;
+	int coeff;
+	int expo;
 	struct NODE *next;
 };
 
 typedef struct NODE node;
-node *last, *list = NULL, *list2 = NULL;
+node *list = NULL, *last;
 
-node *getnode() // creates a node
+node *getnode()
 {
 	node *temp;
-
 	temp = (node *)malloc(sizeof(node));
 
-	printf("\n Enter the data for new node: ");
-	scanf("%d", &temp->data);
+	printf("\n Enter the coefficient for new node: ");
+	scanf("%d", &temp->coeff);
+	printf("\n Enter the exponent for new node: ");
+	scanf("%d", &temp->expo);
 
 	temp->next = NULL;
 
 	return temp;
 }
 
-void create()
+node * create(node *list)
 {
-	node *temp;
-	char ch;
-	
-	do{
-		temp = getnode();
-		
-		if(list == NULL)
-		{
-			list = temp;
-		}	
-		else
-		{
-			last->next = temp;	
-		}
-		
-		last = temp;
-		
-		printf("\n Do you want to create more nodes?(Y/N): ");
-		scanf(" %c",&ch);
-		
-	}while(ch == 'Y' || ch =='y');
+	int i, n;
+
+    printf("\nEnter the number of nodes: ");
+    scanf("%d", &n);
+
+    for (i = rand()%(10); i < n; i++)
+    {
+        node *temp = getnode();
+
+        if (list == NULL)
+        {
+            list = temp;
+            last = temp;
+        }
+        else
+        {
+            last->next = temp;
+            last = temp;
+        }
+    }
 }
 
-void display()
-{
-	node *ptr;
-	
-	printf("\n Linked List: ");
-	for(ptr = list; ptr != NULL; ptr = ptr->next)
-	{
-		printf("%d->",ptr->data);
-	}
-	printf("NULL\n");
-}
-
-void insertbypos()
-{
-	int pos,i;
-	node *ptr,*prev,*temp;
-	
-	temp = getnode();
-	
-	printf("\n Enter the position to insert the node ");
-	
-	for(ptr = list,prev = list,i=0; ptr != NULL && i < pos-1;prev = ptr,ptr = ptr->next);
-	
-	if(ptr != NULL && i < pos-1)
-	{
-		
-	}
-	
-}
 
 void main()
 {
-	int ch;
-	
-	while(1)
-	{
-		printf("\n\n --MENU--");
-		printf("\n\n 1.Create the linked list.");
-		printf("\n 2.Display the linked list.");
-		printf("\n 3.Insert by Position.")
-		printf("\n 4.Exit the program.");
-		
-		printf("\n\n Enter choice: ");
-		scanf("%d",&ch);
-		
-		switch(ch)
-		{
-			case 1:
-				create();
-				break;
-			
-			case 2:
-				display();
-				break;
-				
-			case 3:
-				insertbypos();
-				break;
-				
-			case 4:
-				printf("\n Exiting the program....\n");
-				exit(1);
-				
-			default:
-				printf("\n Invalid Choice! Try Again!");
-				break;
-		}
-	}
-	
+	srand(time(0));
+	printf("\n Creating Random Linked List:\n");
+	list = create(list);
+
+	printf("\n\n Your Random Linked: ");
+	display(list);
 }
