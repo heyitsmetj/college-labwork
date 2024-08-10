@@ -125,14 +125,14 @@ void deletenode()
 
 void reverse()
 {
-	node *temp = NULL, *prev = NULL, *current = list;
+	node *temp = NULL, *prev = NULL, *ptr = list;
 
-	while (current != NULL)
+	while (ptr != NULL)
 	{
-		temp = current->next;
-		current->next = prev;
-		prev = current;
-		current = temp;
+		temp = ptr->next;
+		ptr->next = prev;
+		prev = ptr;
+		ptr = temp;
 	}
 	list = prev;
 

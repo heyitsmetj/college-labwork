@@ -3,21 +3,24 @@
 
 struct NODE
 {
-	int data;
+	int coeff;
+	int expo;
 	struct NODE *next;
 };
 
 typedef struct NODE node;
-node *list1 = NULL,*list2 = NULL,*last;
+node *list = NULL, *last;
 
 node *getnode()
 {
 	node *temp;
 	temp = (node *)malloc(sizeof(node));
 
-	printf("\n Enter the data for new node: ");
-	scanf("%d", &temp->data);
-	
+	printf("\n Enter the coefficient for new node: ");
+	scanf("%d", &temp->coeff);
+	printf("\n Enter the exponent for new node: ");
+	scanf("%d", &temp->expo);
+
 	temp->next = NULL;
 
 	return temp;
@@ -39,12 +42,11 @@ node *create(node *list)
 		else
 		{
 			for (last = list; last->next != NULL; last = last->next)
-			;
+				;
 			last->next = temp;
-
 		}
 
-		printf("\n Do you want to enter more nodes?(Y/N): ");
+		printf("\n Do you want to extend the expression?(Y/N): ");
 		scanf(" %c", &ch);
 
 	} while (ch == 'Y' || ch == 'y');
@@ -58,45 +60,66 @@ void display(node *list)
 
 	for (ptr = list; ptr != NULL; ptr = ptr->next)
 	{
-		printf("%d->", ptr->data);
+		printf(" %d^%d ", ptr->coeff, ptr->expo);
+
+		if (ptr->next != NULL)
+		{
+			printf("+");
+		}
 	}
-	printf("NULL");
 }
 
-
-void concatenate(node *list1, node *list2)
+node * additionofpolynomial(node *list)
 {
-	node *ptr;
+	node *ptr1, *ptr2, *result = NULL, *temp;
+	int sum;
 
-    if (list1 == NULL)
-    {
-		printf("\n List1 is Empty!");
-		create(list1);
-	}
-	if (list2 == NULL)
+	ptr1 = list;
+
+	while (ptr1 != NULL)
 	{
-		printf("\n List2 is Empty!");
-        create(list2);
-	}
+		ptr2 = list;
 
-	for(ptr=list1; ptr->next != NULL;ptr = ptr->next);
-	ptr->next = list2;
+		while (ptr2 != NULL)
+		{
+			if (ptr1->expo == ptr2->expo)
+			{
+				sum = ptr1->coeff + ptr2->coeff;
+
+				if (sum != 0)
+				{
+					temp = (node *)malloc(sizeof(node));
+					temp->coeff = sum;
+					temp->expo = ptr1->expo;
+					temp->next = NULL;
+
+					if (result == NULL)
+					{
+						result = temp;
+					}
+					else
+					{
+						last->next = temp;
+					}
+
+					last = temp;
+				}
+
+				ptr2 = ptr2->next;
+			}
+		}
+	}
+	return result;
 }
 
 void main()
 {
-	printf("\n Creating 1st List:\n");
-	list1 = create(list1);
-	printf("\n Creating 2nd List:\n");
-	list2 = create(list2);
-	
-	printf("\n 1st Linked list: ");
-	display(list1);
-	printf("\n 2nd Linked List: ");
-	display(list2);
-	
-	concatenate(list1,list2);
+	printf("\n Creating Polynomial:\n");
+	list = create(list);
 
-	printf("\n\n Linked list after concatenation: ");
-	display(list1);
+	printf("\n\n Your Polynomial: ");
+	display(list);
+	printf("\n\nPolynomial after addition: ");
+	node * result = additionofpolynomial(list);
+	display(result);
 }
