@@ -39,10 +39,10 @@ void create()
 		}
 		else
 		{
+			for (last = list; last->next != NULL; last = last->next)
+				;
 			last->next = temp;
 		}
-
-		last = temp;
 
 		printf("\n Do you want to enter more nodes? (Y/N): ");
 		scanf(" %c", &ch);
@@ -60,6 +60,7 @@ void display()
 	{
 		printf("\t %d", ptr->data);
 	}
+	printf("NULL \n");
 }
 
 int countnode()
@@ -73,7 +74,7 @@ int countnode()
 	return cnt;
 }
 
-void deletenode()
+void deletepos()
 {
 	int pos, i;
 	node *curr, *prev = NULL;
@@ -193,6 +194,110 @@ void concatenate(node **list, node **list2)
 	printf("\n\n List Concatenated.\n");
 }
 
+void insertbypos()
+{
+	node *ptr;
+	int pos, i;
+	node *temp = getnode();
+
+	display();
+
+	printf("\n Enter position to insert (starting from 1): ");
+	scanf("%d", &pos);
+
+	if (pos < 1)
+	{
+		printf("\n Invalid position.\n");
+		return;
+	}
+
+	for (ptr = list, i = 1; ptr != NULL && i < pos - 1; ptr = ptr->next, i++)
+		;
+
+	if (ptr == NULL)
+	{
+		printf("\n Position %d not found.\n", pos);
+		return;
+	}
+	else
+	{
+		temp->next = ptr->next;
+		ptr->next = temp;
+	}
+
+	printf("\n Node at position %d added.\n", pos);
+	display();
+}
+
+void insertval()
+{
+	int val;
+	node *temp, *ptr, *previous = NULL;
+
+	printf("\n Creating a new node!\n\n");
+
+	temp = getnode();
+
+	display();
+	printf("\n Enter the value of node after which new node is to be placed: ");
+	scanf("%d", &val);
+
+	for (ptr = list, previous = list; ptr != NULL && val != ptr->data; previous = ptr, ptr = ptr->next)
+		;
+
+	if (ptr == list && previous == list)
+	{
+		temp->next = ptr->next;
+		list = temp;
+	}
+
+	if (ptr != NULL && val == ptr->data)
+	{
+		temp->next = ptr->next;
+		ptr->next = temp;
+	}
+	else
+	{
+		printf("\n Value not Found!\n");
+		return;
+	}
+
+	printf("\n New node inserted!\n");
+	display();
+}
+
+void deleteval()
+{
+	int val;
+	node *temp, *ptr, *previous;
+
+	display();
+	printf("\n Enter the value of node to be deleted: ");
+	scanf("%d", &val);
+
+	for (ptr = list, previous = list; ptr != NULL && val != ptr->data; previous = ptr, ptr = ptr->next)
+		;
+
+	if (val == ptr->data)
+	{
+		if (ptr == list && previous == list)
+			list = ptr->next;
+
+		else
+		{
+			previous->next = ptr->next;
+		}
+		printf("\n Node Deleted!\n");
+		free(ptr);
+	}
+	else
+	{
+		printf("\n Value not Found!");
+	}
+
+	display();
+}
+
 void main()
 {
 	int ch, cnt;
@@ -202,10 +307,13 @@ void main()
 		printf("\n\n 1.Create the Linked List.");
 		printf("\n 2.Display the Linked List.");
 		printf("\n 3.Count the nodes in the Linked List.");
-		printf("\n 4.Delete a node from the Linked List.");
-		printf("\n 5.Reverse the Linked List.");
-		printf("\n 6.Concatenate another Linked List.");
-		printf("\n 7.Exit the program.");
+		printf("\n 4.Delete a node by Position.");
+		printf("\n 5.Delete a node by Value.");
+		printf("\n 6.Reverse the Linked List.");
+		printf("\n 7.Concatenate another Linked List.");
+		printf("\n 8.Insert a node by Position.");
+		printf("\n 9.Insert a node by Value.");
+		printf("\n 10.Exit the program.");
 		printf("\n\n Enter choice: ");
 		scanf("%d", &ch);
 
@@ -226,20 +334,32 @@ void main()
 			break;
 
 		case 4:
-			deletenode();
+			deletepos();
 			break;
 
 		case 5:
-			reverse();
+			deleteval();
 			break;
 
 		case 6:
+			reverse();
+			break;
+
+		case 7:
 			list2 = create_another_list();
 			concatenate(&list, &list2);
 			display();
 			break;
 
-		case 7:
+		case 8:
+			insertbypos();
+			break;
+
+		case 9:
+			insertval();
+			break;
+
+		case 10:
 			exit(1);
 		}
 	}
