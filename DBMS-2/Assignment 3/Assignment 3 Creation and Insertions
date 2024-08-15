@@ -1,0 +1,269 @@
+CREATE TABLE Project (
+    pno INTEGER PRIMARY KEY,
+    pname CHAR(30) NOT NULL,
+    ptype CHAR(20),
+    duration INTEGER CHECK (duration > 0)
+);
+
+CREATE TABLE Employee (
+    eno INTEGER PRIMARY KEY,
+    ename CHAR(20),
+    qualification CHAR(15),
+    joining_date DATE
+);
+
+CREATE TABLE Project_Employee (
+    pno INTEGER REFERENCES Project,
+    eno INTEGER REFERENCES Employee,
+    start_date DATE,
+    no_of_hours_worked INTEGER
+);
+
+INSERT INTO Project (pno, pname, ptype, duration) VALUES
+(1, 'ERP', 'Software', 12),
+(2, 'CRM', 'Software', 8),
+(3, 'HRMS', 'Software', 4),
+(4, 'E-Commerce', 'Web', 10);
+
+INSERT INTO Employee (eno, ename, qualification, joining_date) VALUES
+(1, 'Rajesh Kumar', 'MCA', '2020-01-15'),
+(2, 'Aditi Sharma', 'B.Tech', '2019-06-01'),
+(3, 'Vijay Mehta', 'MCA', '2021-03-10'),
+(4, 'Pooja Gupta', 'MBA', '2018-11-20'),
+(5, 'Suresh Rathi', 'B.Com', '2020-05-05');
+
+INSERT INTO Project_Employee (pno, eno, start_date, no_of_hours_worked) VALUES
+(1, 1, '2020-02-01', 350),
+(1, 2, '2020-03-01', 200),
+(2, 1, '2020-04-01', 150),
+(1, 3, '2020-01-20', 400),
+(4, 4, '2020-07-01', 500),
+(3, 5, '2021-05-01', 100);
+
+--------------SetA2--------------
+
+CREATE TABLE Area (
+    aname VARCHAR(20) PRIMARY KEY,
+    area_type VARCHAR(5) CHECK (area_type IN ('urban', 'rural'))
+);
+
+CREATE TABLE Person (
+    pno INTEGER PRIMARY KEY,
+    pname VARCHAR(20),
+    birthdate DATE,
+    income MONEY,
+    aname VARCHAR(20) REFERENCES Area
+);
+
+-- Insert into Area table
+INSERT INTO Area (aname, area_type) VALUES
+('Hadapsar', 'urban'),
+('Kothrud', 'urban'),
+('Shirwal', 'rural'),
+('Baramati', 'rural');
+
+-- Insert into Person table
+INSERT INTO Person (pno, pname, birthdate, income, aname) VALUES
+(1, 'Rahul Patil', '1950-03-15', 25000, 'Hadapsar'),
+(2, 'Priya Kulkarni', '1965-09-20', 30000, 'Kothrud'),
+(3, 'Amit Tupe', '1975-02-12', 15000, 'Shirwal'),
+(4, 'Sneha Desai', '1980-11-22', 50000, 'Hadapsar'),
+(5, 'Ramesh Jadhav', '1948-01-05', 12000, 'Baramati'),
+(6, 'Suresh Tupe', '1960-08-10', 18000, 'Hadapsar'),
+(7, 'Neha Apte', '1990-07-18', 22000, 'Kothrud');
+
+--------------SetB1--------------
+
+
+CREATE TABLE Route (
+    route_no INT PRIMARY KEY,
+    source CHAR(20),
+    destination CHAR(20),
+    no_of_stations INT
+);
+
+CREATE TABLE Bus (
+    bus_no INT PRIMARY KEY,
+    b_capacity INT NOT NULL,
+    depot_name VARCHAR(20),
+    route_no INT REFERENCES Route
+);
+
+
+CREATE TABLE Driver (
+    driver_no INT PRIMARY KEY,
+    driver_name CHAR(20),
+    license_no INT UNIQUE,
+    address CHAR(20),
+    d_age INT,
+    salary FLOAT
+);
+
+CREATE TABLE Bus_Driver (
+    bus_no INT REFERENCES Bus,
+    driver_no INT REFERENCES Driver,
+    date_of_duty_allotted DATE,
+    shift INT CHECK (shift IN (1, 2)),
+
+);
+
+-- Inserting records into Route table
+INSERT INTO Route VALUES (1, 'Deccan', 'Katraj', 5);
+INSERT INTO Route VALUES (2, 'Swargate', 'Hinjewadi', 10);
+INSERT INTO Route VALUES (3, 'Shivaji Nagar', 'Kothrud', 7);
+
+-- Inserting records into Bus table with route_no as foreign key
+INSERT INTO Bus VALUES (101, 50, 'Kothrud Depot', 3);
+INSERT INTO Bus VALUES (102, 45, 'Swargate Depot', 2);
+INSERT INTO Bus VALUES (103, 30, 'Deccan Depot', 1);
+
+-- Inserting records into Driver table
+INSERT INTO Driver VALUES (201, 'Rajesh Patil', 12345, 'Pune', 55, 30000);
+INSERT INTO Driver VALUES (202, 'Suresh Sharma', 12346, 'Pune', 45, 28000);
+INSERT INTO Driver VALUES (203, 'Anil Jadhav', 12347, 'Pune', 52, 29000);
+
+-- Inserting records into Bus_Driver table
+INSERT INTO Bus_Driver VALUES (101, 201, '2020-07-02', 1);
+INSERT INTO Bus_Driver VALUES (102, 202, '2020-07-10', 2);
+INSERT INTO Bus_Driver VALUES (103, 203, '2020-07-15', 1);
+INSERT INTO Bus_Driver VALUES (101, 203, '2020-07-20', 2);
+
+--------------SetB2--------------
+
+-- Branch Table
+CREATE TABLE Branch (
+    br_id INTEGER PRIMARY KEY,
+    br_name CHAR(30),
+    br_city CHAR(10)
+);
+
+-- Customer Table
+CREATE TABLE Customer (
+    cno INTEGER PRIMARY KEY,
+    c_name CHAR(20),
+    caddr CHAR(35),
+    city CHAR(20)
+);
+
+-- Loan_application Table
+CREATE TABLE Loan_application (
+    lno INTEGER PRIMARY KEY,
+    l_amt_required MONEY CHECK (l_amt_required > 0),
+    l_amt_approved MONEY,
+    l_date DATE
+);
+
+-- Ternary Relationship Table
+CREATE TABLE Ternary (
+    br_id INT REFERENCES Branch,
+    cno INT REFERENCES Customer,
+    lno INT REFERENCES Loan_application
+);
+
+--------------SetC1--------------
+
+-- Department Table
+CREATE TABLE Dept (
+    dept_no VARCHAR(10) PRIMARY KEY,
+    dept_name CHAR(20)
+);
+
+-- Salesman Table
+CREATE TABLE Salesman (
+    sno INTEGER PRIMARY KEY,
+    s_name CHAR(30),
+    start_year INTEGER,
+    dept_no VARCHAR(10) REFERENCES Dept
+);
+
+-- Trip Table
+CREATE TABLE Trip (
+    tno INTEGER PRIMARY KEY,
+    from_city CHAR(20),
+    to_city CHAR(20),
+    departure_date DATE,
+    return_date DATE,
+    sno INTEGER REFERENCES Salesman
+);
+
+-- Expense Table
+CREATE TABLE Expense (
+    eid INTEGER PRIMARY KEY,
+    amount MONEY,
+    tno INTEGER REFERENCES Trip
+);
+
+-- Inserting records into Dept table
+INSERT INTO Dept VALUES ('D01', 'Sales');
+INSERT INTO Dept VALUES ('D02', 'Marketing');
+
+-- Inserting records into Salesman table
+INSERT INTO Salesman VALUES (1, 'Rohan Sharma', 2015, 'D01');
+INSERT INTO Salesman VALUES (2, 'Amit Desai', 2018, 'D02');
+INSERT INTO Salesman VALUES (3, 'Vijay Rao', 2017, 'D01');
+
+-- Inserting records into Trip table
+INSERT INTO Trip VALUES (101, 'Pune', 'Mumbai', '2023-08-01', '2023-08-05', 1);
+INSERT INTO Trip VALUES (102, 'Pune', 'Delhi', '2023-07-10', '2023-07-15', 2);
+INSERT INTO Trip VALUES (103, 'Pune', 'Mumbai', '2023-08-10', '2023-08-12', 3);
+
+-- Inserting records into Expense table
+INSERT INTO Expense VALUES (201, 15000.00, 101);
+INSERT INTO Expense VALUES (202, 12000.00, 102);
+INSERT INTO Expense VALUES (203, 18000.00, 103);
+
+--------------SetC2--------------
+
+-- Train Table
+CREATE TABLE Train (
+    train_no INT PRIMARY KEY,
+    train_name VARCHAR(20),
+    depart_time TIME,
+    arrival_time TIME,
+    source_stn VARCHAR(20),
+    dest_stn VARCHAR(20),
+    no_of_res_bogies INT,
+    bogie_capacity INT
+);
+
+-- Passenger Table
+CREATE TABLE Passenger (
+    passenger_id INT PRIMARY KEY,
+    passenger_name VARCHAR(20),
+    address VARCHAR(30),
+    age INT,
+    gender CHAR(1)
+);
+
+-- Ticket Table
+CREATE TABLE Ticket (
+    ticket_no INT PRIMARY KEY,
+    bogie_no INT,
+    no_of_berths INT,
+    tdate DATE,
+    ticket_amt DECIMAL(7,2),
+    status CHAR(1),
+    train_no INT REFERENCES Train(train_no),
+    passenger_id INT REFERENCES Passenger
+);
+
+-- Inserting records into Train table
+INSERT INTO Train VALUES (101, 'Rajdhani Express', '08:00:00', '18:00:00', 'Mumbai', 'Delhi', 15, 72);
+INSERT INTO Train VALUES (102, 'Shatabdi Express', '06:00:00', '14:00:00', 'Pune', 'Bangalore', 12, 72);
+
+-- Inserting records into Passenger table
+INSERT INTO Passenger VALUES (1, 'Rohan Mohite', 'Mumbai', 45, 'M');
+INSERT INTO Passenger VALUES (2, 'Priya Deshmukh', 'Pune', 30, 'F');
+INSERT INTO Passenger VALUES (3, 'Ajay Patil', 'Nashik', 60, 'M');
+
+-- Inserting records into Ticket table
+INSERT INTO Ticket VALUES (1001, 101, 1, 1, 1, '2019-12-12', 1500.00, 'W');
+INSERT INTO Ticket VALUES (1002, 101, 2, 2, 1, '2019-12-12', 1500.00, 'C');
+INSERT INTO Ticket VALUES (1003, 102, 3, 3, 1, '2019-12-12', 2000.00, 'C');
+
+
+
+
+
+
+
