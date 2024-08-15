@@ -13,8 +13,8 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE Project_Employee (
-    pno INTEGER REFERENCES Project,
-    eno INTEGER REFERENCES Employee,
+    pno INTEGER REFERENCES Project ON DELETE CASCADE,
+    eno INTEGER REFERENCES Employee ON DELETE CASCADE,
     start_date DATE,
     no_of_hours_worked INTEGER
 );
@@ -52,7 +52,7 @@ CREATE TABLE Person (
     pname VARCHAR(20),
     birthdate DATE,
     income MONEY,
-    aname VARCHAR(20) REFERENCES Area
+    aname VARCHAR(20) REFERENCES Area ON DELETE CASCADE
 );
 
 -- Insert into Area table
@@ -86,7 +86,7 @@ CREATE TABLE Bus (
     bus_no INT PRIMARY KEY,
     b_capacity INT NOT NULL,
     depot_name VARCHAR(20),
-    route_no INT REFERENCES Route
+    route_no INT REFERENCES Route ON DELETE CASCADE
 );
 
 
@@ -100,8 +100,8 @@ CREATE TABLE Driver (
 );
 
 CREATE TABLE Bus_Driver (
-    bus_no INT REFERENCES Bus,
-    driver_no INT REFERENCES Driver,
+    bus_no INT REFERENCES Bus ON DELETE CASCADE,
+    driver_no INT REFERENCES Driver ON DELETE CASCADE,
     date_of_duty_allotted DATE,
     shift INT CHECK (shift IN (1, 2)),
 
@@ -173,7 +173,7 @@ CREATE TABLE Salesman (
     sno INTEGER PRIMARY KEY,
     s_name CHAR(30),
     start_year INTEGER,
-    dept_no VARCHAR(10) REFERENCES Dept
+    dept_no VARCHAR(10) REFERENCES Dept ON DELETE CASCADE
 );
 
 -- Trip Table
@@ -183,14 +183,14 @@ CREATE TABLE Trip (
     to_city CHAR(20),
     departure_date DATE,
     return_date DATE,
-    sno INTEGER REFERENCES Salesman
+    sno INTEGER REFERENCES Salesman ON DELETE CASCADE
 );
 
 -- Expense Table
 CREATE TABLE Expense (
     eid INTEGER PRIMARY KEY,
     amount MONEY,
-    tno INTEGER REFERENCES Trip
+    tno INTEGER REFERENCES Trip ON DELETE CASCADE
 );
 
 -- Inserting records into Dept table
@@ -243,8 +243,8 @@ CREATE TABLE Ticket (
     tdate DATE,
     ticket_amt DECIMAL(7,2),
     status CHAR(1),
-    train_no INT REFERENCES Train(train_no),
-    passenger_id INT REFERENCES Passenger
+    train_no INT REFERENCES Train ON DELETE CASCADE,
+    passenger_id INT REFERENCES Passenger ON DELETE CASCADE
 );
 
 -- Inserting records into Train table
