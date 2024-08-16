@@ -1,0 +1,36 @@
+se2203a3=# select A3A2F1('Hadapsar');
+ a3a2f1 
+--------
+      3
+(1 row)
+
+se2203a3=# select * from person;
+ pno |     pname      | birthdate  |   income   |  aname   
+-----+----------------+------------+------------+----------
+   1 | Rahul Patil    | 1950-03-15 | ₹25,000.00 | Hadapsar
+   2 | Priya Kulkarni | 1965-09-20 | ₹30,000.00 | Kothrud
+   3 | Amit Tupe      | 1975-02-12 | ₹15,000.00 | Shirwal
+   4 | Sneha Desai    | 1980-11-22 | ₹50,000.00 | Hadapsar
+   5 | Ramesh Jadhav  | 1948-01-05 | ₹12,000.00 | Baramati
+   6 | Suresh Tupe    | 1960-08-10 | ₹18,000.00 | Hadapsar
+   7 | Neha Apte      | 1990-07-18 | ₹22,000.00 | Kothrud
+(7 rows)
+
+se2203a3=# select a3a2f3('urban');
+NOTICE:  1 || Rahul Patil || 1950-03-15 || ₹25,000.00 || Hadapsar
+NOTICE:  2 || Priya Kulkarni || 1965-09-20 || ₹30,000.00 || Kothrud
+NOTICE:  4 || Sneha Desai || 1980-11-22 || ₹50,000.00 || Hadapsar
+NOTICE:  6 || Suresh Tupe || 1960-08-10 || ₹18,000.00 || Hadapsar
+NOTICE:  7 || Neha Apte || 1990-07-18 || ₹22,000.00 || Kothrud
+ a3a2f3 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3a2f4('Hadapsar');
+NOTICE:  1 || Rahul Patil || 1950-03-15 || ₹25,000.00 || Hadapsar
+NOTICE:  6 || Suresh Tupe || 1960-08-10 || ₹18,000.00 || Hadapsar
+ a3a2f4 
+--------
+ 
+(1 row)

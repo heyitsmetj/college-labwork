@@ -1,0 +1,32 @@
+se2203a3=# select A3A1F1();
+ a3a1f1 
+--------
+      1
+(1 row)
+
+se2203a3=# select A3A1F2(1);
+ a3a1f2 
+--------
+      2
+(1 row)
+
+se2203a3=# select A3A1F3('ERP');
+NOTICE:  1 Rajesh Kumar         MCA             2006-08-24
+NOTICE:  2 Aditi Sharma         B.Tech          2019-06-01
+NOTICE:  3 Vijay Mehta          MCA             2021-03-10
+ a3a1f3 
+--------
+ 
+(1 row)
+
+se2203a3=# select A3A1F4();
+NOTICE:  2 CRM                            Software             8
+NOTICE:  4 E-Commerce                     Web                  10
+NOTICE:  3 HRMS                           Software             4
+NOTICE:  1 ERP                            Software             12
+NOTICE:  1 ERP                            Software             12
+NOTICE:  1 ERP                            Software             12
+ a3a1f4 
+--------
+ 
+(1 row)

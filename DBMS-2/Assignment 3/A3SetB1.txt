@@ -1,0 +1,7 @@
+se2203a3=# select a3b1f1(3);
+NOTICE:  101 || 50 || Kothrud Depot || 3
+ a3b1f1 
+--------
+ 
+(1 row)
+
