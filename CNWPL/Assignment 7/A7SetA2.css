@@ -1,0 +1,38 @@
+/* styles.css */
+#container {
+    width: 500px;
+}
+
+#header {
+    background-color: #FFA500;
+}
+
+#header h1 {
+    margin-bottom: 0;
+}
+
+#menu {
+    background-color: #FFD700;
+    height: 200px;
+    width: 90px;
+    float: left;
+    border-right: 1px solid black;
+}
+
+#menu b {
+    display: block;
+}
+
+#content {
+    background-color: #EEEEEE;
+    height: 200px;
+    width: 390px;
+    float: left;
+    margin-left: 10px;
+}
+
+#footer {
+    background-color: #FFA500;
+    clear: both;
+    text-align: center;
+}
