@@ -160,6 +160,37 @@ CREATE TABLE Ternary (
     lno INT REFERENCES Loan_application
 );
 
+-- Insert records into Branch
+INSERT INTO Branch (br_id, br_name, br_city) VALUES
+(1, 'Downtown', 'Pune'),
+(2, 'Uptown', 'Mumbai'),
+(3, 'Central', 'Delhi');
+
+-- Insert records into Customer
+INSERT INTO Customer (cno, c_name, caddr, city) VALUES
+(1, 'Rajesh Kumar', 'MG Road', 'Pune'),
+(2, 'Neha Singh', 'Juhu', 'Mumbai'),
+(3, 'Anil Kapoor', 'Bandra', 'Mumbai'),
+(4, 'Suresh Sharma', 'Connaught Place', 'Delhi'),
+(5, 'Amitabh Bachchan', 'Juhu', 'Mumbai');
+
+-- Insert records into Loan_application
+INSERT INTO Loan_application (lno, l_amt_required, l_amt_approved, l_date) VALUES
+(101, '500000.00', '450000.00', '2019-05-30'),
+(102, '300000.00', '250000.00', '2019-06-05'),
+(103, '700000.00', '700000.00', '2020-01-01'),
+(104, '1000000.00', '900000.00', '2020-07-15'),
+(105, '800000.00', '800000.00', '2019-12-12');
+
+-- Insert records into Ternary
+INSERT INTO Ternary (br_id, cno, lno) VALUES
+(1, 1, 101), -- Rajesh Kumar applied in Downtown branch
+(2, 2, 102), -- Neha Singh applied in Uptown branch
+(3, 3, 103), -- Anil Kapoor applied in Central branch
+(2, 3, 104), -- Anil Kapoor applied in Uptown branch (multiple branches)
+(2, 5, 105); -- Amitabh Bachchan applied in Uptown branch
+
+
 --------------SetC1--------------
 
 -- Department Table
