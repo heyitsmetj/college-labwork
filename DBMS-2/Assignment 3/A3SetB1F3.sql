@@ -12,4 +12,5 @@ SELECT COUNT(DISTINCT b.bus_no) INTO b_count FROM Bus b, Route r WHERE b.route_n
 RAISE NOTICE 'Bus COUNT: %',b_count;
 
 END;
+
 $$ LANGUAGE plpgsql;

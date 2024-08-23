@@ -5,3 +5,25 @@ NOTICE:  101 || 50 || Kothrud Depot || 3
  
 (1 row)
 
+se2203a3=# select a3b1f2(2,'Kothrud Depot');
+NOTICE:  203 || Anil Jadhav          || 12347 || Pune                 || 52 || 29000
+ a3b1f2 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b1f3('Deccan');
+NOTICE:  Bus COUNT: 1
+ a3b1f3 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b1f4('Kothrud Depot');
+NOTICE:  201 Rajesh Patil         12345 Pune                 55 30000
+NOTICE:  203 Anil Jadhav          12347 Pune                 52 29000
+ a3b1f4 
+--------
+ 
+(1 row)
+

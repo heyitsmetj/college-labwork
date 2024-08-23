@@ -8,7 +8,7 @@ r RECORD;
 BEGIN 
 
 FOR r IN 
-select c. FROm Branch b,Customer c,Loan_application la,Ternary t WHERE
+select c.* FROM Branch b,Customer c,Loan_application la,Ternary t WHERE
 b.br_id = t.br_id AND la.lno = t.lno AND c.cno = t.cno AND
 b.br_name = bname AND la.l_amt_required > la.l_amt_approved 
 LOOP
