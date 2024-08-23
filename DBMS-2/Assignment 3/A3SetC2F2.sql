@@ -7,7 +7,7 @@ BEGIN
 
     UPDATE TICKET
     SET status = 'C'
-    WHERE passenger_id = (SELECT passenger_id FROM PASSENGER WHERE passenger_name = 'Mr.Mohite')
+    WHERE passenger_id = (SELECT passenger_id FROM PASSENGER WHERE passenger_name = 'Rohan Mohite')
     AND status = 'W';
     
     RAISE NOTICE 'Status of the ticket for passenger Mr.Mohite has been updated to Confirmed';

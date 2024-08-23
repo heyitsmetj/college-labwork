@@ -1,0 +1,38 @@
+se2203a3=# select a3b2f1('Downtown');
+NOTICE:  1 || Rajesh Kumar         || MG Road                             || Pune                
+ a3b2f1 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b2f2('Uptown');
+NOTICE:  Neha Singh           || 102 || ₹250,000.00
+NOTICE:  Anil Kapoor          || 104 || ₹900,000.00
+NOTICE:  Amitabh Bachchan     || 105 || ₹800,000.00
+ a3b2f2 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b2f3();
+NOTICE:  Total Loan Amount Approved After 30/05/2019: ₹2,650,000.00
+ a3b2f3 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b2f3();
+NOTICE:  Total Loan Amount Approved After 30/05/2019: ₹2,650,000.00
+ a3b2f3 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3b2f4();
+NOTICE:  Customer ID: 3, Name: Anil Kapoor         , Address: Bandra                             , City: Mumbai              , Branch Count: 2
+ a3b2f4 
+--------
+ 
+(1 row)
+
+

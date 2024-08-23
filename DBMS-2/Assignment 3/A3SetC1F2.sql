@@ -8,7 +8,7 @@ t_count INTEGER;
 BEGIN 
 
 SELECT COUNT(*) INTO t_count FROM 
-Trip from_city = 'Pune' AND to_city = 'Mumbai';
+Trip WHERE from_city ='Pune' AND to_city ='Mumbai';
 
 RETURN t_count;
 

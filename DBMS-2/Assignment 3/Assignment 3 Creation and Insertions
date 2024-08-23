@@ -288,9 +288,9 @@ INSERT INTO Passenger VALUES (2, 'Priya Deshmukh', 'Pune', 30, 'F');
 INSERT INTO Passenger VALUES (3, 'Ajay Patil', 'Nashik', 60, 'M');
 
 -- Inserting records into Ticket table
-INSERT INTO Ticket VALUES (1001, 101, 1, 1, 1, '2019-12-12', 1500.00, 'W');
-INSERT INTO Ticket VALUES (1002, 101, 2, 2, 1, '2019-12-12', 1500.00, 'C');
-INSERT INTO Ticket VALUES (1003, 102, 3, 3, 1, '2019-12-12', 2000.00, 'C');
+INSERT INTO Ticket VALUES (1001,1, 1, '2019-12-12', 1500.00, 'W',101, 1);
+INSERT INTO Ticket VALUES (1002,2, 1, '2019-12-12', 1500.00, 'C',101, 2);
+INSERT INTO Ticket VALUES (1003,3, 1, '2019-12-12', 2000.00, 'C',102, 3);
 
 
 

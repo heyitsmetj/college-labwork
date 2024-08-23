@@ -11,7 +11,7 @@ BEGIN
     FROM TICKET
     WHERE tdate = '2019-12-12';
     
-    RAISE NOTICE 'Total ticket amount paid by all passengers on % is %', p_date, total_amt;
+    RAISE NOTICE 'Total ticket amount paid by all passengers on 2019-12-12 is %',total_amt;
 
 END;
 

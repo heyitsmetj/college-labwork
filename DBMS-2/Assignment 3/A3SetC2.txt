@@ -1,0 +1,13 @@
+se2203a3=# select a3c2f1();
+NOTICE:  Total ticket amount paid by all passengers on 2019-12-12 is 5000.00
+ a3c2f1 
+--------
+ 
+(1 row)
+
+se2203a3=# select a3c2f2();
+NOTICE:  Status of the ticket for passenger Mr.Mohite has been updated to Confirmed
+ a3c2f2 
+--------
+ 
+(1 row)

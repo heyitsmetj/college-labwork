@@ -211,6 +211,12 @@ void insertbypos()
 		return;
 	}
 
+	if(pos == 1)
+	{
+		temp->next = list;
+        list = temp;
+	}
+
 	for (ptr = list, i = 1; ptr != NULL && i < pos - 1; ptr = ptr->next, i++)
 		;
 

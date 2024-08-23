@@ -3,7 +3,7 @@ DECLARE
     me RECORD;
 BEGIN
 
-SELECt t.*,e.amount INTO max_expense
+SELECt t.*,e.amount INTO me
 FROM Trip t,Expense e WHERE
 t.tno = e.tno ORDER BY e.amount DESC LIMIT 1;
     
