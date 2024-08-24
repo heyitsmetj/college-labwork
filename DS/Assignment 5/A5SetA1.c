@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//Implementing Static Stack of integers using array
+// Implementing Static Stack of integers using array
 
 #define MAX 5
 
@@ -9,24 +9,29 @@ int stack[MAX];
 int top = -1;
 
 // Function to check if stack is full
-int isFull() {
+int isFull()
+{
     return top == MAX - 1;
 }
 
 // Function to initialize stack
 
-void initializeStack() {
+void initializeStack()
+{
     top = -1;
 }
 
 // Function to check if stack is empty
-int isEmpty() {
+int isEmpty()
+{
     return top == -1;
 }
 
 // Function to push an element onto the stack
-void push(int value) {
-    if (isFull()) {
+void push(int value)
+{
+    if (isFull())
+    {
         printf("Stack Overflow\n");
         return;
     }
@@ -35,8 +40,10 @@ void push(int value) {
 }
 
 // Function to pop an element from the stack
-int pop() {
-    if (isEmpty()) {
+int pop()
+{
+    if (isEmpty())
+    {
         printf("Stack Underflow\n");
         exit(EXIT_FAILURE);
     }
@@ -44,8 +51,10 @@ int pop() {
 }
 
 // Function to peek the top element of the stack
-int peek() {
-    if (isEmpty()) {
+int peek()
+{
+    if (isEmpty())
+    {
         printf("Stack is empty\n");
         exit(EXIT_FAILURE);
     }
@@ -53,8 +62,10 @@ int peek() {
 }
 
 // Function to display the elements of the stack
-void display() {
-    if (isEmpty()) {
+void display()
+{
+    if (isEmpty())
+    {
         printf("Stack is empty\n");
         return;
     }
@@ -64,12 +75,9 @@ void display() {
     printf("\n");
 }
 
-//Function to initialize a Stack
-void initializeStack() {
-    top = -1;
-}
 
-int main() {
+int main()
+{
     push(10);
     push(20);
     push(30);
@@ -81,4 +89,3 @@ int main() {
 
     return 0;
 }
-
