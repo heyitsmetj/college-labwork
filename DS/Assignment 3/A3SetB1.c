@@ -1,3 +1,4 @@
+//Linear Search
 #include<stdio.h>
 
 void main()
@@ -45,14 +46,3 @@ void main()
 		printf("\n %d not found in Array\n",key);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
