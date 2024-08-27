@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A7SetB2</title>
+    <style>
+        .container {
+            border: 1px solid black;
+            margin: 15px;
+            padding-left: 15px;
+            width: 40%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        span img {
+            width: 50px;
+            margin: 0 10px;
+        }
+
+        .pp {
+            width: 70px;
+        }
+
+        label {
+            display: inline-flex;
+            align-items: center;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        label span {
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+        .head {
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .radios {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .remainingform {
+            width: 89%;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: rgb(245, 245, 245);
+        }
+
+        .inp {
+            color: gray;
+            width: 95%;
+            padding: 10px;
+            font-size: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .remainingform select {
+            color: gray;
+            width: 20%;
+            padding: 10px;
+            font-size: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .sec {
+            color: gray;
+            width: 30%;
+            padding: 10px;
+            font-size: 1.2rem;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="head">Pay Now</p>
+        <form action="#">
+            <div class="radios">
+                <input type="radio" name="pay-method" id="credit-debit"><label for="credit-debit">Credit or Debit Card <span class="logos"><img src="mc.png"><img src="v.png"><img src="amex.jpg"></span></label><br>
+                <input type="radio" name="pay-method" id="net"><label for="net">Pay with Net Banking</label><br>
+                <input type="radio" name="pay-method" id="pp"><label for="pp">PayPal <span class="logos"><img src="pp.png" class="pp"></span></label><br>
+                <input type="radio" name="pay-method" id="mobile"><label for="mobile">Pay by Mobile using Local Methods</label><br>
+            </div>
+            <div class="remainingform">
+                <input class="inp" type="text" id="name" placeholder="Name on Card"><br>
+                <input class="inp" type="text" id="card-number" placeholder="Card Number"><br>
+                <select name="month" id="month">
+                    <option value="none" selected>MM</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select name="year" id="year">
+                    <option value="none" selected>YYYY</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                </select>
+                <input type="text" placeholder="Security Code" class="sec">
+                <p style="font-size: 14px;">By completing your purchase you agree to these <a href="T&S.html">Terms of Service</a></p>
+            </div>
+            <center><button type="submit">Complete Payment</button></center>
+        </form>
+    </div>
+</body>
+</html>

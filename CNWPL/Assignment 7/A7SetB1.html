@@ -1,79 +1,128 @@
-<!--Create a HTML page that will show a digital dummy Credit Card-->
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Digital Credit Card</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
+<html lang="en">
 
-            #credit-card-container {
-                width: 300px;
-                margin: 0 auto;
-                background-color: #f2f2f2;
-                padding: 20px;
-                border-radius: 5px;
-            }
+<head>
 
-            #credit-card-number {
-                font-size: 24px;
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
+    <title>A7SetB1</title>
 
-            #credit-card-details {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
+    <style>
+        @font-face {
+            font-family: 'Credit';
+            src: url('Kredit Front.otf') format('opentype');
+        }
 
-            #credit-card-details span {
-                font-size: 16px;
-            }
+        .container {
+            background: linear-gradient(0deg, #03060a, #32538f);
+            margin-top: 150px;
+            margin-left: 150px;
+            width: 430px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-            #cvv-container {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-                margin-left: 10px;
-                width: 60px;
-                height: 30px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                text-align: center;
-                padding: 5px;
-                font-size: 14px;
-                font-weight: bold;
-                color: #000;
-                background-color: #fff;
-                cursor: pointer;
-                }
+        .card-name {
+            font-size: 3rem;
+            text-align: right;
+            padding-top: 15px;
+            padding-right: 35px;
+            color: white;
+            font-weight: bold;
+            font-family: monospace;
+            letter-spacing: -3px;
+        }
 
-            #cvv-container:hover {
-                border-color: #000;
-            }
+        .chip img {
+            width: 55px;
+            border-radius: 5px;
+            margin-left: 25px;
+            margin-top: 15px;
+        }
 
-            #expiration-container {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-                margin-left: 10px;
-                width: 100px;
-                height: 30px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                text-align: center;
-                padding: 5px;
-                font-size: 14px;
-                font-weight: bold;
-                color: #000;
-                background-color: #fff;
-                cursor: pointer;
-            }
+        .card-number {
+            margin-left: 25px;
+            margin-top: 15px;
+            font-size: 2.4rem;
+            font-family: 'Credit';
+            font-weight: 600;
+            color: gray;
+        }
 
-            #expiration-container:hover {
-                border-color: #000;
-            }
-            
+        .metallic-text {
+            background: linear-gradient(45deg, #6b6b6b, #ffffff, #cccccc, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), -1px -1px 2px rgba(255, 255, 255, 0.2);
+        }
 
+        .exp-container {
+            position: relative;
+            height: 23px;
+        }
+
+        .exp{
+            position: absolute;
+            right: 130px;
+            display: flex;
+            color: gray;
+            font-family: 'Credit';
+        }
+        .exp-sub1{
+            font-size: 10px;
+            width: 33px;
+            text-overflow: clip;
+            text-align: center;
+        }
+        .exp-sub2{
+            font-size: 20px;
+            padding-left: 2px;
+        }
+
+        .cardholder {
+            font-size: 1.5rem;
+            font-family: 'Credit';
+            margin-left: 25px;
+            color: gray;
+        }
+
+        .logo {
+            height: 20px;
+            position: relative;
+        }
+
+        .logo img {
+            position: absolute;
+            right: 40px;
+            top: -40px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-name">Credit Card</div>
+        <div class="chip"><img src="chip.jpg" alt=""></div>
+        <div>
+            <div class="card-number"><div class="metallic-text">1234 5678 9012 3456</div></div>
+            <div class="exp-container">
+                
+                <div class="exp">
+                    <div class="metallic-text">
+                    <div class="exp-sub1">VALID THRU</div>
+                    </div>
+                    <div class="metallic-text">
+                    <div class="exp-sub2">12/31</div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="metallic-text">
+            <div class="cardholder">CARDHOLDER</div>
+            </div>
+            <div class="logo"><img src="name.jpg" alt="MasterCard"></div>
+        </div>
+    </div>
+</body>
+
+</html>
