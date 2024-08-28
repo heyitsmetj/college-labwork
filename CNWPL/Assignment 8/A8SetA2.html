@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Perfect Number Checker</title>
+</head>
+
+<body>
+
+    <h1>Perfect Number Checker</h1>
+    <script>
+
+        let num = parseInt(prompt("Enter a number to check if it is a perfect number:"), 10);
+
+        let sum = 0;
+
+        for (let i = 1; i < num; i++) {
+            if (num % i === 0) {
+                sum += i;
+            }
+        }
+
+        if (sum === num) 
+        {
+            document.write("Number " + num + " is a perfect number.");
+        } 
+        else 
+        {
+            document.write("Number " + num + " is not a perfect number.");
+        }
+
+    </script>
+</body>
+
+</html>

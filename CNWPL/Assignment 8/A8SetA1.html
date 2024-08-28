@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Factorial Calculator</title>
+</head>
+<body>
+
+<h1>Factorial Calculator</h1>
+<script>
+    let num = parseInt(prompt("Enter a positive integer to calculate its factorial:"), 10);
+
+        let factorial = 1;
+
+        for (let i = 1; i <= num; i++) {
+            factorial *= i;
+        }
+
+        document.write("The factorial of " + num + " is " + factorial + ".");
+
+</script>
+</body>
+</html>
