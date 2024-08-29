@@ -1,0 +1,385 @@
+---SetA1---
+
+CREATE TABLE Student (
+    s_no INTEGER PRIMARY KEY,
+    s_name CHAR(20) NOT NULL,
+    address CHAR(25),
+    class CHAR(10)
+);
+
+CREATE TABLE Teacher (
+    t_no INTEGER PRIMARY KEY,
+    t_name CHAR(10) NOT NULL,
+    qualification CHAR(10),
+    experience INTEGER
+);
+
+CREATE TABLE Student_Teacher (
+    s_no INTEGER REFERENCES Student ON DELETE CASCADE,
+    t_no INTEGER REFERENCES Teacher ON DELETE CASCADE,
+    subject CHAR(20),
+    marks_scored INTEGER CHECK (marks_scored > 0)
+);
+
+INSERT INTO Student (s_no, s_name, address, class) VALUES (1, 'Amit', 'Delhi', '10th');
+INSERT INTO Student (s_no, s_name, address, class) VALUES (2, 'Neha', 'Mumbai', '10th');
+INSERT INTO Student (s_no, s_name, address, class) VALUES (3, 'Rahul', 'Chennai', '10th');
+
+INSERT INTO Teacher (t_no, t_name, qualification, experience) VALUES (1, 'Seema', 'MSc', 5);
+INSERT INTO Teacher (t_no, t_name, qualification, experience) VALUES (2, 'Vikram', 'BEd', 10);
+INSERT INTO Teacher (t_no, t_name, qualification, experience) VALUES (3, 'Rani', 'PhD', 8);
+
+INSERT INTO Student_Teacher (s_no, t_no, subject, marks_scored) VALUES (1, 1, 'RDBMS', 85);
+INSERT INTO Student_Teacher (s_no, t_no, subject, marks_scored) VALUES (2, 2, 'RDBMS', 90);
+INSERT INTO Student_Teacher (s_no, t_no, subject, marks_scored) VALUES (3, 3, 'RDBMS', 88);
+INSERT INTO Student_Teacher (s_no, t_no, subject, marks_scored) VALUES (1, 2, 'Mathematics', 78);
+
+
+---SetA2---
+
+
+CREATE TABLE Movie (
+    m_name CHAR(25) PRIMARY KEY,
+    release_year INTEGER,
+    budget MONEY CHECK (budget > 0)
+);
+
+CREATE TABLE Actor (
+    a_name VARCHAR(20) PRIMARY KEY,
+    role CHAR(20) CHECK (role IN ('Main', 'Supportive', 'Villan', 'Comedy')),
+    charges MONEY CHECK (charges > 0),
+    a_address VARCHAR(20)
+);
+
+CREATE TABLE Producer (
+    producer_id INTEGER PRIMARY KEY,
+    p_name CHAR(30) NOT NULL,
+    p_address VARCHAR(20)
+);
+
+CREATE TABLE Movie_Actor (
+    m_name CHAR(25) REFERENCES Movie(m_name) ON DELETE CASCADE,
+    a_name VARCHAR(20) REFERENCES Actor(a_name) ON DELETE CASCADE
+);
+
+CREATE TABLE Movie_Producer (
+    m_name CHAR(25) REFERENCES Movie(m_name) ON DELETE CASCADE,
+    producer_id INTEGER REFERENCES Producer(producer_id) ON DELETE CASCADE
+);
+
+INSERT INTO Movie VALUES
+('Sholay', 1975, 30000000::MONEY),
+('Piku', 2015, 420000000::MONEY),
+('Pink', 2016, 230000000::MONEY),
+('Padman', 2018, 200000000::MONEY),
+('Paa', 2009, 150000000::MONEY),
+('Agneepath', 2012, 600000000::MONEY);
+
+INSERT INTO Actor VALUES
+('Amitabh Bachchan', 'Main', 20000000::MONEY, 'Mumbai'),
+('Deepika Padukone', 'Main', 15000000::MONEY, 'Mumbai'),
+('Taapsee Pannu', 'Main', 10000000::MONEY, 'Delhi'),
+('Akshay Kumar', 'Main', 30000000::MONEY, 'Mumbai'),
+('Vidya Balan', 'Main', 12000000::MONEY, 'Mumbai');
+
+INSERT INTO Producer VALUES
+(1, 'Karan Johar', 'Mumbai'),
+(2, 'Ronnie Screwvala', 'Mumbai'),
+(3, 'Shoojit Sircar', 'Kolkata'),
+(4, 'Twinkle Khanna', 'Mumbai'),
+(5, 'R. Balki', 'Chennai');
+
+INSERT INTO Movie_Actor VALUES
+('Sholay', 'Amitabh Bachchan'),
+('Piku', 'Amitabh Bachchan'),
+('Piku', 'Deepika Padukone'),
+('Pink', 'Amitabh Bachchan'),
+('Pink', 'Taapsee Pannu'),
+('Padman', 'Akshay Kumar'),
+('Paa', 'Amitabh Bachchan'),
+('Paa', 'Vidya Balan'),
+('Agneepath', 'Amitabh Bachchan');
+
+INSERT INTO Movie_Producer VALUES
+('Sholay', 1),
+('Piku', 2),
+('Piku', 3),
+('Pink', 2),
+('Pink', 3),
+('Padman', 4),
+('Paa', 5),
+('Agneepath', 2);
+
+
+---SetB1---
+
+
+CREATE TABLE Dept (
+    dept_no VARCHAR(10) PRIMARY KEY,
+    dept_name CHAR(20) NOT NULL
+);
+
+CREATE TABLE Salesman (
+    sno INTEGER PRIMARY KEY,
+    s_name VARCHAR(30) NOT NULL,
+    start_year INTEGER,
+    dept_no VARCHAR(10) REFERENCES Dept ON DELETE CASCADE
+);
+
+CREATE TABLE Trip (
+    tno INTEGER PRIMARY KEY,
+    from_city CHAR(20),
+    to_city CHAR(20),
+    departure_date DATE,
+    return_date DATE,
+    sno INTEGER REFERENCES Salesman ON DELETE CASCADE
+);
+
+CREATE TABLE Expense (
+    eid INTEGER PRIMARY KEY,
+    amount MONEY CHECK (amount > 0),
+    tno INTEGER UNIQUE REFERENCES Trip ON DELETE CASCADE
+);
+
+INSERT INTO Dept VALUES
+('D001', 'Sales'),
+('D002', 'Marketing'),
+('D003', 'Finance');
+
+INSERT INTO Salesman VALUES
+(1, 'Rajesh Kumar', 2015, 'D001'),
+(2, 'Priya Sharma', 2018, 'D001'),
+(3, 'Amit Patel', 2017, 'D002');
+
+INSERT INTO Trip VALUES
+(101, 'Mumbai', 'Delhi', '2023-06-01', '2023-06-05', 1),
+(102, 'Bangalore', 'Chennai', '2023-06-10', '2023-06-15', 2),
+(103, 'Kolkata', 'Hyderabad', '2023-06-20', '2023-06-25', 1),
+(104, 'Pune', 'Ahmedabad', '2023-07-01', '2023-07-05', 3);
+
+INSERT INTO Expense VALUES
+(1, 75000::MONEY, 101),
+(2, 100000::MONEY, 102),
+(3, 90000::MONEY, 103),
+(4, 85000::MONEY, 104);
+
+
+---SetB2---
+
+
+CREATE TABLE Cities (
+    city CHAR(20) PRIMARY KEY,
+    state CHAR(20)
+);
+
+CREATE TABLE Warehouses (
+    wid INTEGER PRIMARY KEY,
+    wname CHAR(30) NOT NULL,
+    location CHAR(20) REFERENCES Cities(city) ON DELETE CASCADE
+);
+
+CREATE TABLE Stores (
+    sid INTEGER PRIMARY KEY,
+    store_name CHAR(20),
+    city CHAR(20) REFERENCES Cities ON DELETE CASCADE,
+    wid INTEGER REFERENCES Warehouses(wid) ON DELETE CASCADE
+);
+
+CREATE TABLE Items (
+    itemno INTEGER PRIMARY KEY,
+    description TEXT,
+    weight DECIMAL(5, 2),
+    cost DECIMAL(5, 2)
+);
+
+CREATE TABLE Customers (
+    cno INTEGER PRIMARY KEY,
+    cname CHAR(50),
+    addr VARCHAR(50),
+    city CHAR(20) REFERENCES Cities ON DELETE CASCADE
+);
+
+CREATE TABLE Orders (
+    ono INTEGER PRIMARY KEY,
+    odate DATE,
+    cno INTEGER REFERENCES Customer ON DELETE CASCADE
+);
+
+CREATE TABLE Order_Items (
+    ono INTEGER REFERENCES Orders ON DELETE CASCADE,
+    itemno INTEGER REFERENCES Items ON DELETE CASCADE,
+    ordered_quantity INTEGER
+);
+
+CREATE TABLE Store_Items (
+    sid INTEGER REFERENCES Stores ON DELETE CASCADE,
+    itemno INTEGER REFERENCES Items ON DELETE CASCADE,
+    quantity INTEGER
+);
+
+INSERT INTO Cities VALUES
+('Mumbai', 'Maharashtra'),
+('Delhi', 'Delhi'),
+('Bangalore', 'Karnataka'),
+('Chennai', 'Tamil Nadu');
+
+INSERT INTO Warehouses VALUES
+(1, 'Central Warehouse', 'Mumbai'),
+(2, 'North Warehouse', 'Delhi'),
+(3, 'South Warehouse', 'Chennai');
+
+INSERT INTO Stores VALUES
+(101, 'Mumbai Store', 'Mumbai', 1),
+(102, 'Delhi Store', 'Delhi', 2),
+(103, 'Bangalore Store', 'Bangalore', 1),
+(104, 'Chennai Store', 'Chennai', 3);
+
+INSERT INTO Items VALUES
+(1, 'Laptop', 2.5, 45000),
+(2, 'Smartphone', 0.2, 15000),
+(3, 'Tablet', 0.5, 20000),
+(4, 'Desktop PC', 10.0, 35000);
+
+INSERT INTO Customers VALUES
+(1, 'Rahul Sharma', '123 MG Road', 'Mumbai'),
+(2, 'Priya Patel', '456 Anna Salai', 'Chennai'),
+(3, 'Amit Singh', '789 Brigade Road', 'Bangalore'),
+(4, 'Sneha Reddy', '101 Connaught Place', 'Delhi');
+
+INSERT INTO Orders VALUES
+(1001, '2023-06-01', 1),
+(1002, '2023-06-05', 2),
+(1003, '2023-06-10', 3),
+(1004, '2023-06-15', 4);
+
+INSERT INTO Order_Items VALUES
+(1001, 1, 1),
+(1001, 2, 2),
+(1002, 3, 3),
+(1003, 4, 2),
+(1004, 1, 1),
+(1004, 3, 1);
+
+INSERT INTO Store_Items VALUES
+(101, 1, 10),
+(101, 2, 20),
+(102, 1, 15),
+(102, 3, 25),
+(103, 2, 30),
+(103, 4, 5),
+(104, 3, 20),
+(104, 4, 10);
+
+
+---SetC1---
+
+CREATE TABLE Branch (
+    br_id INTEGER PRIMARY KEY,
+    br_name CHAR(30),
+    br_city CHAR(10)
+);
+
+CREATE TABLE Customer (
+    cno INTEGER PRIMARY KEY,
+    c_name CHAR(20),
+    caddr CHAR(35),
+    city CHAR(20)
+);
+
+CREATE TABLE Loan_application (
+    lno INTEGER PRIMARY KEY,
+    l_amt_required MONEY CHECK (l_amt_required > 0::MONEY),
+    l_amt_approved MONEY,
+    l_date DATE
+);
+
+CREATE TABLE Ternary (
+    br_id INTEGER REFERENCES Branch ON DELETE CASCADE,
+    cno INTEGER REFERENCES Customer ON DELETE CASCADE,
+    lno INTEGER REFERENCES Loan_application ON DELETE CASCADE
+);
+
+INSERT INTO Branch VALUES
+(1, 'SBI Main Branch', 'Mumbai'),
+(2, 'ICICI Andheri', 'Mumbai'),
+(3, 'HDFC Connaught Place', 'Delhi'),
+(4, 'Axis Bank MG Road', 'Bangalore');
+
+INSERT INTO Customer VALUES
+(101, 'Rajesh Kumar', '123 Pali Hill, Bandra', 'Mumbai'),
+(102, 'Priya Sharma', '456 Juhu Beach Road', 'Mumbai'),
+(103, 'Amit Patel', '789 Linking Road, Bandra', 'Mumbai'),
+(104, 'Sneha Reddy', '101 MG Road', 'Bangalore'),
+(105, 'Vikram Singh', '202 Chandni Chowk', 'Delhi');
+
+INSERT INTO Loan_application VALUES
+(1001, 100000::MONEY, 80000::MONEY, '2023-06-01'),
+(1002, 500000::MONEY, 450000::MONEY, '2023-06-05'),
+(1003, 200000::MONEY, 180000::MONEY, '2023-06-10'),
+(1004, 1000000::MONEY, 900000::MONEY, '2023-06-15'),
+(1005, 300000::MONEY, 250000::MONEY, '2023-06-20');
+
+INSERT INTO Ternary VALUES
+(1, 101, 1001),
+(1, 102, 1002),
+(2, 103, 1003),
+(3, 105, 1004),
+(4, 104, 1005);
+
+
+---SetC2---
+
+
+CREATE TABLE Train (
+    tno INT PRIMARY KEY,
+    tname VARCHAR(20),
+    depart_time TIME,
+    arrival_time TIME,
+    source_stn CHAR(10),
+    dest_stn CHAR(10),
+    no_of_res_bogies INT,
+    bogie_capacity INT
+);
+
+CREATE TABLE Passenger (
+    passenger_id INT PRIMARY KEY,
+    passenger_name VARCHAR(20),
+    address VARCHAR(30),
+    age INT,
+    gender CHAR(1)
+);
+
+CREATE TABLE Ticket (
+    train_no INT REFERENCES Train ON DELETE CASCADE,
+    passenger_id INT REFERENCES Passenger ON DELETE CASCADE,
+    ticket_no INT PRIMARY KEY,
+    bogie_no INT,
+    no_of_berths INT,
+    tdate DATE,
+    ticket_amt DECIMAL(7,2),
+    status CHAR(1) CHECK (status IN ('W', 'C'))
+);
+
+INSERT INTO Train (tno, tname, depart_time, arrival_time, source_stn, dest_stn, no_of_res_bogies, bogie_capacity)
+VALUES (101, 'Rajdhani Express', '08:00', '20:00', 'Delhi', 'Mumbai', 12, 72);
+
+INSERT INTO Train (tno, tname, depart_time, arrival_time, source_stn, dest_stn, no_of_res_bogies, bogie_capacity)
+VALUES (102, 'Shatabdi Express', '06:00', '14:00', 'Delhi', 'Amritsar', 10, 78);
+
+INSERT INTO Passenger (passenger_id, passenger_name, address, age, gender)
+VALUES (1, 'Anjali Sharma', 'Mumbai', 28, 'F');
+
+INSERT INTO Passenger (passenger_id, passenger_name, address, age, gender)
+VALUES (2, 'Ravi Kumar', 'Delhi', 34, 'M');
+
+INSERT INTO Passenger (passenger_id, passenger_name, address, age, gender)
+VALUES (3, 'Priya Singh', 'Amritsar', 25, 'F');
+
+INSERT INTO Ticket (train_no, passenger_id, ticket_no, bogie_no, no_of_berths, tdate, ticket_amt, status)
+VALUES (101, 1, 1001, 3, 2, '2024-08-01', 1500.00, 'C');
+
+INSERT INTO Ticket (train_no, passenger_id, ticket_no, bogie_no, no_of_berths, tdate, ticket_amt, status)
+VALUES (101, 2, 1002, 5, 1, '2024-08-01', 800.00, 'W');
+
+INSERT INTO Ticket (train_no, passenger_id, ticket_no, bogie_no, no_of_berths, tdate, ticket_amt, status)
+VALUES (102, 3, 1003, 2, 3, '2024-08-01', 1800.00, 'C');
