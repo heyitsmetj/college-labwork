@@ -41,13 +41,13 @@ INSERT INTO Student_Teacher (s_no, t_no, subject, marks_scored) VALUES (1, 2, 'M
 CREATE TABLE Movie (
     m_name CHAR(25) PRIMARY KEY,
     release_year INTEGER,
-    budget MONEY CHECK (budget > 0)
+    budget MONEY CHECK (budget > 0::MONEY)
 );
 
 CREATE TABLE Actor (
     a_name VARCHAR(20) PRIMARY KEY,
     role CHAR(20) CHECK (role IN ('Main', 'Supportive', 'Villan', 'Comedy')),
-    charges MONEY CHECK (charges > 0),
+    charges MONEY CHECK (charges > 0::MONEY),
     a_address VARCHAR(20)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE Producer (
 );
 
 CREATE TABLE Movie_Actor (
-    m_name CHAR(25) REFERENCES Movie(m_name) ON DELETE CASCADE,
-    a_name VARCHAR(20) REFERENCES Actor(a_name) ON DELETE CASCADE
+    m_name CHAR(25) REFERENCES Movie ON DELETE CASCADE,
+    a_name VARCHAR(20) REFERENCES Actor ON DELETE CASCADE
 );
 
 CREATE TABLE Movie_Producer (
@@ -137,7 +137,7 @@ CREATE TABLE Trip (
 
 CREATE TABLE Expense (
     eid INTEGER PRIMARY KEY,
-    amount MONEY CHECK (amount > 0),
+    amount MONEY CHECK (amount > 0::MONEY),
     tno INTEGER UNIQUE REFERENCES Trip ON DELETE CASCADE
 );
 
@@ -189,7 +189,7 @@ CREATE TABLE Items (
     itemno INTEGER PRIMARY KEY,
     description TEXT,
     weight DECIMAL(5, 2),
-    cost DECIMAL(5, 2)
+    cost DECIMAL(8, 2)
 );
 
 CREATE TABLE Customers (
@@ -202,7 +202,7 @@ CREATE TABLE Customers (
 CREATE TABLE Orders (
     ono INTEGER PRIMARY KEY,
     odate DATE,
-    cno INTEGER REFERENCES Customer ON DELETE CASCADE
+    cno INTEGER REFERENCES Customers ON DELETE CASCADE
 );
 
 CREATE TABLE Order_Items (
@@ -235,10 +235,11 @@ INSERT INTO Stores VALUES
 (104, 'Chennai Store', 'Chennai', 3);
 
 INSERT INTO Items VALUES
-(1, 'Laptop', 2.5, 45000),
-(2, 'Smartphone', 0.2, 15000),
-(3, 'Tablet', 0.5, 20000),
-(4, 'Desktop PC', 10.0, 35000);
+(1, 'Laptop', 2.5, 65000.00),
+(2, 'Smartphone', 0.2, 15000.00),
+(3, 'Tablet', 0.5, 20000.00),
+(4, 'Desktop PC', 9.0, 88000.00);
+
 
 INSERT INTO Customers VALUES
 (1, 'Rahul Sharma', '123 MG Road', 'Mumbai'),

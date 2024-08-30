@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION A5C1F2(name CHAR)
 RETURNS VOID AS $$
 
 DECLARE
-    num Customer.cno%TYPE
+    num Customer.cno%TYPE;
 
     c_c1b CURSOR FOR
     SELECT c.cno FROM Customer c,Ternary t,Branch b WHERE

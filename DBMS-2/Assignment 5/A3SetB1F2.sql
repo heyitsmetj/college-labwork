@@ -13,7 +13,7 @@ BEGIN
         FETCH  c_b1b INTO rt;
         EXIT WHEN NOT FOUND;
         
-        RAISE NOTICE '% || % || % || % || % || %',rt.t.tno,rt.from_city,rt.to_city,rt.departure_date,rt.return_date;
+        RAISE NOTICE '% || % || % || % || % ||',rt.tno,rt.from_city,rt.to_city,rt.departure_date,rt.return_date;
 
     END LOOP;
     

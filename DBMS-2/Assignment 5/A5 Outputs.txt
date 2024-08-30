@@ -1,0 +1,60 @@
+se2203a5=# select A5A1F1(1);
+NOTICE:  Student Name: Amit                 , Teacher Name: Seema      
+ a5a1f1 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5A2F3();
+NOTICE:  Producer: Ronnie Screwvala               has produced 3 movies with Amitabh Bachchan
+ a5a2f3 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5B1F2();
+NOTICE:  102 || Bangalore            || Chennai              || 2023-06-10 || 2023-06-15 ||
+ a5b1f2 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5B2F2();
+NOTICE:  Customer Name: Amit Singh                                        
+NOTICE:  Customer Name: Rahul Sharma                                      
+NOTICE:  Customer Name: Sneha Reddy                                       
+ a5b2f2 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5C1F2('SBI Main Branch');
+NOTICE:  COUNT : 2
+ a5c1f2 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5C1F3();
+NOTICE:  Loan ID : 1001 , Updated Approved Amount : ₹108,000.00 
+NOTICE:  Loan ID : 1002 , Updated Approved Amount : ₹607,500.00 
+NOTICE:  Loan ID : 1003 , Updated Approved Amount : ₹243,000.00 
+NOTICE:  Loan ID : 1004 , Updated Approved Amount : ₹1,215,000.00 
+NOTICE:  Loan ID : 1005 , Updated Approved Amount : ₹337,500.00 
+ a5c1f3 
+--------
+ 
+(1 row)
+
+
+se2203a5=# select A5C2F1('2024-08-01','Anjali Sharma');
+NOTICE:  Passenger : Anjali Sharma , Date : 2024-08-01 , Total Berths Reserved : 2 , Total Amount Paid : 1500.00 
+ a5c2f1 
+--------
+ 
+(1 row)

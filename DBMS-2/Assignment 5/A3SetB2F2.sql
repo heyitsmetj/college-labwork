@@ -14,7 +14,7 @@ BEGIN
     OPEN c_b2b;
     
     LOOP
-        FETCH customer_cursor INTO customer_record;
+        FETCH c_b2b INTO cn;
         EXIT WHEN NOT FOUND;
         
         RAISE NOTICE 'Customer Name: %',cn;

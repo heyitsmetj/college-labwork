@@ -17,7 +17,7 @@ BEGIN
         EXIT WHEN NOT FOUND;
     
         UPDATE Loan_Application SET l_amt_approved =(l_amt_approved::NUMERIC * 1.35)::MONEY
-        WHERE lno - loan_id;
+        WHERE lno = loan_id;
 
     RAISE NOTICE 'Loan ID : % , Updated Approved Amount : % ',loan_id,(approved_amt::NUMERIC * 1.35)::MONEY;
     END LOOP;

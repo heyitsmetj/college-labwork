@@ -2,7 +2,6 @@ CREATE OR REPLACE FUNCTION A5A2F3()
 RETURNS VOID AS $$
 DECLARE
     pr RECORD;
-    movie_counter INT;
 
     c_a2c CURSOR FOR
         SELECT p.p_name, COUNT(DISTINCT mp.m_name) as movie_count
