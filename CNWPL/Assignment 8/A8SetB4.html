@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>A8SetB4</title>
+</head>
+
+<body>
+    <script>
+
+   var key = prompt("Enter the KeyWord: ");
+   var nkey = prompt("Keyword is : [" + key + "] ,Enter the New KeyWord: ");
+
+    let ch = 0;
+
+   while(ch < 2 && key !== nkey)
+   {
+    var nkey = prompt("Invalid Keyword. Please enter a valid Keyword [" + key + "] : ");
+    ch++;
+   }
+
+if(ch < 2)
+{
+   document.write("Correct! <br>The Keyword is: " + key);
+   document.write("<br>Your Input is: " + nkey);
+}
+else
+{
+   document.write("Sorry, you have entered an invalid keyword too many times.");
+}
+</script>
+</body>
+
+</html>

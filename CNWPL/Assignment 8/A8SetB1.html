@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>A8SetB1</title>
+</head>
+
+<body>
+    <script>
+
+        document.write("Prime Numbers between 1 to 89: ")
+        for (let i = 2; i < 89;i++)
+        {
+            var isPrime = true;
+            for (var j = 2; j < i; j++)
+            {
+                if (i % j === 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime)
+            {
+                document.write(parseInt(i) + " ");
+            }
+        }
+    </script>
+</body>
+
+</html>

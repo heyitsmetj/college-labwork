@@ -1,60 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <title>Number to Words Converter</title>
+    <title>A8SetA4 Number to Words</title>
 </head>
+
 <body>
+    <script>
 
-<h1>Number to Words Converter</h1>
-<script>
-    // Prompt user for input and convert to number
-    let num = parseInt(prompt("Enter a number to convert it to words:"), 10);
+        let numberInput = prompt("Enter a number:");
 
-    // Check if input is a valid number and is non-negative
-    if (isNaN(num) || num < 0) {
-        document.write("Please enter a non-negative integer.");
-    } else {
-        const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-        const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-        const thousands = ["", "Thousand", "Lakh"]; // You can add more if needed
-        
-        if (num === 0) {
-            document.write("Number " + num + " in words is: Zero.");
-        } else {
-            let word = '';
-            let unit = 0;
-            
-            while (num > 0) {
-                let part = num % 1000;
-                let partWord = '';
-                
-                // Handle numbers less than 1000
-                if (part % 100 < 20) {
-                    partWord = ones[part % 100];
-                    part = Math.floor(part / 100);
-                } else {
-                    partWord = ones[part % 10];
-                    part = Math.floor(part / 10);
-                    partWord = tens[part % 10] + (partWord ? ' ' + partWord : '');
-                    part = Math.floor(part / 10);
-                }
-                
-                if (part > 0) {
-                    partWord = ones[part] + ' Hundred' + (partWord ? ' ' + partWord : '');
-                }
-                
-                if (partWord) {
-                    word = partWord + (thousands[unit] ? ' ' + thousands[unit] : '') + (word ? ' ' + word : '');
-                }
-                
-                num = Math.floor(num / 1000);
-                unit++;
+        const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+        let wordResult = "";
+
+        for (let i = 0; i < numberInput.length; i++) 
+        {
+            const digit = numberInput[i];
+
+            if (!isNaN(digit)) {
+                wordResult += words[parseInt(digit)] + " ";
+            } 
+            else 
+            {
+                wordResult = "Invalid Input";
+                break;
             }
-            
-            document.write("Number " + num + " in words is: " + word.trim() + ".");
         }
-    }
-</script>
+
+        document.write("<h2>Number in Words:</h2>");
+        document.write("<p>" + wordResult + "</p>");
+    </script>
 </body>
+
 </html>

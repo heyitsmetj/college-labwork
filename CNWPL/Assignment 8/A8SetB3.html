@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>A8SetB3</title>
+</head>
+
+<body>
+    <script>
+
+        var num = parseInt(prompt("Enter the number to be reversed: "));
+        var rev = 0;
+        var temp = num;
+        while (temp !== 0)
+        {
+                rev = (rev * 10) + (temp % 10);
+                temp = Math.floor(temp / 10);
+        }
+
+        document.write("Reverse of the given number " + num + " : " + rev);
+     
+    </script>
+</body>
+
+</html>
