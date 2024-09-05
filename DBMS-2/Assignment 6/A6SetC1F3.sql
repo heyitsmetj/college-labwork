@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION A6C1F3() RETURNS TRIGGER AS
+$$
+
+BEGIN 
+
+IF NEW.year > EXTRACT(YEAR FROM CURRENT_DATE) THEN
+
+NEW.year = EXTRACT(YEAR FROM CURRENT_DATE);
+
+RAISE NOTICE 'Year entered is greater than current year. Year changed to %.',NEW.year;
+
+END IF;
+
+RETURN NEW;
+
+END;
+$$ LANGUAGE plpgsql;
+
