@@ -3,7 +3,7 @@ $$
 
 BEGIN 
 
-    RAISE NOTICE 'The studnet with number: % is being updated from class % to class %.',OLD.s_no,OLD.s_class,NEW.s_class;
+    RAISE NOTICE 'The student with number: % is being updated from class % to class %.',OLD.s_no,OLD.s_class,NEW.s_class;
 
 RETURN NEW;
 

@@ -1,0 +1,84 @@
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA1F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA1F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA1F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA2F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA2F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetA2F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB1F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB1F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB1F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB2F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB2F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetB2F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC1F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC1F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC1F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC2F1.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC2F2.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/A6SetC2F3.sql'
+CREATE FUNCTION
+se2203a6=# \i '/home/mitacsc/tejasSE2203/college-labwork/DBMS-2/Assignment 6/Triggers.txt'
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+
+--SetA1a--
+se2203a6=# INSERT INTO Student VALUES(-1,'Ramesh Mahajan','FYBCA','Pimpri');
+
+ERROR:  Invalid student number. Student number must be a positive integer.
+CONTEXT:  PL/pgSQL function a6a1f1() line 6 at RAISE
+
+
+--SetA1b--
+se2203a6=# INSERT INTO Student VALUES(1,'Ramesh Mahajan','FYBCA','Pimpri');
+INSERT 0 1
+
+se2203a6=# UPDATE Student SET s_class = 'SYBCA' WHERE s_class = 'FYBCA';
+NOTICE:  The studnet with number: 1 is being updated from class FYBCA to class SYBCA.
+UPDATE 1
+
+
+--SetA1c--
+se2203a6=# INSERT INTO Teacher VALUES(1,'Kalpana','B.Ed',1);
+
+ERROR:  Experience must be at least 2 years.
+CONTEXT:  PL/pgSQL function a6a1f3() line 7 at RAISE
+
+
+--SetA2a--
+se2203a6=# INSERT INTO Employee VALUES(101,'Kashish Sheikh','BCA','2025-08-24');
+
+ERROR:  Joining date should be before current date. Provided Date: 2025-08-24
+CONTEXT:  PL/pgSQL function a6a2f1() line 7 at RAISE
