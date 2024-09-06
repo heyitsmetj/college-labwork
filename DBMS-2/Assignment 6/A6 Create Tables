@@ -1,0 +1,109 @@
+--SetA1--
+
+CREATE TABLE Student (
+    s_no INTEGER PRIMARY KEY,
+    s_name VARCHAR(20) NOT NULL,
+    s_class VARCHAR(10),
+    s_addr VARCHAR(30)
+);
+
+CREATE TABLE Teacher (
+    t_no INTEGER PRIMARY KEY,
+    t_name CHAR(10) NOT NULL,
+    qualification CHAR(10),
+    experience INTEGER
+);
+
+CREATE TABLE Student_Teacher (
+    s_no INTEGER REFERENCES Student ON DELETE CASCADE ON UPDATE CASCADE, 
+    t_no INTEGER REFERENCES Teacher ON DELETE CASCADE ON UPDATE CASCADE,
+    subject CHAR(20)
+);
+
+--SetA2--
+
+CREATE TABLE Project (
+    pno INTEGER PRIMARY KEY,
+    pname CHAR(30) NOT NULL,
+    ptype CHAR(20),
+    duration INTEGER
+);
+
+CREATE TABLE Employee (
+    eno INTEGER PRIMARY KEY,
+    ename CHAR(20),
+    qualification CHAR(15),
+    joining_date DATE
+);
+
+CREATE TABLE Project_Employee (
+    pno INTEGER REFERENCES Project ON DELETE CASCADE ON UPDATE CASCADE,
+    eno INTEGER REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+    start_date DATE,
+    no_of_hours_worked INTEGER
+);
+
+--SetB1--
+
+CREATE TABLE Train (
+    tno INT PRIMARY KEY,
+    tname VARCHAR(20),
+    depart_time TIME,
+    arrival_time TIME,
+    source_stn CHAR(10),
+    dest_stn CHAR(10),
+    no_of_res_bogies INT,
+    bogie_capacity INT
+);
+
+CREATE TABLE Passenger (
+    passenger_id INT PRIMARY KEY,
+    passenger_name VARCHAR(20),
+    address VARCHAR(30),
+    age INT,
+    gender CHAR(1)
+);
+
+CREATE TABLE Ticket (
+    train_no INT REFERENCES Train ON DELETE CASCADE ON UPDATE CASCADE,
+    passenger_id INT REFERENCES Passenger ON DELETE CASCADE ON UPDATE CASCADE,
+    ticket_no INT PRIMARY KEY,
+    bogie_no INT,
+    no_of_berths INT,
+    tdate DATE,
+    ticket_amt DECIMAL(7,2),
+    status CHAR(1) CHECK (status IN ('W', 'C'))
+);
+
+--SetB2--
+
+CREATE TABLE Route (
+    route_no INT PRIMARY KEY,
+    source CHAR(20),
+    destination CHAR(20),
+    no_of_stations INT
+);
+
+CREATE TABLE Bus (
+    bus_no INT PRIMARY KEY,
+    b_capacity INT NOT NULL,
+    depot_name VARCHAR(20),
+    route_no INT REFERENCES Route ON DELETE CASCADE
+);
+
+
+CREATE TABLE Driver (
+    driver_no INT PRIMARY KEY,
+    driver_name CHAR(20),
+    license_no INT UNIQUE,
+    address CHAR(20),
+    d_age INT,
+    salary FLOAT
+);
+
+CREATE TABLE Bus_Driver (
+    bus_no INT REFERENCES Bus ON DELETE CASCADE,
+    driver_no INT REFERENCES Driver ON DELETE CASCADE,
+    date_of_duty_allotted DATE,
+    shift INT CHECK (shift IN (1, 2))
+);

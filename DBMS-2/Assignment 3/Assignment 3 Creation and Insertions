@@ -103,7 +103,7 @@ CREATE TABLE Bus_Driver (
     bus_no INT REFERENCES Bus ON DELETE CASCADE,
     driver_no INT REFERENCES Driver ON DELETE CASCADE,
     date_of_duty_allotted DATE,
-    shift INT CHECK (shift IN (1, 2)),
+    shift INT CHECK (shift IN (1, 2))
 
 );
 
