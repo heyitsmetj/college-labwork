@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sum of First and Last Digit</title>
+</head>
+<body>
+    <script>
+        let num = parseInt(prompt("Enter a number to find the sum of its first and last digit:")); // Get input from user
+        let firstDigit;
+        let lastDigit = num % 10; // Get the last digit
+
+        while (num >= 10) {
+            num = Math.floor(num / 10); // Keep removing last digits until only the first digit is left
+        }
+
+        firstDigit = num; // Now, num holds the first digit
+        let sumFirstLast = firstDigit + lastDigit;
+
+        document.write("Sum of first and last digit: " + sumFirstLast + "<br>");
+    </script>
+</body>
+</html>
