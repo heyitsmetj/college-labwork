@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sum of Digits</title>
+</head>
+<body>
+    <script>
+        let number = parseInt(prompt("Enter a number to find the sum of its digits:")); // Get input from user
+        let sum = 0;
+        let digit;
+
+        while (number > 0) {
+            digit = number % 10; // Get the last digit
+            sum += digit;        // Add it to the sum
+            number = Math.floor(number / 10); // Remove the last digit
+        }
+
+        document.write("Sum of digits: " + sum + "<br>");
+    </script>
+</body>
+</html>
