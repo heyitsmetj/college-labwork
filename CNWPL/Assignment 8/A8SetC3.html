@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fibonacci Series</title>
+</head>
+<body>
+    <script>
+        let n = 10; // Number of terms
+        let a = 0;  // First term
+        let b = 1;  // Second term
+        let nextTerm;
+
+        document.write("Fibonacci series:<br>");
+        document.write(a + "<br>"); // Print first term
+        document.write(b + "<br>"); // Print second term
+
+        for (let i = 3; i <= n; i++) { // Start from the third term
+            nextTerm = a + b; // Next term is the sum of the previous two
+            document.write(nextTerm + "<br>"); // Print the next term
+            a = b;    // Update the terms
+            b = nextTerm;
+        }
+    </script>
+</body>
+</html>
