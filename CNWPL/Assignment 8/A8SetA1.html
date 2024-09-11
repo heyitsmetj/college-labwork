@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Factorial Calculator</title>
+  <title>Factorial Calculator</title>
 </head>
+
 <body>
+  <script>
 
-<script>
-  var fn=prompt("Enter your First Name: ");
-  var ln=prompt("Enter your last Name: ");
+    function calculateFact(num) {
+      if (num === 0 || num === 1) 
+      {
+        return 1;
+      } 
+      
+      else 
+      {
+        return num * calculateFact(num - 1);
+      }
+    }
 
-</script>
+    let number = parseInt(prompt("Enter a number to calculate its factorial:"));
+
+    let result = calculate(number);
+    document.write("The factorial of " + number + " is " + result);
+
+  </script>
 </body>
+
 </html>

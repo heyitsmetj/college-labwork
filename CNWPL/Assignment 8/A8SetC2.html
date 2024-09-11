@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sum of First and Last Digit</title>
+    <title>A8SetC2</title>
 </head>
 <body>
     <script>
-        let num = parseInt(prompt("Enter a number to find the sum of its first and last digit:")); // Get input from user
+        let num = parseInt(prompt("Enter a number to find the sum of its first and last digit:")); 
         let firstDigit;
-        let lastDigit = num % 10; // Get the last digit
+        let lastDigit = num % 10;
+        document.write(num+"<br>"); 
 
         while (num >= 10) {
-            num = Math.floor(num / 10); // Keep removing last digits until only the first digit is left
+            num = Math.floor(num / 10); 
+            document.write(num);
         }
 
-        firstDigit = num; // Now, num holds the first digit
+        firstDigit = num; 
         let sumFirstLast = firstDigit + lastDigit;
 
         document.write("Sum of first and last digit: " + sumFirstLast + "<br>");

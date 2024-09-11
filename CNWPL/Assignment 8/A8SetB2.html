@@ -8,23 +8,23 @@
 <body>
     <script>
 
-        document.write("Even numbers between 50 to 100: ");
+        document.write("Count of Even & Odd numbers between 50 to 100: ");
+        let even = 0;
+        let odd = 0;
+
         for (let i = 51; i < 100;i++)
         {
                 if (i % 2 === 0)
                 {
-                    document.write(i + " ");
+                    even++;
+                }
+                else 
+                {
+                    odd++;
                 }
         }
 
-        document.write("<br>Even numbers between 50 to 100: ");
-        for (let i = 51; i < 100;i++)
-        {
-                if (i % 2 !== 0)
-                {
-                    document.write(i + " ");
-                }
-        }
+        document.write("<br>Even Count: " + even + "<br>Odd Count: " + odd);
     </script>
 </body>
 
