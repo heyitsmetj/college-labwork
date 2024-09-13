@@ -82,3 +82,50 @@ se2203a6=# INSERT INTO Employee VALUES(101,'Kashish Sheikh','BCA','2025-08-24');
 
 ERROR:  Joining date should be before current date. Provided Date: 2025-08-24
 CONTEXT:  PL/pgSQL function a6a2f1() line 7 at RAISE
+
+
+--SetA2c--
+se2203a6=# INSERT INTO Employee VALUES(1,'Ramesh Sahay','B.E','2015-05-24');
+INSERT 0 1
+se2203a6=# INSERT INTO Employee VALUES(2,'Suresh Mehta','B.Tech','2016-08-24');
+INSERT 0 1
+
+se2203a6=# DELETE FROM Employee;
+NOTICE:  Employee record with ID: 1 is being deleted.
+NOTICE:  Employee record with ID: 2 is being deleted.
+DELETE 2
+
+
+--SetB1b--
+se2203a6=# INSERT INTO Passenger VALUES(101,'Mukesh Yadav','Pimpri',34,'M');
+NOTICE:  Age above 5 will be charged full fare. Passenger age: 34
+INSERT 0 1
+
+
+--SetB2a--
+se2203a6=# INSERT INTO Driver VALUES(101,'Ramkumar Mishra',123456,'Daund',38,7000);
+NOTICE:  Entry within valid range (38).
+INSERT 0 1
+
+
+--SetC1b--
+se2203a6=# INSERT INTO Students VALUES(1,'Ayush Kumar','SYBCA');
+INSERT 0 1
+se2203a6=# INSERT INTO Competition VALUES(101,'Math Quiz','Academic');
+INSERT 0 1
+
+se2203a6=# INSERT INTO Students_Competition VALUES(1,101,1,2028);
+ERROR:  Year is invalid. Year: 2028 is greater than the current year.
+CONTEXT:  PL/pgSQL function a6c1f2() line 9 at RAISE
+
+--SetC1c--
+drop trigger a6c1t2 on students_competition;
+DROP TRIGGER
+
+se2203a6=# INSERT INTO Students_Competition VALUES(1,101,1,2026);
+NOTICE:  Year entered is greater than current year. Year changed to 2024.
+INSERT 0 1
+
+
+--SetC2c--
+

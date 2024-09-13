@@ -9,9 +9,9 @@ RAISE EXCEPTION 'Customer number cannot be negative or zero';
 
 END IF;
 
-IF NEW.cname IS NULL THEN
+IF NEW.c_name = NULL THEN
 
-RAISE EXCEPTION 'Customer name cannot be NULL';
+RAISE EXCEPTION 'Customer name cannot be set to NULL';
 
 END IF;
 

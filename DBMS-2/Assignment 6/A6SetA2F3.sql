@@ -3,7 +3,7 @@ $$
 
 BEGIN 
 
-RAISE NOTICE 'Employee record with ID: % is being deleted.',OLD.cno;
+RAISE NOTICE 'Employee record with ID: % is being deleted.',OLD.eno;
 
 RETURN OLD;
 
