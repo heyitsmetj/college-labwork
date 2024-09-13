@@ -79,7 +79,7 @@ void main()
         printf(" 3. Display\n");
         printf(" 4. Peek\n");
         printf(" 5. Exit\n");
-        
+
         printf("\n Enter your choice: ");
         scanf("%d", &ch);
 
@@ -110,6 +110,7 @@ void main()
                 printf("\n Stack is EMPTY!");
             else
                 peek(&s);
+                break;
 
         case 5:
             exit(0);
