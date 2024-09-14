@@ -1,28 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct NODE
 {
-	int coeff;
-	int expo;
+	int coef;
+	int exp;
 	struct NODE *next;
 };
-
 typedef struct NODE node;
-node *list = NULL, *last;
+
+node *getnodenum(int co, int ex)
+{
+	node *temp;
+	temp = (node *)malloc(sizeof(node));
+	temp->coef = co;
+	temp->exp = ex;
+	temp->next = NULL;
+	return temp;
+}
 
 node *getnode()
 {
 	node *temp;
 	temp = (node *)malloc(sizeof(node));
-
-	printf("\n Enter the coefficient for new node: ");
-	scanf("%d", &temp->coeff);
-	printf("\n Enter the exponent for new node: ");
-	scanf("%d", &temp->expo);
-
+	printf("\nEnter the coefficient: ");
+	scanf("%d", &temp->coef);
+	printf("\nEnter the exponent: ");
+	scanf("%d", &temp->exp);
 	temp->next = NULL;
-
 	return temp;
 }
 
@@ -46,80 +50,115 @@ node *create(node *list)
 			last->next = temp;
 		}
 
-		printf("\n Do you want to extend the expression?(Y/N): ");
+		printf("\nDo you want to enter any more nodes(Y/N): ");
 		scanf(" %c", &ch);
 
 	} while (ch == 'Y' || ch == 'y');
 
-	return (list);
+	return list;
 }
 
 void display(node *list)
 {
 	node *ptr;
-
-	for (ptr = list; ptr != NULL; ptr = ptr->next)
+	if (list == NULL)
+		printf("NULL list");
+	else
 	{
-		printf(" %d^%d ", ptr->coeff, ptr->expo);
-
-		if (ptr->next != NULL)
+		for (ptr = list; ptr->next != NULL; ptr = ptr->next)
 		{
-			printf("+");
+			printf("%dx^%d + ", ptr->coef, ptr->exp);
+		}
+		if (ptr->exp == 0)
+		{
+			printf("%d", ptr->coef);
+		}
+		else
+		{
+			printf("%dx^%d", ptr->coef, ptr->exp);
 		}
 	}
 }
 
-node * additionofpolynomial(node *list)
+node *addpoly(node *list1, node *list2)
 {
-	node *ptr1, *ptr2, *result = NULL, *temp;
-	int sum;
+	node *aptr, *bptr, *list3 = NULL, *temp, *last, *ptr;
 
-	ptr1 = list;
-
-	while (ptr1 != NULL)
+	int co;
+	for (aptr = list1, bptr = list2; aptr != NULL, bptr != NULL;)
 	{
-		ptr2 = list;
-
-		while (ptr2 != NULL)
+		if (aptr->exp == bptr->exp)
 		{
-			if (ptr1->expo == ptr2->expo)
-			{
-				sum = ptr1->coeff + ptr2->coeff;
+			co = aptr->coef + bptr->coef;
+			temp = getnodenum(co, aptr->exp);
+			aptr = aptr->next;
+			bptr = bptr->next;
+		}
 
-				if (sum != 0)
-				{
-					temp = (node *)malloc(sizeof(node));
-					temp->coeff = sum;
-					temp->expo = ptr1->expo;
-					temp->next = NULL;
+		else if (aptr->exp > bptr->exp)
+		{
+			temp = getnodenum(aptr->coef, aptr->exp);
+			aptr = aptr->next;
+		}
+		else if (aptr->exp < bptr->exp)
+		{
+			temp = getnodenum(bptr->coef, bptr->exp);
+			bptr = bptr->next;
+		}
 
-					if (result == NULL)
-					{
-						result = temp;
-					}
-					else
-					{
-						last->next = temp;
-					}
-
-					last = temp;
-				}
-
-				ptr2 = ptr2->next;
-			}
+		if (list3 == NULL)
+		{
+			list3 = temp;
+		}
+		else
+		{
+			for (last = list3; last->next != NULL; last = last->next)
+				;
+			last->next = temp;
 		}
 	}
-	return result;
+
+	while (aptr != NULL)
+	{
+		temp = getnodenum(aptr->coef, aptr->exp);
+		for (last = list3; last->next != NULL; last = last->next)
+			;
+		last->next = temp;
+		aptr = aptr->next;
+	}
+
+	while (bptr != NULL)
+	{
+		temp = getnodenum(bptr->coef, bptr->exp);
+		for (last = list3; last->next != NULL; last = last->next)
+			;
+		last->next = temp;
+		bptr = bptr->next;
+	}
+
+	return list3;
 }
 
 void main()
 {
-	printf("\n Creating Polynomial:\n");
-	list = create(list);
+	node *list1 = NULL, *list2 = NULL, *list3 = NULL;
+	printf("\nCreate list of poly1: ");
+	list1 = create(list1);
+	printf("\nEntered poly1: ");
+	display(list1);
 
-	printf("\n\n Your Polynomial: ");
-	display(list);
-	printf("\n\nPolynomial after addition: ");
-	node * result = additionofpolynomial(list);
-	display(result);
+	printf("\n");
+
+	printf("\nCreate list of poly2: ");
+	list2 = create(list2);
+	printf("\nEntered poly2: ");
+	display(list2);
+
+	printf("\n");
+
+	list3 = addpoly(list1, list2);
+	printf("\nAddition of poly1 and poly2: ");
+	display(list3);
+
+	printf("\n");
 }
