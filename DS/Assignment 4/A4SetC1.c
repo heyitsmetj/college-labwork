@@ -142,8 +142,10 @@ node *addpoly(node *list1, node *list2)
 void main()
 {
 	node *list1 = NULL, *list2 = NULL, *list3 = NULL;
+	
 	printf("\nCreate list of poly1: ");
 	list1 = create(list1);
+	
 	printf("\nEntered poly1: ");
 	display(list1);
 
@@ -151,12 +153,14 @@ void main()
 
 	printf("\nCreate list of poly2: ");
 	list2 = create(list2);
+	
 	printf("\nEntered poly2: ");
 	display(list2);
 
 	printf("\n");
 
 	list3 = addpoly(list1, list2);
+	
 	printf("\nAddition of poly1 and poly2: ");
 	display(list3);
 

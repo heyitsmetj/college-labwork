@@ -73,7 +73,7 @@ void main()
 
     while (1)
     {
-        printf("\n\n Stack Operations\n");
+        printf("\n\n Stack Operations:-\n");
         printf(" 1. Push\n");
         printf(" 2. Pop\n");
         printf(" 3. Display\n");
