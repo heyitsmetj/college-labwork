@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>A8SetA3</title>
+
+</head>
+
+<body>
+    <script>
+        let arr = [];
+        let n = parseInt(prompt("Enter the number of elements in the array: "));
+
+        for (let i = 0; i < n; i++) 
+        {
+            arr[i] = parseInt(prompt("Enter element " + i + ": "));
+        }
+
+        let ogarr = arr;
+        let flag = 1;
+
+        while (flag) 
+        {
+            let ch = parseInt(prompt(`
+            1. Display the array.
+            2. Sort the array.
+            3. Reverse the array.
+            4. Search an element in the array.
+            5. Exit.`));
+         
+            switch (ch) 
+            {
+                case 1:
+                    alert("Array: " + arr);
+                    break;
+            case 2:
+                let sarr = arr.sort();
+                alert(`
+                Original Array: ${ogarr}
+                Sorted Array: ${sarr}
+                `);
+                break;
+
+            case 3:
+                   let rarr = arr.reverse();
+                    alert(`
+                Original Array: ${ogarr}
+                Reversed Array: ${rarr}
+                `);
+                    break;
+            
+            case 4:
+                    let key = prompt("Enter the element to search: ");
+                    for (let i = 0; i < n; i++) 
+                    {
+                        if(arr[i] === key)
+                        {
+                            alert("Element found at index: " + i);
+                            break;
+                        }
+            
+                    }
+                    if(i === n)
+                    {
+                        alert("Element not found.");
+                    }
+
+                    break;
+
+                case 5:
+                    alert("Exiting...");
+                    flag = 0;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>

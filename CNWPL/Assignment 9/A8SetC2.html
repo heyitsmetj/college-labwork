@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let max, min, sum = 0, average;
+        let arr = [20, 40, 10, 30, 50, 80, 60];
+        document.write("Array = " + arr + "<br>");
+        arr.sort();
+        max = arr[arr.length - 1];
+        min = arr[0];
+        arr.map(c => sum += c);
+        average = sum / arr.length;
+        document.write(`
+            Maximum = ${max}<br> 
+            Minimum = ${min}<br>
+            Sum = ${sum}<br>
+            Average = ${average}<br>
+        `);
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>A8SetA1</title>
+
+</head>
+
+<body>
+    <script>
+        function greetUser() {
+            const currentDate = new Date();
+            const currentHour = currentDate.getHours();
+            let greeting;
+
+            if (currentHour < 12) {
+                greeting = "Good Morning!";
+            } 
+            else if (currentHour < 18) 
+            {
+                greeting = "Good Afternoon!";
+            } 
+            else 
+            {
+                greeting = "Good Evening!";
+            }
+
+            document.write(greeting);
+        }
+
+        greetUser();
+
+    </script>
+</body>
+
+</html>

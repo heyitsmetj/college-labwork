@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>A8SetA2</title>
+
+</head>
+
+<body>
+    <script>
+        let num = parseInt(prompt("Enter Number: "));
+        let arr = [];
+        let j=0;
+        for(let i = 1;i<=num;i++)
+        {
+            if(num % i === 0)
+            {
+                arr[j++] = i;
+            }
+        }
+        document.write("Factors of " + num + " are: " + arr);
+    </script>
+</body>
+
+</html>
