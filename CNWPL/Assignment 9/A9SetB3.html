@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Menu Driven Stack and Queue Operations</title>
+</head>
+
+<body>
+    <h1>Stack and Queue Operations</h1>
+
+    <label>Select operation:</label>
+    <select id="operation" onchange="performOperation()">
+        <option value="0">--Select--</option>
+        <option value="1">Insert Element in Stack</option>
+        <option value="2">Delete Element from Stack</option>
+        <option value="3">Display Contents of Stack</option>
+        <option value="4">Insert Element in Queue</option>
+        <option value="5">Delete Element from Queue</option>
+        <option value="6">Display Contents of Queue</option>
+    </select>
+
+    <div id="inputDiv" style="display:none;">
+        <input type="text" id="element" placeholder="Enter element">
+        <button onclick="submitElement()">Submit</button>
+    </div>
+
+    <div>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        let stack = [];
+        let queue = [];
+
+        function performOperation() {
+            const operation = document.getElementById("operation").value;
+            const inputDiv = document.getElementById("inputDiv");
+
+            if (operation == 1 || operation == 4) {
+                // Show input for insert operations
+                inputDiv.style.display = 'block';
+            }
+            else {
+                inputDiv.style.display = 'none';
+
+                switch (operation) {
+                    case "2":
+                        deleteFromStack();
+                        break;
+                    case "3":
+                        displayStack();
+                        break;
+                    case "5":
+                        deleteFromQueue();
+                        break;
+                    case "6":
+                        displayQueue();
+                        break;
+                }
+            }
+        }
+
+        function submitElement() {
+            const element = document.getElementById("element").value;
+            const operation = document.getElementById("operation").value;
+
+            if (operation == 1) {
+                insertInStack(element);
+            }
+
+            else if (operation == 4) {
+                insertInQueue(element);
+            }
+
+            document.getElementById("element").value = ''; // Clear input
+        }
+
+        // Stack operations
+        function insertInStack(element) {
+            stack.push(element);
+            document.getElementById("result").innerText = `${element} inserted in stack`;
+        }
+
+        function deleteFromStack() {
+            if (stack.length === 0) {
+                document.getElementById("result").innerText = 'Stack is empty';
+            } else {
+                const deletedElement = stack.pop();
+                document.getElementById("result").innerText = `${deletedElement} deleted from stack`;
+            }
+        }
+
+        function displayStack() {
+            if (stack.length === 0) {
+                document.getElementById("result").innerText = 'Stack is empty';
+            } else {
+                document.getElementById("result").innerText = `Stack contents: ${stack.join(', ')}`;
+            }
+        }
+
+        // Queue operations
+        function insertInQueue(element) {
+            queue.push(element);
+            document.getElementById("result").innerText = `${element} inserted in queue`;
+        }
+
+        function deleteFromQueue() {
+            if (queue.length === 0) {
+                document.getElementById("result").innerText = 'Queue is empty';
+            } else {
+                const deletedElement = queue.shift();
+                document.getElementById("result").innerText = `${deletedElement} deleted from queue`;
+            }
+        }
+
+        function displayQueue() {
+            if (queue.length === 0) {
+                document.getElementById("result").innerText = 'Queue is empty';
+            } else {
+                document.getElementById("result").innerText = `Queue contents: ${queue.join(', ')}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

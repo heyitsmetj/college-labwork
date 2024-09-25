@@ -3,14 +3,14 @@
 
 <head>
     <script>
-        let [day, month, year] = prompt("Enter date in dd-mm-yy format").split("-");
+        let [day, month, year] = prompt("Enter date in dd-mm-yy format: ").split("-");
         month += 1;
         if (day == "01" && month == "01") {
             document.write("Happy new year!");
         } else if (day == "25" && month == "12") {
             document.write("Merry Christmas!");
         } else if (day == "14" && month == "01") {
-            document.write("Happy mukar sankrant!");
+            document.write("Happy Makar Sankrant!");
         } else {
             document.write("Have a good day!")
         }

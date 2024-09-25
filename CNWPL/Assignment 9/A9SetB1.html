@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let flag = 1;
+        while (flag) {
+            let choice = Number(prompt(`
+                !!! MENU !!!
+                1) Square root.
+                2) Power.
+                3) Absolute value.
+                4) Exit.
+            `));
+            let num = Number(prompt("Enter number"));
+            switch (choice) {
+                case 1:
+                    alert("Square root of " + num + " is " + Math.sqrt(num));
+                    break;
+                case 2:
+                    let power = Number(prompt("Enter power"));
+                    alert(power + " raise to the power of " + num + " is " + Math.pow(num, power));
+                    break;
+                case 3:
+                    alert("Absoulte value of " + num + " is " + Math.abs(num));
+                    break;
+                case 4:
+                    flag = 0;
+                    break;
+                default:
+                    alert("Invalid");
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
