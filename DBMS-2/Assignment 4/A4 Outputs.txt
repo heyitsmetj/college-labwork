@@ -1,0 +1,29 @@
+--A5SetA1a--
+
+-- Example call:
+SELECT get_person_count_by_area('Mumbai');
+
+--A5SetA1b--
+
+-- Example call:
+SELECT get_total_income('urban');
+
+--A5SetA1c--
+
+-- Example call:
+SELECT * FROM get_persons_by_month(5);
+
+--A5SetA2a--
+
+-- Example call:
+SELECT count_teachers_for_student('Amit');
+
+--A5SetA2b--
+
+-- Example call:
+SELECT count_students_for_subject('Physics');
+
+--A5SetA2c--
+
+-- Example call:
+SELECT * FROM get_teachers_by_qualification('MSc');

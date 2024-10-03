@@ -1,0 +1,81 @@
+--A4SetA1--
+
+-- Creating Area table
+CREATE TABLE Area (
+    aname VARCHAR(20) PRIMARY KEY,
+    area_type VARCHAR(5) CHECK (area_type IN ('urban', 'rural'))
+);
+
+-- Creating Person table
+CREATE TABLE Person (
+    pno INTEGER PRIMARY KEY,
+    pname VARCHAR(20),
+    birthdate DATE,
+    income MONEY,
+    aname VARCHAR(20) REFERENCES Area(aname) -- Foreign Key to Area table
+);
+
+-- Inserting records in Area
+INSERT INTO Area (aname, area_type) VALUES
+('Mumbai', 'urban'),
+('Pune', 'urban'),
+('Nagpur', 'urban'),
+('Bhopal', 'rural'),
+('Indore', 'rural');
+
+-- Inserting records in Person
+INSERT INTO Person (pno, pname, birthdate, income, aname) VALUES
+(1, 'Amit', '1980-05-15', 50000, 'Mumbai'),
+(2, 'Raj', '1990-08-20', 60000, 'Pune'),
+(3, 'Meera', '1985-07-10', 70000, 'Nagpur'),
+(4, 'Sunil', '1975-12-30', 55000, 'Bhopal'),
+(5, 'Priya', '1992-01-25', 80000, 'Indore');
+
+
+--A4SetA2--
+
+-- Create Student table
+CREATE TABLE Student (
+    sno INTEGER PRIMARY KEY,
+    s_name VARCHAR(30),
+    s_class CHAR(10),
+    s_addr CHAR(50)
+);
+
+-- Create Teacher table
+CREATE TABLE Teacher (
+    tno INTEGER PRIMARY KEY,
+    t_name VARCHAR(20),
+    qualification CHAR(15),
+    experience INTEGER
+);
+
+-- Create Student-Teacher table (for Many-to-Many relationship) with descriptive attribute 'subject'
+CREATE TABLE Student_Teacher (
+    sno INTEGER,
+    tno INTEGER,
+    subject VARCHAR(30),
+    FOREIGN KEY (sno) REFERENCES Student(sno),
+    FOREIGN KEY (tno) REFERENCES Teacher(tno)
+);
+
+-- Insert records into Student table
+INSERT INTO Student (sno, s_name, s_class, s_addr) VALUES
+(1, 'Amit', '10', 'Delhi'),
+(2, 'Sneha', '12', 'Mumbai'),
+(3, 'Ravi', '10', 'Bangalore'),
+(4, 'Priya', '11', 'Chennai');
+
+-- Insert records into Teacher table
+INSERT INTO Teacher (tno, t_name, qualification, experience) VALUES
+(101, 'Mr. Sharma', 'MSc', 12),
+(102, 'Mrs. Rao', 'PhD', 15),
+(103, 'Mr. Gupta', 'MTech', 8);
+
+-- Insert records into Student-Teacher table
+INSERT INTO Student_Teacher (sno, tno, subject) VALUES
+(1, 101, 'Mathematics'),
+(2, 101, 'Physics'),
+(1, 102, 'Physics'),
+(3, 103, 'Computer Science'),
+(4, 102, 'Chemistry');
