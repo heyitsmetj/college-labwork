@@ -1,25 +1,20 @@
-CREATE OR REPLACE FUNCTION A4A1F3(month_num INTEGER)
+CREATE OR REPLACE FUNCTION A4A1F3(month_num INT)
 RETURNS VOID AS $$
 DECLARE
 
-r RECORD;
+name VARCHAR;
 
 BEGIN
-    -- Return persons whose birthday is in the specified month
-    FOR r IN
-    SELECT *
+
+    SELECT p.pname INTO name
     FROM Person p
-    WHERE EXTRACT(MONTH FROM birthdate) = month_num
-    LOOP
+    WHERE EXTRACT(MONTH FROM birthdate) = month_num;
     
     IF NOT FOUND THEN
     RAISE EXCEPTION 'No persons found with a birthday in month %', month_num;
     ELSE
-    RAISE NOTICE 'Persons found with a birthday in month % : % || % || % || % || %', month_num,r.pno,r.pname,r.birthdate,r.income,r.aname;
+    RAISE NOTICE 'Persons found with a birthday in month % : %',month_num,name;
     END IF;
-    
-    END LOOP;
-
 END;
 $$ LANGUAGE plpgsql;
 

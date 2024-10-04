@@ -12,7 +12,7 @@ void bubbleSort(struct Employees *emp, int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j < n - i - 1; j++)
+        for (int j =  0; j < n - i - 1; j++)
         {
             if (strcmp(emp[j].empname, emp[j + 1].empname) > 0)
             {
@@ -30,7 +30,7 @@ int readfile(struct Employees *emp)
     int i=0;
     FILE *fp;
 
-    printf("\n Enter filename to read: ");
+    printf("\n Enter filename to read: ");                                              
     scanf("%s",fname);
     fp = fopen(fname,"r");
 

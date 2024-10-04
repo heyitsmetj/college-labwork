@@ -1,21 +1,18 @@
-CREATE OR REPLACE FUNCTION count_teachers_for_student(student_name VARCHAR)
-RETURNS INTEGER AS $$
+CREATE OR REPLACE FUNCTION A4A2F1(stud_name VARCHAR) RETURNS VOID AS 
+$$
+
 DECLARE
-    teacher_count INTEGER;
+    t_cnt int;
+
 BEGIN
-    -- Count the number of teachers teaching to the specified student
-    SELECT COUNT(DISTINCT tno) INTO teacher_count
-    FROM Student_Teacher
-    JOIN Student ON Student.sno = Student_Teacher.sno
-    WHERE Student.s_name = student_name;
+    select count(*) into t_cnt from teacher,student,stud_teach where student.sno=stud_teach.sno and 
+    teacher.tno=stud_teach.tno and sname=stud_name;
     
-    -- If no student exists, return 0 or raise an exception
-    IF teacher_count = 0 THEN
-        RAISE EXCEPTION 'Student name does not exist';
-    END IF;
+    IF t_cnt=0 THEN 
+    RAISE EXCEPTION 'Innvalid student name : %',stud_name;
+    else 
+    RAISE NOTICE 'Total no. of Teachers %',t_cnt;
+    end if;
     
-    RETURN teacher_count;
 END;
-$$ LANGUAGE plpgsql;
-
-
+$$ language 'plpgsql'  

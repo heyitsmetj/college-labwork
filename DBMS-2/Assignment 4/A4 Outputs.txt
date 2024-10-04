@@ -1,17 +1,44 @@
 --A5SetA1a--
 
 -- Example call:
-SELECT get_person_count_by_area('Mumbai');
+se2203a4=# SELECT A4A1F1('Mumbai');
+NOTICE:  Total persons in Mumbai is : 1
+ a4a1f1 
+--------
+ 
+(1 row)
+
+se2203a4=# SELECT A4A1F1('Thane');
+ERROR:  Invalid Area Name: Thane
+CONTEXT:  PL/pgSQL function a4a1f1(character varying) line 11 at RAISE
 
 --A5SetA1b--
 
--- Example call:
-SELECT get_total_income('urban');
+NOTICE:  Total income in urban areas: ₹180,000.00
+ a4a1f2 
+--------
+ 
+(1 row)
+
+se2203a4=# SELECT A4A1F2('urba');
+ERROR:  Invalid area type urba or no data available.
+CONTEXT:  PL/pgSQL function a4a1f2(character varying) line 11 at RAISE
+
 
 --A5SetA1c--
 
--- Example call:
-SELECT * FROM get_persons_by_month(5);
+se2203a4=# SELECT A4A1F3(5);
+NOTICE:  Persons found with a birthday in month 5 : Amit
+ a4a1f3 
+--------
+ 
+(1 row)
+
+
+se2203a4=# SELECT A4A1F3(12);
+ERROR:  No persons found with a birthday in month 12
+CONTEXT:  PL/pgSQL function a4a1f3(integer) line 15 at RAISE
+
 
 --A5SetA2a--
 
