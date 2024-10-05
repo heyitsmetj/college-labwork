@@ -24,6 +24,7 @@ void display(node *list[])
 {
     int i;
     node *ptr;
+    printf("\n Adjacency List:\n");
     for(i = 0; i < nov; i++)
     {
         printf("V%d: ", i + 1);
