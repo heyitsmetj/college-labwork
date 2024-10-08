@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigation Menu</title>
+</head>
+<body>
+    <h1>Navigation Menu</h1>
+    
+    <div id="menu">
+        <h2>Choose an option:</h2>
+        <button onclick="goBack()">a. Previous page</button><br><br>
+        <button onclick="goForward()">b. Next page</button><br><br>
+        <button onclick="goBackTwo()">c. Two pages back</button><br><br>
+        <button onclick="goForwardTwo()">d. Two pages forward</button><br><br>
+    </div>
+
+    <script>
+        function goBack() {
+            history.back();
+        }
+        
+        function goForward() {
+            history.forward();
+        }
+        
+        function goBackTwo() {
+            history.go(-2);
+        }
+        
+        function goForwardTwo() {
+            history.go(2);
+        }
+    </script>
+
+    <h3>Current page history:</h3>
+    <button onclick="alert('History length: ' + history.length)">
+        Check History Length
+    </button>
+</body>
+</html>

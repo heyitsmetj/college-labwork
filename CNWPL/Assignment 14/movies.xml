@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MayanagariCDStore>
+    <Classical>
+        <MovieName>Devdas</MovieName>
+        <ReleaseYear>2002</ReleaseYear>
+    </Classical>
+    <Classical>
+        <MovieName>Guide</MovieName>
+        <ReleaseYear>1965</ReleaseYear>
+    </Classical>
+    <Action>
+        <MovieName>War</MovieName>
+        <ReleaseYear>2019</ReleaseYear>
+    </Action>
+    <Action>
+        <MovieName>Dhoom 2</MovieName>
+        <ReleaseYear>2006</ReleaseYear>
+    </Action>
+    <Horror>
+        <MovieName>Raaz</MovieName>
+        <ReleaseYear>2002</ReleaseYear>
+    </Horror>
+    <Horror>
+        <MovieName>Bhoot</MovieName>
+        <ReleaseYear>2003</ReleaseYear>
+    </Horror>
+</MayanagariCDStore>

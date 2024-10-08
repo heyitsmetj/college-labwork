@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CricketTeam>
+    <Team country="India">
+        <player>Virat Kohli</player>
+        <runs>5000</runs>
+        <wicket>10</wicket>
+    </Team>
+    <Team country="Australia">
+        <player>David Warner</player>
+        <runs>6000</runs>
+        <wicket>5</wicket>
+    </Team>
+    <Team country="Australia">
+        <player>Aaron Finch</player>
+        <runs>8000</runs>
+        <wicket>0</wicket>
+    </Team>
+    <Team country="Australia">
+        <player>Steve Smith</player>
+        <runs>7000</runs>
+        <wicket>2</wicket>
+    </Team>
+    <Team country="Australia">
+        <player>Pat Cummins</player>
+        <runs>1000</runs>
+        <wicket>50</wicket>
+    </Team>
+    <Team country="Australia">
+        <player>Glenn Maxwell</player>
+        <runs>3000</runs>
+        <wicket>40</wicket>
+    </Team>
+</CricketTeam>

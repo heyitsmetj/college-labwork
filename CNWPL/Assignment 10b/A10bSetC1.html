@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Background Color</title>
+</head>
+<body>
+    <h1>Change Background Color</h1>
+    <p>Select a color to change the background:</p>
+
+    <select id="colorSelect">
+        <option value="white">White</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+        <option value="lightcoral">Light Coral</option>
+        <option value="lightyellow">Light Yellow</option>
+    </select>
+
+    <button onclick="changeBackgroundColor()">Change Color</button>
+
+    <script>
+        function changeBackgroundColor() {
+            const selectedColor = document.getElementById("colorSelect").value;
+            document.body.style.backgroundColor = selectedColor;
+        }
+    </script>
+</body>
+</html>

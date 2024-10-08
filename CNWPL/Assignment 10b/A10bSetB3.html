@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Purchase</title>
+</head>
+<body>
+    <h1>Product Purchase Form</h1>
+    <form id="purchaseForm">
+        <div>
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" required><br><br>
+        </div>
+        <div>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" required><br><br>
+        </div>
+        <div>
+            <label for="rate">Rate per Item ($):</label>
+            <input type="number" id="rate" required><br><br>
+        </div>
+        <button type="button" onclick="calculateBill()">Calculate Total Bill</button>
+    </form>
+
+    <div id="billResult" style="display: none;">
+        <h2>Bill Summary</h2>
+        <p>Product Name: <span id="resultProductName"></span></p>
+        <p>Quantity: <span id="resultQuantity"></span></p>
+        <p>Rate per Item: $<span id="resultRate"></span></p>
+        <p>Discount Applied: <span id="resultDiscount"></span>%</p>
+        <p>Total Bill (after discount): $<span id="resultTotal"></span></p>
+    </div>
+
+    <script>
+        function calculateBill() {
+            const productName = document.getElementById('productName').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+
+            if (!productName || isNaN(quantity) || isNaN(rate)) {
+                alert("Please fill in all fields correctly.");
+                return;
+            }
+
+            // Determine discount based on quantity
+            let discount = 0;
+
+            if (quantity > 5 && quantity < 25) {
+                discount = 5;
+            } else if (quantity >= 25 && quantity < 50) {
+                discount = 15;
+            } else if (quantity >= 50) {
+                discount = 20;
+            }
+
+            // Calculate total price before discount
+            const totalPrice = quantity * rate;
+
+            // Calculate total discount and final total bill
+            const discountAmount = totalPrice * (discount / 100);
+            const totalBill = totalPrice - discountAmount;
+
+            // Display results
+            document.getElementById('resultProductName').textContent = productName;
+            document.getElementById('resultQuantity').textContent = quantity;
+            document.getElementById('resultRate').textContent = rate.toFixed(2);
+            document.getElementById('resultDiscount').textContent = discount;
+            document.getElementById('resultTotal').textContent = totalBill.toFixed(2);
+
+            document.getElementById('billResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

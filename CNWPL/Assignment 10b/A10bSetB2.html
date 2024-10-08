@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Account Details</title>
+</head>
+<body>
+    <h1>Customer Account Details</h1>
+    <form id="accountForm">
+        <div>
+            <label for="customerName">Name of Customer:</label>
+            <input type="text" id="customerName" required><br><br>
+        </div>
+        <div>
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" required><br><br>
+        </div>
+        <div>
+            <label for="panNumber">PAN Number:</label>
+            <input type="text" id="panNumber" maxlength="10" required><br><br>
+        </div>
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <div id="formResult" style="display: none;">
+        <h2>Form Submission Successful</h2>
+        <p>Customer Name: <span id="resultCustomerName"></span></p>
+        <p>Account Number: <span id="resultAccountNumber"></span></p>
+        <p>PAN Number: <span id="resultPanNumber"></span></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const customerName = document.getElementById('customerName').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+            const panNumber = document.getElementById('panNumber').value;
+
+            // PAN Validation pattern: first 5 letters, next 4 digits, last letter
+            const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+
+            if (!customerName || !accountNumber || !panNumber) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            if (!panPattern.test(panNumber)) {
+                alert("Invalid PAN number. It should be of 10 characters: first 5 letters, next 4 digits, and last 1 letter.");
+                return;
+            }
+
+            // If all validations pass
+            document.getElementById('resultCustomerName').textContent = customerName;
+            document.getElementById('resultAccountNumber').textContent = accountNumber;
+            document.getElementById('resultPanNumber').textContent = panNumber;
+
+            document.getElementById('formResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

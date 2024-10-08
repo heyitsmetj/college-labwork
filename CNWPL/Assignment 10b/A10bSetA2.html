@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Validation Form</title>
+</head>
+<body>
+    <script>
+        let name = prompt("Enter your name:");
+        let mobile = prompt("Enter your mobile number:");
+
+        function isValidName(name) {
+            let namePattern = /^[A-Za-z\s]+$/;
+            return namePattern.test(name);
+        }
+
+        function isValidMobile(mobile) {
+            let mobilePattern = /^[0-9]{10}$/;
+            return mobilePattern.test(mobile);
+        }
+
+        if (name === "" || mobile === "") {
+            document.write("Error: All fields must be filled.");
+        } else if (!isValidName(name)) {
+            document.write("Error: Name should contain only alphabets.");
+        } else if (!isValidMobile(mobile)) {
+            document.write("Error: Mobile number must be 10 digits long.");
+        } else {
+            document.write("Name and Mobile number are valid.");
+        }
+    </script>
+</body>
+</html>
