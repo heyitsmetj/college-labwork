@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <script>
+        function clearDisplay(){
+            document.getElementById("display").value = "";
+        }
+        function displayNumber(num){
+            document.getElementById("display").value += num;
+        }
+        function calculate(){
+            var expression = document.getElementById("display").value;
+            var result = eval(expression);
+            document.getElementById("display").value = result;
+        }
+        function deleteChar(){
+            var display = document.getElementById("display").value;
+            document.getElementById("display").value = display.substring(0, display.length - 1);
+        }
+        function displayOperator(operator){
+            document.getElementById("display").value += operator;
+        }
+    </script>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        #display {
+            width: 210px;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button-container button, #calculate-button {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        .button-container button:hover, #calculate-button:hover {
+            background-color: #ccc;
+        }
+        .button-container {
+            width: 200px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        #calculate-button{
+            width: 220px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Calculator</h1>
+        <div class="calculator-container">
+            <input type="text" id="display" disabled>
+            <div class="button-container">
+                <button class="button" onclick="clearDisplay()">C</button>
+                <button class="button" onclick="deleteChar()">DEL</button>
+                <button class="button" onclick="displayOperator('/')">/</button>
+                <button class="button" onclick="displayOperator('*')">*</button>
+                <button class="button" onclick="displayNumber(7)">7</button>
+                <button class="button" onclick="displayNumber(8)">8</button>
+                <button class="button" onclick="displayNumber(9)">9</button>
+                <button class="button" onclick="displayOperator('-')">-</button>
+                <button class="button" onclick="displayNumber(4)">4</button>
+                <button class="button" onclick="displayNumber(5)">5</button>
+                <button class="button" onclick="displayNumber(6)">6</button>
+                <button class="button" onclick="displayOperator('+')">+</button>
+                <button class="button" onclick="displayNumber(1)">1</button>
+                <button class="button" onclick="displayNumber(2)">2</button>
+                <button class="button" onclick="displayNumber(3)">3</button>
+                <button class="button" onclick="displayNumber(0)">0</button>
+            </div>
+            <button class="button" id="calculate-button" onclick="calculate()">=</button>
+        </div>
+    </div>
+</body>
+</html>
