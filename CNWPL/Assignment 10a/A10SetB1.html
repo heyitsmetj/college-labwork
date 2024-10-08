@@ -1,38 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Operations</title>
     <script>
-        let flag = 1;
-        while (flag) {
-            let choice = Number(prompt(`
-                !!! MENU !!!
-                1) Square root.
-                2) Power.
-                3) Absolute value.
-                4) Exit.
-            `));
-            let num = Number(prompt("Enter number"));
-            switch (choice) {
-                case 1:
-                    alert("Square root of " + num + " is " + Math.sqrt(num));
-                    break;
-                case 2:
-                    let power = Number(prompt("Enter power"));
-                    alert(power + " raise to the power of " + num + " is " + Math.pow(num, power));
-                    break;
-                case 3:
-                    alert("Absoulte value of " + num + " is " + Math.abs(num));
-                    break;
-                case 4:
-                    flag = 0;
-                    break;
-                default:
-                    alert("Invalid");
-                    break;
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                formValidation();
+            });
+
+            function operations(choice, num) {
+                let disResult = document.getElementById("result");
+                switch (choice) {
+                    case 1:
+                        disResult.innerText = "Square root of " + num + " is " + Math.sqrt(num);
+                        break;
+                    case 2:
+                        let power = Number(prompt("Enter power"));
+                        disResult.innerText = power + " raised to the power of " + num + " is " + Math.pow(num, power);
+                        break;
+                    case 3:
+                        disResult.innerText = "Absolute value of " + num + " is " + Math.abs(num);
+                        break;
+                    default:
+                        alert("Invalid");
+                        break;
+                }
             }
-        }
+
+            function formValidation() {
+                let num = document.getElementById("num").value;
+                let choice = document.getElementById("choice").value;
+                if (num === "" || choice === "") {
+                    alert("Please fill all the fields");
+                } else {
+                    operations(Number(choice), Number(num));
+                }
+            }
+        });
     </script>
 </head>
 <body>
+    <h1>Mathematical Operations</h1>
+    <form>
+        <input type="number" id="num" name="num" placeholder="Enter number" required>
+        <select id="choice" name="choice" required>
+            <option value="">Select operation</option>
+            <option value="1">Square root</option>
+            <option value="2">Power</option>
+            <option value="3">Absolute value</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <h3>Result</h3>
+    <div id="result"></div>
 </body>
 </html>
