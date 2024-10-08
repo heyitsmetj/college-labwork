@@ -5,13 +5,13 @@ DECLARE
     t_cnt int;
 
 BEGIN
-    select count(*) into t_cnt from teacher,student,stud_teach where student.sno=stud_teach.sno and 
-    teacher.tno=stud_teach.tno and sname=stud_name;
+    select COUNT(*) into t_cnt from teacher t,student s,stud_teacher st where s.sno=st.sno and 
+    t.tno=st.tno and s.sname=stud_name;
     
     IF t_cnt=0 THEN 
-    RAISE EXCEPTION 'Innvalid student name : %',stud_name;
+    RAISE EXCEPTION 'Invalid student name : %',stud_name;
     else 
-    RAISE NOTICE 'Total no. of Teachers %',t_cnt;
+    RAISE NOTICE 'Total no. of Teachers: %',t_cnt;
     end if;
     
 END;
