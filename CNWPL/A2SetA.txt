@@ -1,0 +1,9 @@
+SetA
+
+1. ifconfig
+
+2. ifconfig -a
+    ifconfig -s
+    Ifconfig -v
+
+Use these commands in the terminal.
