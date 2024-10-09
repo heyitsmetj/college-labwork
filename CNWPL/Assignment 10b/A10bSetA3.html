@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>User Login</title>
 </head>
+
 <body>
     <h2>User Login</h2>
     <form id="loginForm">
@@ -19,19 +21,26 @@
     </form>
 
     <script>
-        function validateForm() {
+        function validateForm() 
+        {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
             let confirmPassword = document.getElementById("confirmPassword").value;
 
-            if (username === "" || password === "" || confirmPassword === "") {
+            if (username === "" || password === "" || confirmPassword === "") 
+            {
                 alert("Error: All fields must be filled.");
-            } else if (password !== confirmPassword) {
+            } 
+            else if (password !== confirmPassword) 
+            {
                 alert("Error: Passwords do not match.");
-            } else {
+            } 
+            else 
+            {
                 alert("Login successful.");
             }
         }
     </script>
 </body>
+
 </html>

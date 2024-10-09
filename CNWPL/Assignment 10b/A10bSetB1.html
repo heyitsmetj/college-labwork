@@ -44,8 +44,8 @@
     </div>
 
     <script>
-        function generatePayslip() {
-            // Get input values
+        function generatePayslip() 
+        {
             const employeeName = document.getElementById('employeeName').value;
             const department = document.getElementById('department').value;
             const designation = document.getElementById('designation').value;
@@ -53,16 +53,14 @@
             const hra = parseFloat(document.getElementById('hra').value);
             const da = parseFloat(document.getElementById('da').value);
 
-            // Check if all fields are filled
-            if (!employeeName || !department || !designation || isNaN(basicSalary) || isNaN(hra) || isNaN(da)) {
-                alert("Please fill all fields");
+            if (!employeeName || !department || !designation || isNaN(basicSalary) || isNaN(hra) || isNaN(da)) 
+            {
+                alert("Please fill all fields!");
                 return;
             }
 
-            // Perform the gross salary calculation
             const grossSalary = basicSalary + hra + da;
 
-            // Display the result
             document.getElementById('resultName').textContent = employeeName;
             document.getElementById('resultDepartment').textContent = department;
             document.getElementById('resultDesignation').textContent = designation;

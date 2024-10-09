@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MayanagariCDStore>
+<BookStore>
     <Classical>
-        <MovieName>Devdas</MovieName>
-        <ReleaseYear>2002</ReleaseYear>
+        <Book_PubYear>2002</Book_PubYear>
+        <Book_Title>The God of Small Things</Book_Title>
+        <Book_Author>Arundhati Roy</Book_Author>
     </Classical>
     <Classical>
-        <MovieName>Guide</MovieName>
-        <ReleaseYear>1965</ReleaseYear>
+        <Book_PubYear>1965</Book_PubYear>
+        <Book_Title>One Hundred Years of Solitude</Book_Title>
+        <Book_Author>Gabriel García Márquez</Book_Author>
     </Classical>
     <Action>
-        <MovieName>War</MovieName>
-        <ReleaseYear>2019</ReleaseYear>
+        <Book_PubYear>2019</Book_PubYear>
+        <Book_Title>The Silent Patient</Book_Title>
+        <Book_Author>Alex Michaelides</Book_Author>
     </Action>
     <Action>
-        <MovieName>Dhoom 2</MovieName>
-        <ReleaseYear>2006</ReleaseYear>
+        <Book_PubYear>2006</Book_PubYear>
+        <Book_Title>The Road</Book_Title>
+        <Book_Author>Cormac McCarthy</Book_Author>
     </Action>
     <Horror>
-        <MovieName>Raaz</MovieName>
-        <ReleaseYear>2002</ReleaseYear>
+        <Book_PubYear>2002</Book_PubYear>
+        <Book_Title>American Psycho</Book_Title>
+        <Book_Author>Bret Easton Ellis</Book_Author>
     </Horror>
     <Horror>
-        <MovieName>Bhoot</MovieName>
-        <ReleaseYear>2003</ReleaseYear>
+        <Book_PubYear>2003</Book_PubYear>
+        <Book_Title>The Haunting of Hill House</Book_Title>
+        <Book_Author>Shirley Jackson</Book_Author>
     </Horror>
-</MayanagariCDStore>
+</BookStore>
