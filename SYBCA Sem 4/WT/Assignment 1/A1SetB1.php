@@ -1,7 +1,7 @@
 <?php
-$num1 = 10;
-$num2 = 20;
-$num3 = 30;
+$num1 = 30;
+$num2 = 40;
+$num3 = 10;
 
 if($num1 > $num2 && $num1 > $num3)
     echo "$num1 is greater than $num2 & $num3";
